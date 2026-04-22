@@ -9,8 +9,29 @@
   <meta property="og:title" content="U-Hermes 虾米 — 便携 AI 编程助手 U 盘版">
   <meta property="og:description" content="插上 U 盘，双击运行，开始编程对话。NousResearch Hermes Agent 中文便携版。">
   <meta property="og:url" content="https://u-hermes.org">
-  <link rel="canonical" href="https://u-hermes.org">
+  <link rel="canonical" href="https://www.u-hermes.org">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦐</text></svg>">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "U-Hermes 虾米",
+    "alternateName": "U-Hermes",
+    "description": "NousResearch Hermes Agent 中文便携版 — 插上 U 盘，双击运行，开始编程对话。Windows 商业版和 Linux 开源版。",
+    "url": "https://www.u-hermes.org",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, Linux",
+    "offers": { "@type": "Offer", "price": "99", "priceCurrency": "CNY" },
+    "author": {
+      "@type": "Person",
+      "name": "dongsheng",
+      "url": "https://github.com/dongsheng123132",
+      "email": "hefangsheng@gmail.com"
+    },
+    "codeRepository": "https://github.com/dongsheng123132/u-hermes",
+    "keywords": ["Hermes Agent", "Nous Research", "AI编程助手", "U盘", "DeepSeek", "Qwen", "ollama", "便携AI", "免翻墙"]
+  }
+  </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -219,6 +240,7 @@
       <a href="#products">产品</a>
       <a href="#features">功能</a>
       <a href="#buy">购买</a>
+      <a href="#contact">联系</a>
       <a href="https://github.com/dongsheng123132/u-hermes" target="_blank">GitHub</a>
     </div>
   </div>
@@ -374,6 +396,7 @@
       <div class="actions">
         <a href="https://e.tb.cn/h.ij8LYYB0cZPkNHw?tk=FMo05XEJYk0" class="btn primary" target="_blank">🛒 去淘宝购买</a>
         <a href="https://mobile.yangkeduo.com/goods1.html?ps=WaQeS00tDn" class="btn ghost" target="_blank">🛒 去拼多多购买</a>
+        <a href="https://haohuo.jinritemai.com/ecommerce/trade/detail/index.html?id=3814862440735309865&origin_type=604" class="btn ghost" target="_blank" style="border-color:#fe2c55;color:#fe2c55;">🎵 抖音购买</a>
       </div>
       <p style="margin-top: 12px; font-size: 13px; color: var(--muted);">
         淘宝口令 <code>HU293</code> · 微信下单 <strong>hecare888</strong>
@@ -383,7 +406,11 @@
     <div class="cta-block">
       <h3>🎁 首发优惠：前 100 单额度翻倍</h3>
       <p>现在购买即可获得双倍 AI 额度，支持 DeepSeek / 通义千问 / Kimi 等主流国产模型</p>
-      <a href="https://e.tb.cn/h.ij8LYYB0cZPkNHw?tk=FMo05XEJYk0" class="btn primary" target="_blank" style="font-size: 16px;">🛒 立即购买</a>
+      <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://e.tb.cn/h.ij8LYYB0cZPkNHw?tk=FMo05XEJYk0" class="btn primary" target="_blank" style="font-size: 16px;">🛒 淘宝</a>
+        <a href="https://mobile.yangkeduo.com/goods1.html?ps=WaQeS00tDn" class="btn ghost" target="_blank" style="font-size: 16px;">🛒 拼多多</a>
+        <a href="https://haohuo.jinritemai.com/ecommerce/trade/detail/index.html?id=3814862440735309865&origin_type=604" class="btn ghost" target="_blank" style="font-size: 16px; border-color:#fe2c55;color:#fe2c55;">🎵 抖音</a>
+      </div>
     </div>
 
     <div style="margin-top: 40px; padding: 24px; background: var(--bg); border-radius: 12px;">
@@ -404,10 +431,70 @@
         <summary style="cursor: pointer; color: var(--accent);">Mac / Linux 能用吗？</summary>
         <p style="color: var(--text-dim); margin-top: 8px;">Windows 版原生支持 Win10/11。Mac 可通过 Parallels 虚拟机使用。Linux 用户推荐免费的 <a href="https://github.com/dongsheng123132/u-hermes" target="_blank">开源 Live USB 版</a>。</p>
       </details>
+      <details style="margin-bottom: 10px;">
+        <summary style="cursor: pointer; color: var(--accent);">杀毒软件拦截 / 没法运行？</summary>
+        <p style="color: var(--text-dim); margin-top: 8px;">启动器是无签名 Electron 应用，360 / 火绒 / Windows Defender 可能拦截。请在杀毒软件里把 U 盘上的 <code>launcher/U-Hermes.exe</code> 加白名单。我们在申请代码签名证书，下个版本会解决。</p>
+      </details>
+      <details style="margin-bottom: 10px;">
+        <summary style="cursor: pointer; color: var(--accent);">启动后端口被占用？</summary>
+        <p style="color: var(--text-dim); margin-top: 8px;">默认端口 8642 / 8648。如果占用，启动器会自动 +1 避让。如仍有问题，从托盘退出后重启。</p>
+      </details>
+      <details style="margin-bottom: 10px;">
+        <summary style="cursor: pointer; color: var(--accent);">退款政策？</summary>
+        <p style="color: var(--text-dim); margin-top: 8px;">非质量问题 7 天内可退（U 盘未使用）。已充值的 AI 余额不可退，但可继续在 <a href="https://cloud.u-claw.org/" target="_blank">cloud.u-claw.org</a> 使用。</p>
+      </details>
+      <details style="margin-bottom: 10px;">
+        <summary style="cursor: pointer; color: var(--accent);">开源版和商业版区别？</summary>
+        <p style="color: var(--text-dim); margin-top: 8px;">Linux 开源版需自己刻盘、配置、自备 API Key。Windows 商业版开箱即用，含成品 U 盘 + 预装 AI 额度 + 一键图形界面 + 售后。核心 AI 能力两者一致（都基于 NousResearch Hermes Agent）。</p>
+      </details>
       <details>
         <summary style="cursor: pointer; color: var(--accent);">为什么不直接下载软件？</summary>
         <p style="color: var(--text-dim); margin-top: 8px;">U 盘既是便携载体，也是账户绑定凭证和售后凭证。如果你只想要软件本身，欢迎用开源 Linux 版。</p>
       </details>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2>💬 联系我们</h2>
+    <p class="lead">问题反馈、合作交流、技术咨询</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: center; margin-bottom: 40px;">
+      <div style="text-align: center;">
+        <img src="/wechat-qr.jpg" alt="WeChat QR" style="width: 200px; height: 200px; border-radius: 12px; border: 1px solid var(--border);">
+        <p style="margin-top: 12px; color: var(--text-dim); font-size: 14px;">微信扫码添加 <strong>hecare888</strong></p>
+      </div>
+      <div style="text-align: center;">
+        <a href="https://xhslink.com/m/6mf7Mq2M5wP" target="_blank" style="display: flex; width: 200px; height: 200px; border-radius: 12px; border: 1px solid var(--border); background: linear-gradient(135deg, #ff2442, #ff6670); text-decoration: none; flex-direction: column; align-items: center; justify-content: center;">
+          <span style="font-size: 48px;">📕</span>
+          <span style="color: white; font-size: 18px; font-weight: 700; margin-top: 8px;">小红书</span>
+          <span style="color: rgba(255,255,255,0.8); font-size: 13px;">关注虾盘系列</span>
+        </a>
+        <p style="margin-top: 12px; color: var(--text-dim); font-size: 14px;">小红书关注虾盘</p>
+      </div>
+      <div style="text-align: left; min-width: 200px;">
+        <p style="margin-bottom: 14px; font-size: 15px;">
+          <span style="color: var(--muted);">Email:</span>
+          <a href="mailto:hefangsheng@gmail.com" style="color: var(--accent); margin-left: 8px;">hefangsheng@gmail.com</a>
+        </p>
+        <p style="margin-bottom: 14px; font-size: 15px;">
+          <span style="color: var(--muted);">GitHub:</span>
+          <a href="https://github.com/dongsheng123132" target="_blank" style="color: var(--accent); margin-left: 8px;">dongsheng123132</a>
+        </p>
+        <p style="margin-bottom: 14px; font-size: 15px;">
+          <span style="color: var(--muted);">Telegram:</span>
+          <a href="https://t.me/dsds8848" target="_blank" style="color: var(--accent); margin-left: 8px;">@dsds8848</a>
+        </p>
+        <p style="margin-bottom: 14px; font-size: 15px;">
+          <span style="color: var(--muted);">Twitter/X:</span>
+          <a href="https://x.com/Bitplus888" target="_blank" style="color: var(--accent); margin-left: 8px;">@Bitplus888</a>
+        </p>
+        <p style="font-size: 15px;">
+          <span style="color: var(--muted);">姐妹项目:</span>
+          <a href="https://u-claw.org" target="_blank" style="color: var(--accent); margin-left: 8px;">u-claw.org</a>
+        </p>
+      </div>
     </div>
   </div>
 </section>
