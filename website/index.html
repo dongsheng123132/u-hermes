@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦐 虾盘 U-Hermes v0.3.0 - 便携 AI 助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #718096;
+            margin-bottom: 30px;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: #4c51bf;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-list {
+            list-style: none;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f7fafc;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .status-item:hover {
+            background: #edf2f7;
+            transform: translateY(-2px);
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .status-dot.active {
+            background: #48bb78;
+            box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.2);
+        }
+
+        .status-dot.inactive {
+            background: #e53e3e;
+        }
+
+        .status-text {
+            font-size: 16px;
+            color: #4a5568;
+        }
+
+        .status-port {
+            font-family: 'Courier New', monospace;
+            background: #2d3748;
+            color: #81e6d9;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .usb-path {
+            font-family: 'Courier New', monospace;
+            background: #2d3748;
+            color: #fbb6ce;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 16px;
+            word-break: break-all;
+        }
+
+        .api-key {
+            background: #2d3748;
+            color: #faf089;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: #4c51bf;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #434190;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: #4c51bf;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            background: #434190;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-btn i {
+            font-size: 20px;
+        }
+
+        .action-btn.chat {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .action-btn.settings {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .action-btn.logs {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .action-btn.website {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .tips {
+            background: #fffaf0;
+            border-left: 4px solid #ed8936;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .tips-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #dd6b20;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tips-list li:before {
+            content: "•";
+            color: #ed8936;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .powered-by {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .powered-by img {
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🦐</div>
+            <h1 class="title">虾盘 U-Hermes v0.3.0</h1>
+            <div class="subtitle">便携 AI 助手 — 基于 NousResearch Hermes Agent + 虾盘云</div>
+            <div class="version-badge">v0.3.0</div>
+        </div>
+
+        <div class="content-grid">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-server"></i> 服务状态</h2>
+                <ul class="status-list">
+                    <li class="status-item">
+                        <div class="status-dot active"></div>
+                        <span class="status-text">已激活</span>
+                    </li>
+                    <li class="status-item">
+                        <div class="status-dot active"></div>
+                        <span class="status-text">Hermes Agent 运行中</span>
+                        <span class="status-port">:8642</span>
+                    </li>
+                    <li class="status-item">
+                        <div class="status-dot active"></div>
+                        <span class="status-text">Web UI 运行中</span>
+                        <span class="status-port">:8648</span>
+                    </li>
+                </ul>
+
+                <h3 class="card-title" style="font-size: 20px; margin-top: 30px;">
+                    <i class="fas fa-usb"></i> U 盘位置:
+                </h3>
+                <div class="usb-path">F:\U-Hermes</div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-cloud"></i> 🦞 虾盘云</h2>
+                
+                <h3 style="margin: 20px 0 10px; color: #4a5568;">API Key</h3>
+                <div class="api-key">
+                    <span>sk-eb0c5c4...65c0d6</span>
+                    <button class="copy-btn" onclick="copyApiKey()">
+                        <i class="far fa-copy"></i> 复制
+                    </button>
+                </div>
+
+                <div style="margin: 25px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #4a5568;">节点</span>
+                        <span style="font-weight: 600; color: #2d3748;">国内节点</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #4a5568;">余额</span>
+                        <span style="font-weight: 600; color: #48bb78;">¥ 128.50</span>
+                    </div>
+                    <button class="copy-btn" style="width: 100%; margin-top: 10px;" onclick="refreshBalance()">
+                        <i class="fas fa-sync-alt"></i> 刷新
+                    </button>
+                    <a href="https://cloud.u-claw.org/recharge" target="_blank" class="action-btn" style="margin-top: 15px; text-decoration: none;">
+                        <i class="fas fa-shopping-cart"></i> 前往充值
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-bolt"></i> 快速入口</h2>
+            <div class="quick-actions">
+                <a href="http://127.0.0.1:8648" target="_blank" class="action-btn chat">
+                    <i class="fas fa-comment"></i> 💬 开始聊天
+                </a>
+                <a href="http://127.0.0.1:8648/#/settings" target="_blank" class="action-btn settings">
+                    <i class="fas fa-cog"></i> ⚙ Provider 管理
+                </a>
+                <button class="action-btn logs" onclick="openLogsDirectory()">
+                    <i class="fas fa-folder"></i> 📂 日志目录
+                </button>
+                <a href="https://u-claw.org" target="_blank" class="action-btn website">
+                    <i class="fas fa-globe"></i> 📖 官网
+                </a>
+            </div>
+        </div>
+
+        <div class="tips">
+            <h3 class="tips-title"><i class="fas fa-lightbulb"></i> 使用提示</h3>
+            <ul class="tips-list">
+                <li>「开始聊天」会在浏览器里打开 Web UI（也可以直接点击上面端口号里的地址）</li>
+                <li>默认使用虾盘云 API（国内直连，无需代理），有余额即可使用</li>
+                <li>可在「Provider 管理」添加自己的 API Key（DeepSeek / OpenAI / 其它）</li>
+                <li>关闭主窗口不会退出，服务会继续在后台跑，从系统托盘右键可退出</li>
+                <li>拔 U 盘前请先从托盘「退出」</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 虾盘 U-Hermes. 基于 NousResearch Hermes Agent 构建。</p>
+            <div class="powered-by">
+                <span>Powered by</span>
+                <span style="font-weight: 600; color: #4c51bf;">NousResearch</span>
+                <span>+</span>
+                <span style="font-weight: 600; color: #e53e3e;">虾盘云</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyApiKey() {
+            const apiKey = 'sk-eb0c5c4...65c0d6';
+            navigator.clipboard.writeText(apiKey).then(() => {
+                const btn = event.target.closest('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                btn.style.background = '#48bb78';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
+
+        function refreshBalance() {
+            const btn = event.target.closest('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 刷新中...';
+            btn.disabled = true;
+            
+            // 模拟API调用
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> 已刷新';
+                btn.style.background = '#48bb78';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                }, 1500);
+            }, 1000);
+        }
+
+        function openLogsDirectory() {
+            // 在实际应用中，这里可以调用Electron的shell.openPath
+            alert('日志目录: F:\\U-Hermes\\logs\\');
+        }
+
+        // 模拟实时状态更新
+        function updateStatus() {
+            const dots = document.querySelectorAll('.status-dot');
+            dots.forEach(dot => {
+                if (dot.classList.contains('active')) {
+                    dot.style.animation = 'pulse 2s infinite';
+                }
+            });
+        }
+
+        // 添加CSS动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { opacity: 1; }
+                50% { opacity: 0.5; }
+                100% { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        updateStatus();
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "outputDirectory": "website",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/github", "destination": "https://github.com/dongsheng123132/u-hermes", "permanent": false },
+    { "source": "/buy", "destination": "/buy.html", "permanent": false }
+  ]
+}
