@@ -1,43 +1,45 @@
-# U-HERMES 虾盘 Hermes 一键安装版
+# 🦐 U-Hermes 虾米
 
-把 NousResearch 的 [hermes-agent](https://github.com/NousResearch/hermes-agent) 通过 U盘交付到 Windows 用户手上，免去安装 Python、配置 WSL2、翻墙下 pip 包的门槛。
+> **NousResearch Hermes Agent 的中文便携版 —— 插上 U 盘，双击运行，开始对话**
 
-## 产品定位
+基于 [Nous Research hermes-agent](https://github.com/NousResearch/hermes-agent) 打包的即插即用 AI 助手。支持 Linux Live（开源免费）和 Windows 便携 U 盘（商业成品）两个版本。
 
-- 目标平台：Windows 10 (1809+) / Windows 11
-- 后端：NousResearch hermes-agent (Python)
-- UI：[hermes-web-ui](https://github.com/EKKOLearnAI/hermes-web-ui) (Vue + Koa, fork 改造版)
-- 授权：复用虾盘 ClawX 的 USB 指纹 → `sk-{fingerprint}` 虾盘云 API key
+## 两个版本
 
-## 目录结构
+| 版本 | 形式 | 价格 | 适合谁 |
+|------|------|------|--------|
+| **Linux Live USB** | 开源脚本自己刻盘 | 免费 | 极客、开发者 |
+| **Windows 便携 U 盘** | 成品 U 盘开箱即用 | 淘宝 / 拼多多 | 所有 Windows 用户 |
 
-```
-U-HERMES/
-├── installer/         安装脚本（PowerShell + Batch）
-├── scripts/           构建脚本（Node.js）
-├── packages/          离线资源（Python embeddable / Node / pip wheels / web-ui）
-├── templates/         配置模板（hermes config / providers）
-├── docs/              中文文档
-└── README.md
-```
+## 本仓库是什么
 
-## 用户使用流程
+**只放开源部分**：
+- 🌐 `website/` — [u-hermes.org](https://u-hermes.org) 官网源码（Vercel 部署）
+- 🐧 `linux/` — Linux Live USB 刻盘脚本
+- 📖 `docs/` — 文档
 
-1. 插入 U盘 `I:\U-Hermes\`
-2. 双击 `一键安装.bat`
-3. 等待安装完成 → 桌面出现 U-Hermes 快捷方式
-4. 双击启动 → 浏览器自动打开 hermes UI
+**不在本仓库**（Windows 商业版的私有内容）：
+- Electron 启动器源码
+- USB 指纹 / 激活码 / 付费账户对接
 
-详见 [docs/](./docs/) 与 [使用说明.txt](./使用说明.txt)。
+Windows 版核心逻辑闭源，但它的功能你用这个仓库的 Linux 脚本也能自己搭出来（只是少了图形界面和一键化体验）。
 
-## 开发
+## Linux Live 快速开始
 
-构建 U盘镜像：
 ```bash
-node scripts/download-packages.mjs   # 下载离线资源到 packages/
-node scripts/build-uhermes-usb.mjs --out=I:/U-Hermes   # 装配到 U盘
+git clone https://github.com/dongsheng123132/u-hermes.git
+cd u-hermes/linux
+./install-live.sh   # Ubuntu Live 模式下运行
 ```
 
-## 协议
+详见 [`linux/README.md`](./linux/README.md)。
 
-MIT
+## 许可
+
+代码 MIT。品牌与商标（"U-Hermes 虾米"、Logo）保留。
+
+## 相关
+
+- [u-hermes.org](https://u-hermes.org) — 官网
+- [u-claw.org](https://u-claw.org) — 姊妹项目 U-Claw 虾盘
+- [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) — 上游项目
