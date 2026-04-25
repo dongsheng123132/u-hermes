@@ -1,17 +1,17 @@
-# 🐎 马盘（U-Claw + U-Hermes）
+# 🐎 U-Hermes 马盘（U-Claw + U-Hermes）
 
 > **Windows 便携 AI U 盘 —— 插上 U 盘，双击 .exe 起图形界面，U-Claw 和 U-Hermes 一盘双用**
 
-马盘是即插即用的 AI U 盘成品：同一张 Windows 便携 U 盘内置 U-Claw（通用 AI + IM 机器人）和 U-Hermes（编程 Agent）。U-Hermes 基于 [Nous Research hermes-agent](https://github.com/NousResearch/hermes-agent) 打包；本仓库同时提供 U-Hermes Linux 启动盘开源方案。
+U-Hermes 马盘是即插即用的 AI U 盘成品：同一张 Windows 便携 U 盘内置 U-Claw（通用 AI + IM 机器人）和 U-Hermes（编程 Agent）。U-Hermes 基于 [Nous Research hermes-agent](https://github.com/NousResearch/hermes-agent) 打包；本仓库同时提供 U-Hermes Linux 启动盘开源方案。
 
-关键词：马盘、Windows 便携 AI U 盘、U-Claw、U-Hermes、Hermes Agent、Linux Live USB、AI 编程助手、DeepSeek、通义千问、ollama。
+关键词：U-Hermes 马盘、马盘、Windows 便携 AI U 盘、U-Claw、U-Hermes、Hermes Agent、Linux Live USB、AI 编程助手、DeepSeek、通义千问、ollama。
 
 ## 两个版本
 
 | 版本 | 形式 | 价格 | 适合谁 |
 |------|------|------|--------|
 | **Linux Live USB** | 开源脚本自己刻盘 | 免费 | 极客、开发者 |
-| **马盘 Windows 便携 U 盘** | 成品 U 盘开箱即用，内置 U-Claw + U-Hermes | ¥199 起 / 淘宝 / 拼多多 | 所有 Windows 用户 |
+| **U-Hermes 马盘 Windows 便携 U 盘** | 成品 U 盘开箱即用，内置 U-Claw + U-Hermes | ¥199 起 / 淘宝 / 拼多多 | 所有 Windows 用户 |
 
 ## 本仓库是什么
 
@@ -57,6 +57,6 @@ cd u-hermes\linux
 
 ## 相关
 
-- [u-hermes.org](https://u-hermes.org) — 马盘官网
+- [u-hermes.org](https://u-hermes.org) — U-Hermes 马盘官网
 - [u-claw.org](https://u-claw.org) — U-Claw 项目
 - [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) — 上游项目

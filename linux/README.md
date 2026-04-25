@@ -17,7 +17,7 @@
 | 版本 | 形态 | 适合谁 |
 | --- | --- | --- |
 | Linux 启动盘开源版 | 自己制盘、自己配置 API Key、自己排错 | 极客 / 开发者 |
-| 马盘 Windows 商业版 | 成品 U 盘，内置 U-Claw + U-Hermes，双击 `.exe` 起图形界面 | 想开箱即用的 Windows 用户 |
+| U-Hermes 马盘 Windows 商业版 | 成品 U 盘，内置 U-Claw + U-Hermes，双击 `.exe` 起图形界面 | 想开箱即用的 Windows 用户 |
 
 Linux 版只覆盖 U-Hermes 的开源启动盘方案，不包含 Windows 启动器、U-Claw 集成、账户绑定、预装额度和售后服务。
 
@@ -175,9 +175,9 @@ OPENAI_BASE_URL=http://127.0.0.1:11434/v1
 
 ## FAQ
 
-**Q: 这个开源方案和马盘商业版有什么区别？**
+**Q: 这个开源方案和 U-Hermes 马盘商业版有什么区别？**
 
-A: 开源方案需要自己制盘、联网安装、配置 API Key 和排错；马盘商业版是 Windows 成品 U 盘，内置 U-Claw + U-Hermes、图形启动器、账户体系、初始额度和售后。商业版请看 [官网购买页](https://www.u-hermes.org/#buy)。
+A: 开源方案需要自己制盘、联网安装、配置 API Key 和排错；U-Hermes 马盘商业版是 Windows 成品 U 盘，内置 U-Claw + U-Hermes、图形启动器、账户体系、初始额度和售后。商业版请看 [官网购买页](https://www.u-hermes.org/#buy)。
 
 **Q: 为什么不直接发布 ISO？**
 
