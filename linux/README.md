@@ -1,187 +1,198 @@
-# U-Hermes Linux 启动盘（教程版）
+# U-Hermes Linux 启动盘（开源方案）
 
-> **把任意电脑变成 AI 编程工作站 — 插上 U 盘，开机即用 Hermes Agent**
+> 把任意 x86_64 电脑变成 AI 编程工作站：插上 U 盘，从 USB 启动，进入 Ubuntu 桌面后运行 U-Hermes。
 
-🎯 **本目录是教程和参考脚本，不提供编译好的 ISO release**。跟着文档走，你能自己做一个 Linux U 盘启动盘，开机即进 Ubuntu + hermes-agent。
+本目录是 U-Hermes 的开源 Linux 盘启动方案，参考了 [u-claw-linux](https://github.com/dongsheng123132/u-claw-linux) 的四步制盘结构：Ventoy 引导、Ubuntu Live ISO、casper-rw 持久化、Linux 端一键安装脚本。
 
-## 为什么只发教程不发 release
+商业成品版请看官网和购买链接：
 
-- 打包 ISO 体积 6-8GB，GitHub release 有大小限制
-- 每个人的 U 盘品牌/型号不同，需要自己适配
-- 真正想折腾 Linux 的人，自己刻盘比下别人的 ISO 更有价值
-- **如果你想要开箱即用的成品 U 盘**，请看 [Windows 商业版](https://www.u-hermes.org/#buy)
+- 官网：[https://www.u-hermes.org/](https://www.u-hermes.org/)
+- 购买页：[https://www.u-hermes.org/#buy](https://www.u-hermes.org/#buy)
+- 淘宝：[购买马盘 U 盘](https://e.tb.cn/h.ij8LYYB0cZPkNHw?tk=FMo05XEJYk0)
+- 拼多多：[购买马盘 U 盘](https://mobile.yangkeduo.com/goods1.html?ps=WaQeS00tDn)
+- 抖音：[购买马盘 U 盘](https://haohuo.jinritemai.com/ecommerce/trade/detail/index.html?id=3814862440735309865&origin_type=604)
 
-## 前置条件
+## 开源版与商业版
 
-- 16GB+ 的 U 盘（USB 3.0 以上，慢盘会卡）
-- Windows 或 Linux 制作机
-- [Ventoy 1.0.99+](https://www.ventoy.net/)
-- [Ubuntu 24.04 Desktop ISO](https://releases.ubuntu.com/24.04/ubuntu-24.04.2-desktop-amd64.iso) (~5.8GB)
-- 自备 AI API Key（DeepSeek / OpenAI / 或本地 ollama）
+| 版本 | 形态 | 适合谁 |
+| --- | --- | --- |
+| Linux 启动盘开源版 | 自己制盘、自己配置 API Key、自己排错 | 极客 / 开发者 |
+| 马盘 Windows 商业版 | 成品 U 盘，内置 U-Claw + U-Hermes，双击 `.exe` 起图形界面 | 想开箱即用的 Windows 用户 |
 
-## 整体流程
+Linux 版只覆盖 U-Hermes 的开源启动盘方案，不包含 Windows 启动器、U-Claw 集成、账户绑定、预装额度和售后服务。
 
+## 技术方案
+
+```text
+U 盘
+├── Ventoy 引导区（隐藏分区）
+│   ├── BIOS + UEFI 双模式启动
+│   └── Ventoy 1.0.99
+│
+└── Ventoy 数据分区（可见）
+    ├── ubuntu-24.04.4-desktop-amd64.iso
+    ├── persistence.dat
+    ├── ventoy/
+    │   └── ventoy.json
+    └── u-hermes-linux/
+        ├── setup-hermes.sh
+        ├── start-hermes.sh
+        └── config.example
 ```
-┌────────────────────────────────────────────┐
-│                U 盘结构                      │
-│                                            │
-│  Ventoy 引导区（隐藏分区）                   │
-│    - BIOS + UEFI 双模式启动                  │
-│    - 开源引导管理器 v1.0.99                  │
-│                                            │
-│  Ventoy 数据分区（可见）                     │
-│    ubuntu-24.04.2-desktop-amd64.iso  5.8GB │
-│    ventoy-persistence-casper.dat     20GB  │  ← 系统级持久化
-│    ventoy/ventoy.json                配置   │
-│    u-hermes-linux/                   脚本   │
-│      ├── setup-hermes.sh             首次 bootstrap
-│      ├── start-hermes.sh             每次启动运行
-│      └── config.example              .env 模板
-└────────────────────────────────────────────┘
+
+核心选型：
+
+| 技术 | 作用 |
+| --- | --- |
+| Ventoy 1.0.99 | ISO 直接放进 U 盘即可启动，兼容 BIOS / UEFI |
+| Ubuntu 24.04 LTS | 驱动兼容性和社区支持较好 |
+| casper-rw 持久化 | Live USB 重启后保留安装的软件、配置和对话数据 |
+| hermes-agent | U-Hermes 的开源 Agent 核心 |
+
+## 硬件要求
+
+- 32GB+ U 盘，推荐 USB 3.0 或更快
+- 制作环境：Windows 10/11 + PowerShell 5.1+
+- 目标电脑：x86_64（Intel / AMD）
+- 首次安装需要联网
+- 自备 AI API Key（DeepSeek / 通义千问 / OpenAI 兼容接口 / 本地 ollama）
+
+## Windows 四步制盘
+
+在 Windows 上以普通 PowerShell 进入本目录：
+
+```powershell
+cd path\to\u-hermes-oss\linux
 ```
 
-## 步骤
+### Step 1：安装 Ventoy
 
-### 1. 制作 Ventoy U 盘
+```powershell
+.\1-prepare-usb.ps1
+```
 
-参考 [u-claw-linux 仓库](https://github.com/dongsheng123132/u-claw-linux) 的 `1-prepare-usb.ps1` 到 `4-copy-to-usb.ps1`。步骤一样，只是 ISO 内的脚本换成我们的。
+脚本会下载 Ventoy 1.0.99 并打开 `Ventoy2Disk.exe`。你需要在 Ventoy 图形界面里选择 U 盘并点 Install。
 
-或者命令行版（Linux 制作机）：
+注意：这一步会格式化 U 盘，先备份数据。
+
+### Step 2：下载 Ubuntu ISO
+
+```powershell
+.\2-download-iso.ps1
+```
+
+脚本会优先从清华、阿里、中科大镜像下载 `ubuntu-24.04.4-desktop-amd64.iso`，并尽量用 `SHA256SUMS` 校验文件完整性。
+
+### Step 3：创建持久化镜像
+
+```powershell
+.\3-create-persistence.ps1
+```
+
+默认创建 20GB 的 `persistence.dat`。如需指定大小：
+
+```powershell
+.\3-create-persistence.ps1 -SizeGB 40
+```
+
+推荐安装 WSL。脚本会通过 WSL 执行：
 
 ```bash
-# 假设 U 盘是 /dev/sdX（先 lsblk 确认，别插错！）
-# 1. 安装 Ventoy
-wget https://github.com/ventoy/Ventoy/releases/download/v1.0.99/ventoy-1.0.99-linux.tar.gz
-tar xf ventoy-1.0.99-linux.tar.gz
-cd ventoy-1.0.99
-sudo ./Ventoy2Disk.sh -i /dev/sdX   # ⚠ 会清空 U 盘
-
-# 2. 把 Ubuntu ISO 拷到 U 盘数据分区
-sudo mkdir -p /mnt/usb
-sudo mount /dev/sdX1 /mnt/usb
-sudo cp ~/Downloads/ubuntu-24.04.2-desktop-amd64.iso /mnt/usb/
-
-# 3. 创建持久化文件（20GB，给 hermes 装 venv + pip 依赖）
-sudo truncate -s 20G /mnt/usb/ventoy-persistence-casper.dat
-sudo mkfs.ext4 -L casper-rw /mnt/usb/ventoy-persistence-casper.dat
-
-# 4. Ventoy 开启持久化配置
-sudo mkdir -p /mnt/usb/ventoy
-sudo tee /mnt/usb/ventoy/ventoy.json > /dev/null <<'EOF'
-{
-    "control": [
-        { "VTOY_DEFAULT_MENU_MODE": "0" },
-        { "VTOY_TREE_VIEW_STYLE": "1" }
-    ],
-    "persistence": [
-        {
-            "image": "/ubuntu-24.04.2-desktop-amd64.iso",
-            "backend": "/ventoy-persistence-casper.dat"
-        }
-    ]
-}
-EOF
-
-# 5. 拷 U-Hermes 脚本
-sudo cp -r setup-hermes.sh start-hermes.sh config.example /mnt/usb/u-hermes-linux/
-sudo sync
-sudo umount /mnt/usb
+mkfs.ext4 -F -L casper-rw persistence.dat
 ```
 
-### 2. 启动目标电脑
-
-1. U 盘插入目标电脑 → 开机按 F12 / F2 / Esc（不同品牌不同）进 BIOS 启动菜单
-2. 选 USB 启动
-3. Ventoy 菜单出现 → 选 Ubuntu ISO
-4. Ubuntu 启动菜单选 "**Try or Install Ubuntu**"
-5. 进入 Ubuntu 桌面
-
-### 3. 首次运行 setup
+如果没有 WSL，脚本只会创建空文件。你需要首次进入 Ubuntu 后手动格式化：
 
 ```bash
-# 进 Ubuntu 后打开 Terminal（左下角 Show Applications 搜 terminal）
-sudo cp -r /cdrom/u-hermes-linux ~/u-hermes
-cd ~/u-hermes
-chmod +x setup-hermes.sh start-hermes.sh
-./setup-hermes.sh
+sudo mkfs.ext4 -F -L casper-rw /media/*/Ventoy/persistence.dat
 ```
 
-`setup-hermes.sh` 会：
-- `apt install python3-venv nodejs npm curl`
-- 创建 `~/.u-hermes/venv`
-- pip 装 `hermes-agent` + 依赖
-- 创建 `~/.u-hermes/data/` 目录 + 默认 `.env`
-- 装桌面图标
+### Step 4：复制文件到 U 盘
 
-### 4. 日常使用
+```powershell
+.\4-copy-to-usb.ps1
+```
+
+脚本会把 ISO、`persistence.dat`、`ventoy/ventoy.json` 和 `setup-hermes.sh` / `start-hermes.sh` / `config.example` 复制到 Ventoy U 盘。
+
+## 首次启动
+
+1. 将 U 盘插入目标电脑。
+2. 开机按启动键进入启动菜单（常见：F12 / F11 / F9 / Esc / Del）。
+3. 选择 USB 设备。
+4. 在 Ventoy 菜单里选择 Ubuntu ISO。
+5. 进入 Ubuntu 桌面，连接网络。
+6. 打开 Terminal，运行：
 
 ```bash
-# 每次启动运行
+sudo bash /media/*/Ventoy/u-hermes-linux/setup-hermes.sh
+```
+
+安装完成后，桌面会出现 `U-Hermes` 图标。之后每次进入 Ubuntu，双击图标或运行：
+
+```bash
 ~/u-hermes/start-hermes.sh
 ```
 
-或者双击桌面上的 "U-Hermes" 图标。
+## 配置模型
 
-浏览器会打开 http://127.0.0.1:8648 开始聊天。
-
-## 配置 Provider
-
-首次启动需要配 AI API。编辑 `~/.u-hermes/data/.env`：
+首次启动前编辑：
 
 ```bash
-# 选一个填就行
-DEEPSEEK_API_KEY=sk-xxx          # 国内推荐，直连
-OPENAI_API_KEY=sk-xxx            # 需代理
-ANTHROPIC_API_KEY=sk-ant-xxx     # 需代理
-# ... 其它 OpenAI 兼容接口
+~/.u-hermes/data/.env
 ```
 
-或者用 Ollama 本地模型（离线）：
+支持的常见配置：
 
 ```bash
-# 安装 ollama
-curl -fsSL https://ollama.com/install.sh | sh
+# DeepSeek
+DEEPSEEK_API_KEY=sk-xxx
 
-# 下载模型
-ollama pull qwen2.5:7b
+# 通义千问 / DashScope
+DASHSCOPE_API_KEY=sk-xxx
 
-# Hermes 自动检测到 ollama
+# OpenAI 兼容接口
+OPENAI_API_KEY=sk-xxx
+OPENAI_BASE_URL=https://api.example.com/v1
+
+# 本地 ollama
+OPENAI_API_KEY=ollama
+OPENAI_BASE_URL=http://127.0.0.1:11434/v1
 ```
 
-## 脚本源代码
+## 文件说明
 
-- `setup-hermes.sh` — 首次 bootstrap
-- `start-hermes.sh` — 每次启动执行
-- `config.example` — .env 模板
-
-见本目录下的文件。欢迎 PR 改进。
+| 文件 | 作用 |
+| --- | --- |
+| `1-prepare-usb.ps1` | 下载 Ventoy 并打开 Ventoy2Disk |
+| `2-download-iso.ps1` | 下载 Ubuntu 24.04.4 Desktop ISO |
+| `3-create-persistence.ps1` | 创建 `persistence.dat` 持久化镜像 |
+| `4-copy-to-usb.ps1` | 复制 ISO、持久化镜像、Ventoy 配置和 U-Hermes 脚本 |
+| `ventoy/ventoy.json` | 让 Ventoy 自动为 Ubuntu 加载持久化镜像 |
+| `setup-hermes.sh` | Ubuntu 内首次安装 U-Hermes |
+| `start-hermes.sh` | 每次启动 U-Hermes |
+| `config.example` | API Provider 配置模板 |
 
 ## FAQ
 
-**Q: 跟 Windows 商业版比有什么区别？**
-A: 两者 AI 核心能力一致（都是 hermes-agent + web-ui）。区别在体验：
-- Linux 版需要自己刻盘、跑脚本、排错
-- Windows 版开箱即用，插上 exe 双击即可
-- Linux 版需自备 API Key，Windows 版赠送初始额度
+**Q: 这个开源方案和马盘商业版有什么区别？**
 
-**Q: 持久化分区多大合适？**
-A: 建议 20GB+。hermes 的 Python 依赖约 2GB，再加上模型缓存、聊天历史、ollama 模型等。
+A: 开源方案需要自己制盘、联网安装、配置 API Key 和排错；马盘商业版是 Windows 成品 U 盘，内置 U-Claw + U-Hermes、图形启动器、账户体系、初始额度和售后。商业版请看 [官网购买页](https://www.u-hermes.org/#buy)。
 
-**Q: 能在 Mac 上启动吗？**
-A: Intel Mac 可以（按住 Option 选启动盘）。M1/M2/M3 Mac 不行（ARM 架构不兼容 x86 ISO）。
+**Q: 为什么不直接发布 ISO？**
 
-**Q: 报错 "Kernel panic" / 启动卡住？**
-A: 多半是 Ventoy 或 ISO 损坏。重新刻一遍盘试试。某些杂牌 U 盘兼容性差。
+A: ISO 体积通常 6GB 以上，不适合放在 GitHub release；不同 U 盘型号和持久化大小也需要用户自己选择。
 
-**Q: 为什么不直接发 release ISO？**
-A: ISO 太大（6-8GB），GitHub release 限制 2GB。想要成品请看 [Windows 商业版](https://www.u-hermes.org/#buy)。
+**Q: Mac 能启动吗？**
 
-## 相关
+A: Intel Mac 可能可以，Apple Silicon（M1/M2/M3/M4）不适合这个 x86_64 Ubuntu ISO。
 
-- [u-claw-linux](https://github.com/dongsheng123132/u-claw-linux) — 姊妹项目，同样的 Ventoy 模式做 U-Claw
+**Q: 启动失败或卡住怎么办？**
+
+A: 优先检查 U 盘是否为 USB 3.0、ISO 是否校验通过、`persistence.dat` 是否已格式化为 ext4 且卷标为 `casper-rw`。部分电脑需要在 BIOS 里关闭 Secure Boot。
+
+## 相关项目
+
+- [u-claw-linux](https://github.com/dongsheng123132/u-claw-linux) — OpenClaw / U-Claw 的 Linux 可启动 U 盘方案
+- [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) — U-Hermes 上游 Agent 项目
 - [Ventoy 官方文档](https://www.ventoy.net/en/doc_start.html)
-- [Ubuntu Live Wiki](https://help.ubuntu.com/community/Installation/FromUSBStick)
-
-## License
-
-MIT

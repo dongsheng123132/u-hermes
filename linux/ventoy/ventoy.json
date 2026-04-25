@@ -1,0 +1,12 @@
+{
+  "control": [
+    { "VTOY_TREE_VIEW_STYLE": "1" }
+  ],
+  "persistence": [
+    {
+      "image": "/ubuntu-24.04.4-desktop-amd64.iso",
+      "backend": "/persistence.dat",
+      "autosel": 1
+    }
+  ]
+}
