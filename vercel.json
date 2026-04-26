@@ -8,12 +8,5 @@
     { "source": "/open-source", "destination": "https://github.com/dongsheng123132/u-hermes/tree/main/linux", "permanent": false },
     { "source": "/buy", "destination": "/#buy", "permanent": false },
     { "source": "/commercial", "destination": "/#buy", "permanent": false }
-  ],
-  "rewrites": [
-    {
-      "source": "/((?!study|imgs|_next|api|favicon).*)",
-      "has": [{ "type": "host", "value": "study.u-hermes.org" }],
-      "destination": "/study/$1"
-    }
   ]
 }
