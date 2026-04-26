@@ -781,10 +781,7 @@ footer .wrap { display: flex; align-items: center; justify-content: space-betwee
     <div class="sidebar-group">
       <span class="sidebar-group-label">平台接入</span>
       <a href="#platforms" class="sidebar-link"><span class="sidebar-link-icon">🤖</span>平台总览</a>
-      <a href="#feishu" class="sidebar-link"><span class="sidebar-link-icon">🪶</span>飞书机器人</a>
-      <a href="#qq-detail" class="sidebar-link"><span class="sidebar-link-icon">🐧</span>QQ 机器人</a>
       <a href="#telegram-detail" class="sidebar-link"><span class="sidebar-link-icon">✈️</span>Telegram</a>
-      <a href="#wechat-detail" class="sidebar-link"><span class="sidebar-link-icon">💚</span>微信机器人</a>
       <a href="#discord" class="sidebar-link"><span class="sidebar-link-icon">🎮</span>Discord</a>
     </div>
     <div class="sidebar-group">
@@ -824,119 +821,72 @@ footer .wrap { display: flex; align-items: center; justify-content: space-betwee
     <!-- 快速开始 -->
     <div class="doc-section" id="quickstart">
       <h1 class="doc-h1">欢迎来到 <span class="accent">龙虾学堂</span></h1>
-      <p class="doc-lead">U-Hermes 马盘的官方中文教程中心。这里记录了从安装到高级玩法的所有内容，按顺序看，或直接跳到你需要的章节。</p>
-
-      <!-- TODO: 本页内容来自 U-Claw 教程站的占位改写。Hermes 实际功能（WinUI 3 / 概览-聊天-模型-智能体-技能-记忆-伙伴-集成 八大菜单 / Dreamer / Soul / Skills 加载机制）与 U-Claw 不同，截图也都是 U-Claw 的 UI。后续由内容同事按 Hermes 实际界面重写文案 + 重拍截图。-->
-      <div class="alert tip" style="border-color:var(--accent);">
-        <span class="alert-icon">📝</span>
-        <span><strong>内容编辑中：</strong>本教程站正在按 U-Hermes 实际功能重写，部分截图与文案仍引用 U-Claw 旧版。如有疑问请加微信 <strong>hecare888</strong> 或在 <a href="https://github.com/dongsheng123132/u-hermes/issues" target="_blank" style="color:var(--accent)">GitHub Issues</a> 反馈。</span>
-      </div>
+      <p class="doc-lead">U-Hermes 马盘的官方中文教程中心。U-Hermes 是基于 Windows 原生 WinUI 3 打造的 AI 智能体桌面应用，内置 20+ 工具、104 个技能、Telegram/Discord/Slack/WhatsApp/Matrix 多平台网关。</p>
 
       <h2 class="doc-h2">⚡ 5 分钟快速上手</h2>
-      <p class="doc-p">如果你刚拿到虾盘，按下面的步骤操作，5 分钟内就能和 AI 说上话。</p>
+      <p class="doc-p">U-Hermes 马盘开箱即用，按下面 4 步走一遍，5 分钟内就能和 AI 说上话。</p>
 
       <ul class="step-list">
         <li>
           <div class="step-num-badge">01</div>
           <div>
-            <strong>插入虾盘 U 盘</strong>
-            <span>把虾盘插到电脑的 USB 口（双口设计，USB-A 和 USB-C 各一个，选合适的插）。Windows 会在「此电脑」里出现新盘符，打开 U 盘，可以看到如下文件结构：</span>
-            <img src="imgs/start-01-udisk-files.png" alt="U盘文件列表，箭头指向U-Hermes启动程序" class="doc-screenshot">
+            <strong>插入 U 盘</strong>
+            <span>把 U-Hermes 马盘插到 Windows 10/11 电脑的 USB 口。打开「此电脑」会看到新盘符（一般是 D: / E: / F:），双击进去，可以看到 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">U-Hermes\</code> 和 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">U-Claw\</code> 两个产品文件夹。</span>
           </div>
         </li>
         <li>
           <div class="step-num-badge">02</div>
           <div>
-            <strong>双击启动程序</strong>
-            <span>
-              双击 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">U-Hermes.exe</code>。<br><br>
-              <strong>双击没反应怎么办：</strong>右键 → 「以管理员身份运行」（如下图）
-            </span>
-            <img src="imgs/start-02-run-as-admin.png" alt="右键菜单选择以管理员身份运行" class="doc-screenshot">
-            <span style="display:block;margin-top:-12px">
-              <strong>弹出「Windows 已保护你的电脑」：</strong>点「更多信息」→「仍要运行」即可。<br>
-              如果被杀毒软件拦截，在杀毒软件里把 U 盘目录添加到白名单后重试。
+            <strong>双击 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">Launch U-Hermes.cmd</code></strong>
+            <span>进入 <code style="font-family:monospace;font-size:.85em">U-Hermes\</code> 文件夹，找到 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">Launch U-Hermes.cmd</code> 双击启动。<br><br>
+            ⚠️ <strong>不要直接双击 <code style="font-family:monospace;font-size:.85em">U-Hermes.exe</code></strong>——<code style="font-family:monospace;font-size:.85em">.cmd</code> 启动器会自动设环境变量让数据保存到 U 盘，直接跑 <code style="font-family:monospace;font-size:.85em">.exe</code> 数据可能写到本地。<br><br>
+            <strong>弹出「Windows 已保护你的电脑」：</strong>点「更多信息」→「仍要运行」即可。<br>
+            <strong>被杀毒软件拦截：</strong>在杀毒软件里把 U 盘目录添加到白名单后重试。
             </span>
           </div>
         </li>
         <li>
           <div class="step-num-badge">03</div>
           <div>
-            <strong>等待 U-Hermes 窗口弹出（首次可能需要激活）</strong>
-            <span>首次启动需要几秒初始化（Mac 会显示加载画面）。</span>
-            <img src="imgs/start-05-mac-loading.png" alt="Mac上U-Hermes启动加载画面" class="doc-screenshot" style="max-width:360px">
-            <span style="display:block;margin-top:8px"><strong>如果弹出「软件激活」界面：</strong>这是换了新电脑首次运行时会出现的授权绑定步骤。</span>
-            <div class="screenshot-row" style="margin-top:12px">
-              <figure>
-                <img src="imgs/start-03-activate-input.png" alt="软件激活：复制授权码发给商家">
-                <figcaption>① 复制授权码（64位），发送给商家（微信 hecare888）</figcaption>
-              </figure>
-              <figure>
-                <img src="imgs/start-04-activate-done.png" alt="软件激活：粘贴激活码后重启">
-                <figcaption>② 收到激活码后粘贴进去，点「激活授权」→「重启应用」</figcaption>
-              </figure>
-            </div>
+            <strong>完成激活（首次启动 / 换电脑时）</strong>
+            <span>首次启动会弹出 <strong>Hermes Activation</strong> 激活窗口：</span>
+            <img src="imgs/hermes-activation.png" alt="U-Hermes 激活窗口" class="doc-screenshot" style="max-width:520px">
+            <ol style="margin-top:12px;line-height:1.8">
+              <li><strong>第 1 步：</strong>点「复制授权码」按钮，把这段 64 位字符发给商家（微信 <strong>hecare888</strong>）</li>
+              <li><strong>第 2 步：</strong>商家回复你激活码（一长串 base64 字符），粘贴到第二个输入框</li>
+              <li>点「激活并继续」——窗口自动关闭，进入主界面</li>
+            </ol>
+            <span style="display:block;margin-top:12px">激活码绑定 U 盘硬件指纹（基于 Model + Serial + PNPDeviceID 计算的 SHA256），<strong>只对这一根 U 盘有效</strong>，不会泄露。</span>
           </div>
         </li>
         <li>
           <div class="step-num-badge">04</div>
           <div>
-            <strong>查看余额 / 充值虾盘云</strong>
-            <span>左侧点「<strong>虾粮</strong>」，可以看到当前 Token 余额和「去充值」按钮。新用户有赠送的体验额度，用完再充值。详细步骤见 <a href="#xiapan-cloud" style="color:var(--accent)">虾盘云章节</a>。</span>
-            <img src="imgs/start-07-xiapan-panel.png" alt="虾粮面板显示余额和去充值按钮" class="doc-screenshot">
-          </div>
-        </li>
-        <li>
-          <div class="step-num-badge">05</div>
-          <div>
-            <strong>发送第一条消息</strong>
-            <span>点击左侧「新对话」，在底部输入框打字，按回车发送。看到 AI 回复就成功了！</span>
-            <img src="imgs/start-06-main-ui.png" alt="U-Hermes主界面，输入框准备发消息" class="doc-screenshot">
+            <strong>开始对话</strong>
+            <span>进入主界面后，左侧菜单点「💬 聊天」，底部输入框打字按回车发送。AI 几秒内开始回复就说明所有环节通了。</span>
+            <img src="imgs/hermes-main-chat.png" alt="U-Hermes 主界面：聊天页" class="doc-screenshot">
+            <span style="display:block;margin-top:12px">默认配的是 <strong>虾盘云</strong>，新用户有赠送的初始 Token 不用充值就能聊。Token 用完后从「↔ 模型」页或集成页找充值入口。</span>
           </div>
         </li>
       </ul>
 
       <div class="alert tip">
         <span class="alert-icon">💡</span>
-        <span>U 盘插着才能运行。所有配置和对话记录都保存在 U 盘的 <code style="font-family:monospace;font-size:.85em">U-Hermes/data/</code> 目录里——换台电脑插上，数据完整保留，<strong>不要删除这个文件夹</strong>。</span>
+        <span>U 盘插着才能运行。所有配置和对话记录都保存在 U 盘的 <code style="font-family:monospace;font-size:.85em">U-Hermes\data\</code> 目录里——换台电脑插上，数据完整保留，<strong>不要删除这个文件夹</strong>。</span>
       </div>
 
-      <h3 class="doc-h3">遇到问题？U 盘里有应急工具</h3>
-      <p class="doc-p">U 盘的 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">tools/</code> 目录下有预备好的工具：</p>
+      <h3 class="doc-h3">系统要求</h3>
       <table class="doc-table">
-        <thead><tr><th>工具</th><th>什么时候用</th></tr></thead>
+        <thead><tr><th>项目</th><th>要求</th></tr></thead>
         <tbody>
-          <tr><td><code style="font-family:monospace;font-size:.82em">检测系统环境.bat</code></td><td>双击没反应、启动失败，先运行这个检测原因</td></tr>
-          <tr><td><code style="font-family:monospace;font-size:.82em">防火墙放行(管理员).bat</code></td><td>AI 能启动但无法联网、提示网络错误时运行</td></tr>
-          <tr><td><code style="font-family:monospace;font-size:.82em">VC_redist.x64.exe</code></td><td>提示「缺少 DLL」或「运行库错误」时安装</td></tr>
-          <tr><td><code style="font-family:monospace;font-size:.82em">远程协助-AnyDesk.exe</code></td><td>自己搞不定，让客服远程帮你——运行后把9位数字告诉微信 hecare888</td></tr>
+          <tr><td>操作系统</td><td>Windows 10 1809 / Windows 11（不支持 Mac、Linux、XP/7/8）</td></tr>
+          <tr><td>架构</td><td>x64（不支持 ARM64 / 32 位）</td></tr>
+          <tr><td>内存</td><td>建议 8GB+</td></tr>
+          <tr><td>磁盘</td><td>U 盘自带 ≥ 16GB 即可，本地无需空间</td></tr>
+          <tr><td>.NET 运行时</td><td>无需自行安装（self-contained，所有依赖打包在 U 盘里）</td></tr>
+          <tr><td>网络</td><td>使用虾盘云或在线模型时需联网；纯本地 Ollama 模型可离线</td></tr>
         </tbody>
       </table>
-
-      <h3 class="doc-h3">U 盘里还有哪些东西？</h3>
-      <p class="doc-p">除了主程序，U 盘 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">tools/</code> 目录下还预备了很多有用的东西：</p>
-      <div class="card-grid">
-        <div class="doc-card">
-          <span class="doc-card-icon">🤖</span>
-          <h4>AI 金箍棒</h4>
-          <p>一个独立的 AI 电脑医生工具，可以诊断和修复电脑问题。双击 <code style="font-family:monospace;font-size:.82em">AI金箍棒/启动.bat</code> 运行，不依赖主程序。</p>
-        </div>
-        <div class="doc-card">
-          <span class="doc-card-icon">🧊</span>
-          <h4>本地大模型</h4>
-          <p>内含 Gemma 4 和 Qwen 3.5 的离线模型文件，完全不需要联网，数据不出本机。打开 <code style="font-family:monospace;font-size:.82em">本地大模型/使用教程.html</code> 查看用法。</p>
-        </div>
-        <div class="doc-card">
-          <span class="doc-card-icon">💻</span>
-          <h4>QClaw 安装包</h4>
-          <p>QClaw 是 U-Hermes 的桌面客户端，可以安装到电脑本地，不依赖 U 盘运行。在 <code style="font-family:monospace;font-size:.82em">tools/</code> 里找 QClaw-Setup.exe 安装。</p>
-        </div>
-        <div class="doc-card">
-          <span class="doc-card-icon">🔧</span>
-          <h4>系统修复工具</h4>
-          <p>启动失败时用：<code style="font-family:monospace;font-size:.82em">检测系统环境.bat</code>、<code style="font-family:monospace;font-size:.82em">VC_redist.x64.exe</code>、<code style="font-family:monospace;font-size:.82em">防火墙放行.bat</code>。</p>
-        </div>
-      </div>
     </div>
 
     <!-- 第一次对话 -->
@@ -996,65 +946,75 @@ footer .wrap { display: flex; align-items: center; justify-content: space-betwee
 
       <div class="alert warn">
         <span class="alert-icon">⚠️</span>
-        <span>发消息后 AI 没有任何回应？先确认左上角「gateway 已连接」是绿色状态。如果是红色或灰色，说明后台服务没有运行，需要重新启动 U-Hermes。</span>
+        <span>发消息后 AI 没有任何回应？检查左侧「↔ 模型」页，看当前模型的"运行状态"是否显示"已连接"绿色。如果是红色或"未配置"，说明 API Key 错或网络不通——见 <a href="#troubleshoot" style="color:var(--accent)">故障排查</a>。也可以打开 <code style="font-family:monospace;font-size:.85em">U-Hermes\data\hermes-cs\logs\hermes.log</code> 查最近一段错误。</span>
       </div>
     </div>
 
     <!-- 界面总览 -->
     <div class="doc-section" id="overview">
       <h2 class="doc-h2">🗺️ 界面总览</h2>
-      <p class="doc-p">U-Hermes 控制台的界面分为三个主要区域，认识它们之后操作会顺手很多。</p>
+      <p class="doc-p">U-Hermes 是一个原生 Windows 桌面应用（WinUI 3），左侧 8 个菜单切换不同功能页。</p>
 
-      <h3 class="doc-h3">左侧导航栏</h3>
+      <img src="imgs/hermes-overview.png" alt="U-Hermes 概览页" class="doc-screenshot">
+
+      <h3 class="doc-h3">左侧导航 8 个菜单</h3>
       <table class="doc-table">
-        <thead><tr><th>图标/名称</th><th>功能说明</th></tr></thead>
+        <thead><tr><th>菜单</th><th>功能说明</th></tr></thead>
         <tbody>
-          <tr><td>➕ <strong>新对话</strong></td><td>开始一个全新对话，不携带之前的历史记录</td></tr>
-          <tr><td>🦐 <strong>虾粮</strong></td><td>查看账户余额、用量统计，充值入口（如使用虾盘云）</td></tr>
-          <tr><td>🤖 <strong>Agents</strong></td><td>管理和配置 AI 代理，设置不同用途的专属 AI 助手</td></tr>
-          <tr><td>📡 <strong>频道</strong></td><td>配置平台接入——飞书、QQ、Telegram 等机器人在这里设置</td></tr>
-          <tr><td>🧰 <strong>技能</strong></td><td>管理已安装的技能，浏览技能市场，开启/关闭各个技能</td></tr>
-          <tr><td>⏰ <strong>定时任务</strong></td><td>创建和管理定时自动执行的 AI 任务</td></tr>
-          <tr><td>🔗 <strong>U-Hermes 页面</strong></td><td>跳转到 U-Hermes 的 Web 界面（旧版界面，功能更完整）</td></tr>
-          <tr><td>🎓 <strong>龙虾学堂</strong></td><td>跳转到本教程网站（就是你现在看的这个页面）</td></tr>
-          <tr><td>⚙️ <strong>设置</strong></td><td>模型配置、系统设置、关于信息</td></tr>
+          <tr><td>🏠 <strong>概览</strong></td><td>首页，显示会话数、已注册工具数（默认 20）、可用技能数（默认 104）、大模型连接状态、Dreamer 状态、平台与服务、最近活动</td></tr>
+          <tr><td>💬 <strong>聊天</strong></td><td>主对话界面（最常用）。和 AI 对话、查看会话历史</td></tr>
+          <tr><td>↔ <strong>模型</strong></td><td>统一管理 AI 模型供应商、API Key、鉴权方式、温度/最大 token 等参数。可同时配多个模型，运行时切换</td></tr>
+          <tr><td>👥 <strong>智能体</strong></td><td>管理多个智能体配置（不同 Agent 可有不同的 SOUL.md 系统提示词、不同模型）</td></tr>
+          <tr><td>📚 <strong>技能</strong></td><td>浏览/启用 104 个内置技能（apple-notes、claude-code、creative、data-science、mlops、productivity 等分类）</td></tr>
+          <tr><td>📄 <strong>记忆</strong></td><td>长期记忆管理。AI 会把跨会话需要保留的事实写到这里，新会话自动召回</td></tr>
+          <tr><td>😊 <strong>伙伴</strong></td><td>个人助理人格（Buddy）配置</td></tr>
+          <tr><td>👤 <strong>集成</strong></td><td>消息网关：Telegram、Discord（C# 原生，桌面应用内置）/ Slack、WhatsApp、Matrix、Webhook（需要装 hermes-agent 才能用）</td></tr>
+          <tr><td>⚙️ <strong>设置</strong></td><td>左下角，系统级设置 / 关于</td></tr>
         </tbody>
       </table>
 
-      <h3 class="doc-h3">顶部状态栏</h3>
-      <p class="doc-p">控制台顶部会显示两条关键信息：</p>
-      <div class="card-grid two">
+      <h3 class="doc-h3">概览页关键信息</h3>
+      <p class="doc-p">概览页顶部 4 个数字卡片让你一眼看清运行状态：</p>
+      <div class="card-grid">
         <div class="doc-card">
-          <span class="doc-card-icon">🟢</span>
-          <h4>Gateway 状态</h4>
-          <p>显示「gateway 已连接 | port: 18789」说明后台服务正常运行。如果是红色或没有这行信息，AI 无法响应，需要重启服务。</p>
+          <span class="doc-card-icon">💬</span>
+          <h4>会话数</h4>
+          <p>历史对话总数。新装时为 0，每开一个新对话就会 +1。</p>
         </div>
         <div class="doc-card">
-          <span class="doc-card-icon">🤖</span>
-          <h4>当前对话对象</h4>
-          <p>显示正在和哪个 Agent 对话（默认是 Main Agent）。不同 Agent 可以有不同的系统提示词和性格设定。</p>
+          <span class="doc-card-icon">🔧</span>
+          <h4>工具（默认 20）</h4>
+          <p>已注册的内置工具：ReadFile / WriteFile / EditFile / Glob / Grep / Bash / Terminal / WebFetch / WebSearch / TodoWrite / ScheduleCron / Lsp / Agent（子智能体）/ Memory / SessionSearch / SkillInvoke / SendMessage / CodeSandbox / Checkpoint / Patch。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🧰</span>
+          <h4>技能（默认 104）</h4>
+          <p>预装 104 个 Skill 包，按分类组织。聊天时 AI 自动调用相关 Skill，比如说"画流程图"会调 diagramming Skill。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🟢</span>
+          <h4>大模型状态</h4>
+          <p>显示当前配置的模型连接状态（"已连接" 绿色 = OK；"未配置" / "连接失败" = 红色，需检查 API Key）。</p>
         </div>
       </div>
 
-      <h3 class="doc-h3">主对话区</h3>
-      <p class="doc-p">中间最大的区域是对话区，你的消息显示在右侧蓝色气泡，AI 的回复显示在左侧。</p>
-      <div class="card-grid">
-        <div class="doc-card">
-          <span class="doc-card-icon">📝</span>
-          <h4>Markdown 渲染</h4>
-          <p>AI 的回复支持 Markdown 格式，标题、加粗、代码块、表格都会正确渲染显示。</p>
-        </div>
-        <div class="doc-card">
-          <span class="doc-card-icon">💾</span>
-          <h4>历史记录</h4>
-          <p>所有对话自动保存在本地，左侧列表按时间分组显示「今天」「昨天」等，点击可以继续之前的对话。</p>
-        </div>
-        <div class="doc-card">
-          <span class="doc-card-icon">🔍</span>
-          <h4>搜索历史</h4>
-          <p>顶部有搜索框，可以按关键词搜索历史对话内容，快速找到之前讨论过的话题。</p>
-        </div>
-      </div>
+      <h3 class="doc-h3">Dreamer 是什么</h3>
+      <p class="doc-p">概览页中间有 <strong>Dreamer</strong> 模块——这是 U-Hermes 独有的 <strong>背景闲置自我学习</strong>系统。AI 在你不和它对话的时候，会回顾过去的会话提取经验，叫"游走（Walks）"。游走结果生成"信号"和"摘要"，主对话时偶尔被召回作为额外上下文。默认是 <code>disabled</code>，需要在配置文件开启。</p>
+
+      <h3 class="doc-h3">数据存哪里</h3>
+      <p class="doc-p">所有数据都在 U 盘 <code style="font-family:monospace;font-size:.85em">U-Hermes\data\</code> 目录里：</p>
+      <table class="doc-table">
+        <thead><tr><th>路径</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td><code>data\config.yaml</code></td><td>模型配置 / 鉴权 / 温度等</td></tr>
+          <tr><td><code>data\SOUL.md</code></td><td>主 Agent 的系统提示词（人格）</td></tr>
+          <tr><td><code>data\USER.md</code></td><td>用户档案（让 AI 记住你是谁）</td></tr>
+          <tr><td><code>data\hermes-cs\transcripts\</code></td><td>聊天历史（按会话 ID 分文件）</td></tr>
+          <tr><td><code>data\hermes-cs\memory\</code></td><td>长期记忆</td></tr>
+          <tr><td><code>data\hermes-cs\skills\</code></td><td>已安装的技能（首次启动从 bundle 复制过来）</td></tr>
+          <tr><td><code>data\hermes-cs\logs\hermes.log</code></td><td>运行日志（故障排查关键文件）</td></tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- 模型选择指南 -->
@@ -1118,40 +1078,38 @@ footer .wrap { display: flex; align-items: center; justify-content: space-betwee
       <p class="doc-p" style="margin-top:8px;font-size:.82rem;color:var(--text-muted)">参考：1 百万 token ≈ 75 万中文字，普通用户每天聊 1-2 小时约消耗 2-5 万 token。</p>
 
       <h3 class="doc-h3">充值步骤</h3>
-      <p class="doc-p">新用户自动赠送体验额度，开箱即用。额度用完后按以下步骤充值：</p>
+      <p class="doc-p">U-Hermes 首次启动会自动写入虾盘云模型配置，并尝试激活初始额度（赠送 token）。额度用完后按以下步骤充值：</p>
       <ul class="step-list">
         <li>
           <div class="step-num-badge">01</div>
-          <div><strong>打开虾粮面板</strong><span>U-Hermes 左侧点「<strong>虾粮</strong>」，可以看到当前 Token 余额，以及「去充值」蓝色按钮。</span>
-            <img src="imgs/start-07-xiapan-panel.png" alt="虾粮面板" class="doc-screenshot">
+          <div><strong>查看当前状态</strong><span>U-Hermes 左侧点「↔ 模型」，找到名称为 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">Uclaw Cloud</code> 的模型卡片（顶部带"默认"+"受保护"标签）。卡片显示 <code>https://api.u-claw.org/v1</code> 即虾盘云端点。展开配置可以看到当前 API Key（自动绑定 U 盘指纹生成，不要修改）。</span>
+            <img src="imgs/hermes-model.png" alt="虾盘云模型配置" class="doc-screenshot">
           </div>
         </li>
         <li>
           <div class="step-num-badge">02</div>
-          <div><strong>点击「去充值」</strong><span>点击蓝色按钮，会跳转（或在浏览器打开）虾盘云充值中心网页，API Key 已自动填入。</span></div>
+          <div><strong>访问充值页面</strong><span>用浏览器打开：<code style="font-family:monospace;font-size:.85em">https://api.u-claw.org/recharge?key=&lt;你的 API Key&gt;</code><br>或在 U-Hermes "概览"页找充值入口（部分版本提供一键打开按钮）。</span></div>
         </li>
         <li>
           <div class="step-num-badge">03</div>
-          <div><strong>选择充值金额，支付宝付款</strong><span>在充值页面选择金额（10 / 20 / 50 / 100 / 200 元或自定义），点「支付宝充值」，扫码完成付款。</span>
-            <img src="imgs/start-08-recharge-page.png" alt="虾盘云充值中心页面" class="doc-screenshot" style="max-width:400px">
-          </div>
+          <div><strong>选择金额支付宝付款</strong><span>充值页面选金额（10 / 20 / 50 / 100 / 200 元或自定义），点「支付宝充值」，扫码完成付款。</span></div>
         </li>
         <li>
           <div class="step-num-badge">04</div>
-          <div><strong>到账确认</strong><span>付款成功后，回到 U-Hermes 点「刷新」查看余额更新。到账通常很快，如超过 30 分钟未到账，加微信 <strong>hecare888</strong> 并发付款截图。</span></div>
+          <div><strong>余额到账</strong><span>付款成功后立即到账（一般 < 1 分钟）。回到 U-Hermes "↔ 模型"页面，刷新就能看到新余额。如超过 30 分钟未到账，加微信 <strong>hecare888</strong> 并发付款截图。</span></div>
         </li>
       </ul>
 
       <div class="alert tip">
         <span class="alert-icon">💡</span>
-        <span>充值页面会自动读取你的 API Key，无需手动填写，直接选金额付款即可。余额永不过期，用多少扣多少。</span>
+        <span>API Key 是 <code>sk-{USB 指纹 SHA256}</code> 格式，<strong>由 U 盘硬件计算得出</strong>，不是真正的"密钥"。同一根 U 盘换电脑插上，API Key 不变；换 U 盘则 Key 会变（余额绑定 U 盘）。</span>
       </div>
 
       <h3 class="doc-h3">如果你习惯直接用 API Key（开发者方式）</h3>
-      <p class="doc-p">也可以在任何支持 OpenAI 格式的客户端里直接配置虾盘云：</p>
-      <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://api.u-hermes.org/v1</span>
-<span class="key">API Key：</span>  <span class="string">sk-xp-xxxxxxxx</span>  <span class="comment">← 从面板里复制</span>
-<span class="key">模型名：</span>   <span class="string">deepseek-chat</span>    <span class="comment">（或 deepseek-reasoner / qwen-turbo）</span></div>
+      <p class="doc-p">虾盘云兼容 OpenAI API 格式，可以在 ChatBox / Cherry Studio / 任何 OpenAI 客户端里直接接入：</p>
+      <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://api.u-claw.org/v1</span>
+<span class="key">API Key：</span>  <span class="string">sk-{你的 USB 指纹}</span>  <span class="comment">← 从 U-Hermes "↔ 模型" 页复制</span>
+<span class="key">模型名：</span>   <span class="string">deepseek-chat</span>    <span class="comment">（或 deepseek-reasoner / qwen-turbo / qwen-plus）</span></div>
     </div>
 
     <!-- DeepSeek -->
@@ -1393,27 +1351,71 @@ ollama list   <span class="comment"># 查看已下载的模型</span></div>
     <!-- 技能库 -->
     <div class="doc-section" id="skills">
       <h2 class="doc-h2">🧰 技能库说明</h2>
-      <p class="doc-lead" style="font-size:.97rem">技能（Skill）是给 U-Hermes 安装的"插件"，让 AI 从只会聊天，变成能真正执行任务——查天气、发邮件、操作文件、接收平台消息……每个技能是独立的功能模块，按需开启。</p>
+      <p class="doc-lead" style="font-size:.97rem">技能（Skill）是 U-Hermes 的能力扩展——每个技能是一个独立功能包，让 AI 从只会聊天变成能真正执行任务。U-Hermes 出厂预装 <strong>104 个技能</strong>，按分类组织，开箱即用。</p>
+
+      <img src="imgs/hermes-skills.png" alt="U-Hermes 技能库页面" class="doc-screenshot">
+
+      <h3 class="doc-h3">技能怎么用</h3>
+      <p class="doc-p">技能是 <strong>自动调用</strong> 的——你只要正常聊天，AI 会根据问题自动选择合适的 Skill。比如：</p>
+      <ul style="line-height:1.9;margin-left:24px">
+        <li>说"画一个流程图" → AI 调 <code>diagramming</code> 技能生成 Mermaid / SVG</li>
+        <li>说"读这个 PDF 总结一下" → AI 调 <code>pdf-extract</code> 技能解析</li>
+        <li>说"看下我 Apple Notes 里关于会议的笔记" → AI 调 <code>apple-notes</code> 技能查询（仅 macOS）</li>
+        <li>说"训练一个小模型" → AI 调 <code>mlops/training</code> 系列技能给方案</li>
+      </ul>
+      <p class="doc-p" style="margin-top:14px">你不需要记住技能名字，AI 会自己挑。但可以在「📚 技能」页面浏览全部 104 个技能，或者关掉不想用的（比如不需要 macOS 相关的可以关掉 apple/ 分类）。</p>
+
+      <h3 class="doc-h3">出厂预装的 104 个技能（按分类）</h3>
+      <table class="doc-table">
+        <thead><tr><th>分类</th><th>技能数</th><th>用途示例</th></tr></thead>
+        <tbody>
+          <tr><td><strong>claude-code</strong></td><td>20</td><td>编程：feature-dev、code-review、commit-commands、frontend-design、security-review 等</td></tr>
+          <tr><td><strong>souls</strong></td><td>12</td><td>预设 AI 人格：助理、研究员、程序员、写手等不同性格的系统提示词模板</td></tr>
+          <tr><td><strong>training</strong></td><td>6</td><td>ML 模型训练：unsloth、lora-fine-tuning、weights-and-biases 等</td></tr>
+          <tr><td><strong>github</strong></td><td>6</td><td>GitHub 操作：查 issue / PR / 写 commit message / 读 repo</td></tr>
+          <tr><td><strong>inference</strong></td><td>6</td><td>推理引擎：vllm、tensorrt-llm、gguf-quantization 等</td></tr>
+          <tr><td><strong>productivity</strong></td><td>6</td><td>办公：email、calendar、apple-reminders、note-taking 等</td></tr>
+          <tr><td><strong>research</strong></td><td>5</td><td>学术：arxiv 搜索、论文读取、参考文献整理</td></tr>
+          <tr><td><strong>models</strong></td><td>5</td><td>模型推荐：根据任务推荐合适的开源/商业模型</td></tr>
+          <tr><td><strong>creative</strong></td><td>—</td><td>创意：algorithmic-art、ascii-art、storyboard、diagramming</td></tr>
+          <tr><td><strong>data-science</strong></td><td>—</td><td>数据：xlsx 处理、tabular 分析、chart 生成、 visualization</td></tr>
+          <tr><td><strong>email</strong></td><td>—</td><td>邮件：lark-mail、smtp 发送、imap 读取</td></tr>
+          <tr><td><strong>media</strong></td><td>—</td><td>多媒体：video-editor、video-summary、tts、audio-transcribe</td></tr>
+          <tr><td><strong>mlops</strong></td><td>—</td><td>ML 工程：cloud（modal）、evaluation（lm-eval-harness）、deployment</td></tr>
+          <tr><td><strong>devops</strong></td><td>—</td><td>运维：docker、k8s、ci/cd、aws、alibabacloud 系列</td></tr>
+          <tr><td><strong>apple</strong></td><td>—</td><td>macOS 专属：apple-notes、apple-reminders、findmy、imessage</td></tr>
+          <tr><td><strong>autonomous-ai-agents</strong></td><td>—</td><td>智能体框架：claude-code、codex、hermes-agent、opencode 系列接入</td></tr>
+          <tr><td><strong>mcp</strong></td><td>—</td><td>MCP 协议工具集成（Model Context Protocol）</td></tr>
+          <tr><td><strong>diagramming</strong></td><td>—</td><td>画图：mermaid、graphviz、draw.io 风格图表</td></tr>
+          <tr><td><strong>gifs / gaming / leisure</strong></td><td>—</td><td>娱乐工具</td></tr>
+          <tr><td><strong>red-teaming</strong></td><td>—</td><td>安全测试相关</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>左侧「📚 技能」页面顶部有搜索框，按名称、描述、分类或工具关键字快速找到想要的技能。也可以选某个分类（如 <code>claude-code (20)</code>）只看那一类。</span>
+      </div>
 
       <h3 class="doc-h3">技能从哪里来？</h3>
       <div class="card-grid">
         <div class="doc-card">
+          <span class="doc-card-icon">📦</span>
+          <h4>U-Hermes 内置（默认）</h4>
+          <p>出厂预装 104 个 Skill，覆盖大部分日常场景，无需手动安装。</p>
+          <span class="doc-card-tag">开箱即用</span>
+        </div>
+        <div class="doc-card">
           <span class="doc-card-icon">🦀</span>
           <h4>ClawHub 技能市场</h4>
-          <p>全球最大的 U-Hermes 技能市场，18,000+ 个技能，分 MCP 工具、工作流、开发工具、数据&API 等类别。</p>
+          <p>全球最大的 OpenClaw / Hermes 兼容技能市场，18,000+ 技能。U-Hermes 用同一个 SKILL.md 协议，可以复用。</p>
           <span class="doc-card-tag" style="color:var(--accent)">cn.clawhub-mirror.com（国内镜像）</span>
         </div>
         <div class="doc-card">
           <span class="doc-card-icon">🔧</span>
-          <h4>SkillHub 中文社区</h4>
-          <p>国内技能共享社区，收录中文用户开发的本土化技能，更适合国内使用场景。</p>
-          <span class="doc-card-tag" style="color:var(--accent)">skillhub.cn</span>
-        </div>
-        <div class="doc-card">
-          <span class="doc-card-icon">📦</span>
-          <h4>虾盘预装技能</h4>
-          <p>U-Hermes 虾盘 Hermes出厂预装了精选技能集，涵盖最常用的功能，买到即有，无需手动安装。</p>
-          <span class="doc-card-tag">开箱即用</span>
+          <h4>自己写技能</h4>
+          <p>放一个 <code>SKILL.md</code> 到 <code>data\hermes-cs\skills\my-skill\</code>，按 frontmatter 协议描述输入输出，下次启动 AI 就能用。</p>
+          <span class="doc-card-tag">DIY</span>
         </div>
       </div>
 
@@ -1565,249 +1567,97 @@ ollama list   <span class="comment"># 查看已下载的模型</span></div>
     </div>
 
     <!-- 平台接入 -->
+    <!-- 平台接入（Hermes 真实集成页） -->
     <div class="doc-section" id="platforms">
-      <h2 class="doc-h2">🤖 平台接入总览</h2>
-      <p class="doc-p">U-Hermes 支持多个聊天平台，配置后可以直接在对应平台里和 AI 对话，不需要打开浏览器控制台。</p>
-      <div class="platform-grid">
-        <div class="platform-card" id="qq">
-          <div class="platform-card-head"><span class="platform-card-ico">🐧</span><h4>QQ 机器人</h4></div>
-          <p>接入腾讯 QQ 官方开放平台，支持群聊和私聊，@机器人即可对话。</p>
-          <span class="platform-diff">官方接口</span>
+      <h2 class="doc-h2">🤖 平台接入</h2>
+      <p class="doc-lead" style="font-size:.97rem">U-Hermes 支持 6 个消息平台共用同一网关：Telegram、Discord、Slack、WhatsApp、Matrix、Webhook。配置后 AI 就能在对应平台里收发消息，作为聊天机器人服务。</p>
+
+      <img src="imgs/hermes-integrations.png" alt="U-Hermes 集成页面" class="doc-screenshot">
+
+      <h3 class="doc-h3">两种网关分工</h3>
+      <div class="card-grid two">
+        <div class="doc-card">
+          <span class="doc-card-icon">⚡</span>
+          <h4>原生网关（C#）</h4>
+          <p><strong>桌面应用内置，无需任何额外安装</strong>。支持 <strong>Telegram</strong> 和 <strong>Discord</strong> 两个平台。配 token 后点"启动原生网关"即可工作。</p>
+          <span class="doc-card-tag" style="color:var(--accent)">推荐</span>
         </div>
-        <div class="platform-card">
-          <div class="platform-card-head"><span class="platform-card-ico">🪶</span><h4>飞书机器人</h4></div>
-          <p>接入企业飞书，支持消息卡片、群机器人，适合团队内部 AI 助手。</p>
-          <span class="platform-diff">企业级</span>
-        </div>
-        <div class="platform-card" id="telegram">
-          <div class="platform-card-head"><span class="platform-card-ico">✈️</span><h4>Telegram</h4></div>
-          <p>通过 BotFather 创建 Bot，接入 Telegram 群组或私聊，全球可用。</p>
-          <span class="platform-diff">需代理</span>
-        </div>
-        <div class="platform-card" id="wechat">
-          <div class="platform-card-head"><span class="platform-card-ico">💚</span><h4>微信机器人</h4></div>
-          <p>通过企业微信或个人号 Hook 接入，适合日常私人使用或小团队。</p>
-          <span class="platform-diff">非官方</span>
-        </div>
-        <div class="platform-card" id="discord">
-          <div class="platform-card-head"><span class="platform-card-ico">🎮</span><h4>Discord</h4></div>
-          <p>创建 Discord Bot，接入服务器频道，适合游戏社区和开发者群体。</p>
-          <span class="platform-diff">需代理</span>
+        <div class="doc-card">
+          <span class="doc-card-icon">🐍</span>
+          <h4>Python 网关（可选）</h4>
+          <p>仅在需要 <strong>Slack / WhatsApp / Matrix / Webhook</strong> 时才需要。需要先 <code>pip install hermes-agent</code>，配置文件与原生网关共用 <code>config.yaml</code>。</p>
+          <span class="doc-card-tag">高级用户</span>
         </div>
       </div>
+
+      <h3 class="doc-h3">通用流程</h3>
+      <ol style="line-height:1.9;margin-left:24px">
+        <li>在对应平台拿到 bot token（详见下面各平台教程）</li>
+        <li>U-Hermes 主界面 → 左侧「👤 集成」</li>
+        <li>在 <strong>Telegram</strong> 或 <strong>Discord</strong> 行的输入框粘贴 token，点"保存"</li>
+        <li>点"启动原生网关"按钮，状态从橙色"已停止"变成绿色"运行中"</li>
+        <li>在对应平台给 bot 发消息，AI 就会回复</li>
+      </ol>
     </div>
 
-    <!-- 飞书机器人 -->
-    <div class="doc-section" id="feishu">
-      <h2 class="doc-h2">🪶 飞书机器人接入教程</h2>
-      <p class="doc-lead" style="font-size:.97rem">把 U-Hermes 接入飞书后，在飞书群里 @机器人或直接私聊，即可和 AI 对话。适合公司团队共用一个 AI 助手。</p>
-
-      <div class="alert tip">
-        <span class="alert-icon">💡</span>
-        <span>飞书机器人使用<strong>官方开放平台接口</strong>，稳定可靠，不违反飞书使用条款。整个配置过程约 15 分钟。</span>
-      </div>
-
-      <h3 class="doc-h3">第一步：创建飞书应用</h3>
-      <ul class="step-list">
-        <li>
-          <div class="step-num-badge">1</div>
-          <div><strong>登录飞书开放平台</strong><span>在浏览器打开 <strong>open.feishu.cn</strong>，用你的飞书账号（需要是企业版管理员或开发者权限）登录。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">2</div>
-          <div><strong>创建企业自建应用</strong><span>点击「开发者后台」→「创建应用」→「企业自建应用」。填写应用名称（比如「AI 助手」）和描述，上传图标，点击「确认创建」。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">3</div>
-          <div><strong>记录凭证</strong><span>进入应用页面，在「凭证与基础信息」里找到 <strong>App ID</strong> 和 <strong>App Secret</strong>，复制保存备用。</span></div>
-        </li>
-      </ul>
-
-      <h3 class="doc-h3">第二步：开启机器人能力</h3>
-      <ul class="step-list">
-        <li>
-          <div class="step-num-badge">1</div>
-          <div><strong>添加机器人能力</strong><span>在左侧菜单点「添加应用能力」→「机器人」，点击「添加」。这一步让应用具备在飞书里发消息的权限。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">2</div>
-          <div><strong>配置权限</strong><span>进入「权限管理」，搜索并开启以下权限：<code style="font-family:monospace;font-size:.82em;color:var(--accent)">im:message</code>（接收消息）、<code style="font-family:monospace;font-size:.82em;color:var(--accent)">im:message:send_as_bot</code>（发送消息）、<code style="font-family:monospace;font-size:.82em;color:var(--accent)">im:chat</code>（读取群信息）。</span></div>
-        </li>
-      </ul>
-
-      <h3 class="doc-h3">第三步：配置事件订阅（接收消息）</h3>
-      <ul class="step-list">
-        <li>
-          <div class="step-num-badge">1</div>
-          <div><strong>先获取 U-Hermes 的 Webhook 地址</strong><span>在 U-Hermes 控制台 → 频道 → 飞书 → 新增，系统会生成一个 Webhook 地址，格式类似：<code style="font-family:monospace;font-size:.82em;color:var(--accent)">http://你的IP:18789/channel/feishu/xxx</code>。复制这个地址。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">2</div>
-          <div><strong>填入请求地址</strong><span>回到飞书开放平台，进入「事件订阅」，将请求 URL 设置为刚才复制的 Webhook 地址。点击「验证」，飞书会向该地址发一个验证请求，U-Hermes 会自动响应通过。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">3</div>
-          <div><strong>添加事件</strong><span>在事件列表里搜索并添加：<strong>接收消息</strong>（im.message.receive_v1）。这样每当用户发消息给机器人，飞书就会通知 U-Hermes。</span></div>
-        </li>
-      </ul>
-
-      <h3 class="doc-h3">第四步：在 U-Hermes 里完成配对</h3>
-      <ul class="step-list">
-        <li>
-          <div class="step-num-badge">1</div>
-          <div><strong>填入 App ID 和 App Secret</strong><span>在 U-Hermes → 频道 → 飞书配置页面，把第一步记录的 App ID 和 App Secret 填进去，保存。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">2</div>
-          <div><strong>发布应用</strong><span>回到飞书开放平台，点击「版本管理与发布」→「创建版本」→「申请发布」。企业内测版本通常 1 小时内审核通过（免审）。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">3</div>
-          <div><strong>测试对话</strong><span>在飞书里搜索你的机器人名称，发起私聊，发送「你好」，如果收到 AI 回复，配置成功。</span></div>
-        </li>
-      </ul>
-
-      <div class="alert warn">
-        <span class="alert-icon">⚠️</span>
-        <span>如果 U-Hermes 运行在本机（不是公网服务器），飞书无法访问你的 Webhook 地址。解决方案：① 用 <strong>frp 内网穿透</strong>把本机端口映射到公网；② 或者把 U-Hermes 部署到 VPS 上（参考 <a href="#vps">VPS 部署</a>章节）。</span>
-      </div>
-    </div>
-
-    <!-- QQ 机器人详细 -->
-    <div class="doc-section" id="qq-detail">
-      <h2 class="doc-h2">🐧 QQ 机器人接入教程</h2>
-      <p class="doc-p">腾讯 QQ 官方开放平台提供了正规的机器人接入方式，支持 QQ 群聊和私聊，@机器人即可触发 AI 回复。</p>
-
-      <div class="alert warn">
-        <span class="alert-icon">⚠️</span>
-        <span>QQ 机器人需要在腾讯 QQ 开放平台申请资质，目前对个人开发者开放，但需实名认证。申请地址：<strong>q.qq.com</strong></span>
-      </div>
-
-      <h3 class="doc-h3">基本流程</h3>
-      <ul class="step-list">
-        <li>
-          <div class="step-num-badge">1</div>
-          <div><strong>申请机器人</strong><span>访问 <strong>q.qq.com</strong>，登录 QQ 账号，进入「机器人管理」→「创建机器人」，填写基本信息，提交审核（通常 1-3 个工作日）。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">2</div>
-          <div><strong>获取凭证</strong><span>审核通过后，在机器人详情页找到 <strong>AppID</strong> 和 <strong>AppSecret</strong>，复制保存。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">3</div>
-          <div><strong>配置 U-Hermes</strong><span>在 U-Hermes → 频道 → QQ，填入 AppID 和 AppSecret，填入 Webhook 回调地址（同飞书步骤），保存启用。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">4</div>
-          <div><strong>邀请机器人进群</strong><span>在 QQ 群里点「邀请」，搜索你的机器人名称，邀请进群。之后在群里 @机器人发消息即可触发回复。</span></div>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Telegram 机器人 -->
+    <!-- Telegram 详细教程 -->
     <div class="doc-section" id="telegram-detail">
-      <h2 class="doc-h2">✈️ Telegram 机器人接入教程</h2>
-      <p class="doc-p">Telegram 的机器人 API 是最容易配置的平台之一——申请简单，功能完整，支持群组和私聊。唯一要求：需要能访问 Telegram（大陆需要代理）。</p>
+      <h2 class="doc-h2">✈️ Telegram Bot 接入</h2>
+      <p class="doc-p">Telegram 是最容易接入的平台，2 分钟搞定。</p>
+
+      <h3 class="doc-h3">1. 创建 Bot（@BotFather）</h3>
+      <ol style="line-height:1.9;margin-left:24px">
+        <li>在 Telegram 搜索 <code>@BotFather</code>，开始对话</li>
+        <li>发送 <code>/newbot</code> 命令</li>
+        <li>按提示输入 bot 名字（如 <code>My Hermes Bot</code>）和用户名（必须以 <code>_bot</code> 结尾，如 <code>my_hermes_bot</code>）</li>
+        <li>BotFather 返回一段 token，形如 <code>1234567890:ABCdefGhIJKlmNOPqrstuVWXyz</code>，<strong>复制保存</strong></li>
+      </ol>
+
+      <h3 class="doc-h3">2. 在 U-Hermes 配置</h3>
+      <ol style="line-height:1.9;margin-left:24px">
+        <li>主界面 → 左侧「👤 集成」</li>
+        <li>找到 Telegram 行，token 输入框粘贴刚才复制的 token</li>
+        <li>点"保存令牌"</li>
+        <li>点"启动原生网关"，等几秒变成绿色"运行中"</li>
+      </ol>
+
+      <h3 class="doc-h3">3. 测试</h3>
+      <p class="doc-p">在 Telegram 找到你刚创建的 bot（搜用户名如 <code>@my_hermes_bot</code>），发送 <code>/start</code> 然后随便问个问题。AI 应该几秒内回复。</p>
 
       <div class="alert tip">
         <span class="alert-icon">💡</span>
-        <span>如果你已有代理，Telegram Bot 是最推荐的平台接入方式：配置最简单，5 分钟能搞定，API 稳定，免费无限制。</span>
+        <span><strong>需要代理：</strong>Telegram 在国内被墙，U-Hermes 主机需要能访问 <code>api.telegram.org</code>。配 Clash / V2Ray 全局代理后即可。</span>
       </div>
-
-      <h3 class="doc-h3">第一步：创建 Bot，获取 Token</h3>
-      <ul class="step-list">
-        <li>
-          <div class="step-num-badge">1</div>
-          <div><strong>找 BotFather</strong><span>打开 Telegram，搜索 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">@BotFather</code>（官方机器人管家，认准蓝色认证标），发送 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">/newbot</code> 命令。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">2</div>
-          <div><strong>填写名称和用户名</strong><span>按提示填写机器人显示名（任意，如「我的 AI 助手」）和用户名（必须以 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">bot</code> 结尾，如 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">my_ai_helper_bot</code>）。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">3</div>
-          <div><strong>保存 Token</strong><span>创建成功后，BotFather 会发给你一串 Token，格式类似 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">123456789:AAExxxxxxx</code>，复制保存好，接下来需要用。</span></div>
-        </li>
-      </ul>
-
-      <h3 class="doc-h3">第二步：在 U-Hermes 里配置</h3>
-      <ul class="step-list">
-        <li>
-          <div class="step-num-badge">1</div>
-          <div><strong>进入频道配置</strong><span>U-Hermes 控制台 → 左侧「频道」→「Telegram」→「新增」。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">2</div>
-          <div><strong>填入 Bot Token</strong><span>把刚才从 BotFather 获得的 Token 粘贴进去，保存启用。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">3</div>
-          <div><strong>测试对话</strong><span>在 Telegram 里搜索你的机器人用户名，发起私聊，发送「/start」或任意消息。几秒内收到 AI 回复即配置成功。</span></div>
-        </li>
-      </ul>
-
-      <div class="alert warn">
-        <span class="alert-icon">⚠️</span>
-        <span>Telegram Bot 使用的是「轮询」方式获取消息，U-Hermes 需要保持运行才能响应。若要 24 小时在线，需要把 U-Hermes 部署到 VPS 上，并确保服务器网络能访问 Telegram API（<code style="font-family:monospace;font-size:.82em">api.telegram.org</code>）。</span>
-      </div>
-
-      <h3 class="doc-h3">在群组里使用</h3>
-      <p class="doc-p">把机器人添加到 Telegram 群组后，默认不会响应所有消息（防止刷屏）。可以选择两种模式：</p>
-      <table class="doc-table">
-        <thead><tr><th>模式</th><th>触发方式</th><th>适合场景</th></tr></thead>
-        <tbody>
-          <tr><td>@触发模式（推荐）</td><td>发消息时 @你的机器人用户名</td><td>群聊，避免 AI 回复所有聊天</td></tr>
-          <tr><td>全量响应模式</td><td>群里每条消息都触发 AI</td><td>专门的 AI 助手群，人不多</td></tr>
-          <tr><td>私聊模式</td><td>任意消息</td><td>个人使用，不影响群聊</td></tr>
-        </tbody>
-      </table>
     </div>
 
-    <!-- 微信机器人 -->
-    <div class="doc-section" id="wechat-detail">
-      <h2 class="doc-h2">💬 微信机器人说明</h2>
-      <p class="doc-p">很多用户会问：能不能在微信里直接和 AI 对话？这里给出客观说明。</p>
+    <!-- Discord 详细教程 -->
+    <div class="doc-section" id="discord">
+      <h2 class="doc-h2">🎮 Discord Bot 接入</h2>
+      <p class="doc-p">Discord bot 适合接入游戏社区、开发者群、海外团队。</p>
 
-      <div class="alert warn">
-        <span class="alert-icon">⚠️</span>
-        <span><strong>重要说明：</strong>微信官方没有开放个人账号的机器人 API。目前所有「微信 AI 机器人」方案都是通过模拟登录（hook 微信客户端）实现的，<strong>存在封号风险</strong>，腾讯会定期封禁使用此类工具的账号。请谨慎使用，不要用主力微信号操作。</span>
-      </div>
+      <h3 class="doc-h3">1. 创建 Application</h3>
+      <ol style="line-height:1.9;margin-left:24px">
+        <li>访问 <a href="https://discord.com/developers/applications" target="_blank" style="color:var(--accent)">Discord Developer Portal</a> → 登录</li>
+        <li>点 <strong>New Application</strong>，输入名字（如 <code>Hermes Bot</code>）→ Create</li>
+        <li>左侧 <strong>Bot</strong> → 在 <strong>Token</strong> 区点 <strong>Reset Token</strong> → 确认 → 复制 token（只显示一次！）</li>
+        <li>开启需要的 Privileged Gateway Intents：<strong>Message Content Intent</strong> 必须打开</li>
+      </ol>
 
-      <h3 class="doc-h3">可替代的方案</h3>
-      <div class="card-grid">
-        <div class="doc-card">
-          <span class="doc-card-icon">🏢</span>
-          <h4>企业微信（相对安全）</h4>
-          <p>企业微信有官方开放的机器人 API，通过企业微信群机器人 Webhook 接入，官方支持，不存在封号风险。适合有企业微信账号的团队。</p>
-        </div>
-        <div class="doc-card">
-          <span class="doc-card-icon">🪶</span>
-          <h4>飞书机器人（推荐代替）</h4>
-          <p>飞书是目前企业 IM 里 AI 机器人支持最好的平台，官方 API 完整，配置也不复杂。如果团队能接受，迁移成本很低。</p>
-        </div>
-        <div class="doc-card">
-          <span class="doc-card-icon">✈️</span>
-          <h4>Telegram（个人使用）</h4>
-          <p>个人用户想随时随地用 AI 聊天，Telegram 是最合适的替代方案，配置简单，响应稳定，支持全平台。</p>
-        </div>
-      </div>
+      <h3 class="doc-h3">2. 邀请 Bot 到服务器</h3>
+      <ol style="line-height:1.9;margin-left:24px">
+        <li>左侧 <strong>OAuth2 → URL Generator</strong></li>
+        <li>Scopes 选 <code>bot</code></li>
+        <li>Bot Permissions 选 <code>Send Messages</code> + <code>Read Message History</code></li>
+        <li>复制底部生成的 URL，浏览器打开 → 选你的服务器 → Authorize</li>
+      </ol>
 
-      <h3 class="doc-h3">企业微信群机器人（最简单的官方方案）</h3>
-      <p class="doc-p">如果你的团队用企业微信，可以用「群机器人 Webhook」快速实现 AI 消息推送（注意：这是单向推送，不是双向对话）：</p>
-      <ul class="step-list">
-        <li>
-          <div class="step-num-badge">1</div>
-          <div><strong>创建群机器人</strong><span>在企业微信群里，点「…」→「添加机器人」→「新建机器人」，填写名称，创建后会给你一个 Webhook URL。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">2</div>
-          <div><strong>在 U-Hermes 配置</strong><span>U-Hermes → 频道 → 企业微信，填入 Webhook URL，保存。之后 AI 的回复可以推送到这个群里。</span></div>
-        </li>
-        <li>
-          <div class="step-num-badge">3</div>
-          <div><strong>配合定时任务使用</strong><span>企业微信 Webhook 最适合和定时任务配合：每天自动推送日报、周报摘要、提醒事项到群里。参考<a href="#cron" style="color:var(--accent)">定时任务章节</a>。</span></div>
-        </li>
-      </ul>
+      <h3 class="doc-h3">3. 在 U-Hermes 配置</h3>
+      <ol style="line-height:1.9;margin-left:24px">
+        <li>主界面 → 左侧「👤 集成」</li>
+        <li>找到 Discord 行，粘贴 token，点保存</li>
+        <li>点"启动原生网关"，等绿灯</li>
+        <li>在 Discord 服务器@bot 或私聊，AI 会回复</li>
+      </ol>
     </div>
 
     <!-- 提示词库 -->
@@ -2033,65 +1883,57 @@ ollama list   <span class="comment"># 查看已下载的模型</span></div>
 
     <!-- VPS 部署 -->
     <div class="doc-section" id="vps">
-      <h2 class="doc-h2">🖥️ VPS 部署</h2>
-      <p class="doc-p">默认情况下 U-Hermes 运行在你的本机，关机后服务停止。如果想让 AI 助手 24 小时在线（比如接入飞书/QQ 机器人全天响应、定时任务不中断），需要把 U-Hermes 部署到云服务器（VPS）上。</p>
+      <h2 class="doc-h2">🖥️ 服务器部署 / 长期在线</h2>
+      <p class="doc-p"><strong>U-Hermes 桌面版本身是 Windows 桌面应用</strong>（基于 WinUI 3 + .NET 10），需要 Windows 桌面环境跑，<strong>不能直接部署到 Linux VPS</strong>。如果你需要让 Telegram / Discord bot 24 小时在线，有两个方案：</p>
 
-      <h3 class="doc-h3">服务器选择建议</h3>
-      <table class="doc-table">
-        <thead><tr><th>云服务商</th><th>推荐配置</th><th>参考价格</th><th>优点</th></tr></thead>
-        <tbody>
-          <tr><td><strong>阿里云 ECS</strong></td><td>2核 2GB 内存，40GB 硬盘</td><td>约 ¥40-60/月</td><td>国内延迟低，稳定</td></tr>
-          <tr><td><strong>腾讯云 CVM</strong></td><td>2核 2GB 内存</td><td>约 ¥40-60/月</td><td>新用户优惠力度大</td></tr>
-          <tr><td><strong>新加坡 VPS</strong></td><td>1核 1GB，按需即可</td><td>约 ¥30-50/月</td><td>能访问国际 API，无需代理</td></tr>
-        </tbody>
-      </table>
-
-      <h3 class="doc-h3">部署步骤（以 Linux 服务器为例）</h3>
+      <h3 class="doc-h3">方案 1：本地 Windows 一直开机</h3>
+      <p class="doc-p">最简单的方式——把一台 Windows 电脑（或迷你主机）一直开着，U 盘插上、U-Hermes 后台运行。</p>
       <ul class="step-list">
         <li>
           <div class="step-num-badge">1</div>
-          <div><strong>购买服务器并登录</strong><span>在阿里云/腾讯云购买 ECS，选择 Ubuntu 22.04 系统。拿到服务器 IP 后，用 SSH 登录：<code style="font-family:monospace;font-size:.82em;color:var(--accent)">ssh root@你的IP</code></span></div>
+          <div><strong>用闲置 Windows 主机或迷你主机</strong><span>NUC、Beelink 等小主机功耗低（5-10W），24 小时电费一年也就几十元。</span></div>
         </li>
         <li>
           <div class="step-num-badge">2</div>
-          <div><strong>安装 Node.js</strong><span>U-Hermes 基于 Node.js 运行，需要 Node.js 18 或以上版本。</span></div>
+          <div><strong>设开机自启</strong><span>把 <code style="font-family:monospace;font-size:.85em">Launch U-Hermes.cmd</code> 的快捷方式放到 <code>shell:startup</code>（按 Win+R 输入这条命令打开启动文件夹）。开机后 Hermes 会自动启动。</span></div>
         </li>
         <li>
           <div class="step-num-badge">3</div>
-          <div><strong>安装 U-Hermes</strong><span>按官方文档用 npm 安装 openclaw 包，配置 API Key 和端口。</span></div>
+          <div><strong>关闭 Windows 自动休眠</strong><span>设置 → 系统 → 电源和睡眠 → 屏幕和睡眠都设为"从不"。</span></div>
         </li>
         <li>
           <div class="step-num-badge">4</div>
-          <div><strong>用 PM2 保持后台运行</strong><span>PM2 是 Node.js 进程管理工具，让 U-Hermes 开机自启、崩溃后自动重启。</span></div>
+          <div><strong>系统托盘最小化</strong><span>启动后点窗口右上角"最小化"，Hermes 会缩到托盘继续跑后台 agent。</span></div>
         </li>
       </ul>
 
-      <div class="code-block"><span class="comment"># 安装 Node.js 18（Ubuntu）</span>
-curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-apt-get install -y nodejs
+      <h3 class="doc-h3">方案 2：开源版 hermes-agent（Linux VPS）</h3>
+      <p class="doc-p">如果你有 Linux 经验，可以装开源的 <strong>hermes-agent</strong> CLI 到 Linux VPS 上，**功能上等价于 U-Hermes 桌面版的 Agent 部分**（不带桌面 GUI 和 Skills 浏览界面，但聊天、工具调用、Telegram/Discord bot 都可用）：</p>
 
-<span class="comment"># 安装 PM2 进程管理</span>
-npm install -g pm2
+      <div class="code-block"><span class="comment"># Ubuntu 22.04 / Debian 12</span>
+apt update && apt install -y python3.11 python3-pip
+pip install hermes-agent
 
-<span class="comment"># 安装并启动 U-Hermes</span>
-npm install -g openclaw
-pm2 start "openclaw gateway run --port 18789" --name openclaw
+<span class="comment"># 配 API Key（编辑 ~/.hermes/config.yaml）</span>
+mkdir -p ~/.hermes
+cat > ~/.hermes/config.yaml &lt;&lt;EOF
+model:
+  provider: deepseek
+  base_url: https://api.deepseek.com/v1
+  api_key: sk-xxxxxxx
+  default: deepseek-chat
+EOF
 
-<span class="comment"># 设置开机自启</span>
-pm2 startup
-pm2 save</div>
+<span class="comment"># 用 systemd / pm2 守护</span>
+hermes gateway run --port 8642
+<span class="comment"># 健康检查: curl http://127.0.0.1:8642/health</span></div>
+
+      <p class="doc-p" style="margin-top:12px">详细教程见 <a href="https://github.com/dongsheng123132/u-hermes/tree/main/linux" target="_blank" style="color:var(--accent)">u-hermes/linux</a> 仓库（开源版）。</p>
 
       <div class="alert tip">
         <span class="alert-icon">💡</span>
-        <span>部署到服务器后，记得在服务器防火墙（安全组）里开放 18789 端口，否则外部无法访问控制台，飞书/QQ 的 Webhook 也无法回调。</span>
+        <span>桌面版 + 开源版可以<strong>并存</strong>：桌面版作为本地工作站，VPS 上的 hermes-agent 作为 Telegram/Discord 机器人后端。两边用不同 API Key 互不干扰。</span>
       </div>
-
-      <h3 class="doc-h3">部署后的访问方式</h3>
-      <div class="code-block"><span class="comment"># 浏览器访问控制台（把 IP 换成你服务器的 IP）</span>
-http://你的服务器IP:18789
-
-<span class="comment"># 或者绑定域名后用域名访问（更安全）</span>
-https://ai.你的域名.com</div>
     </div>
 
     <!-- FAQ -->
@@ -2120,10 +1962,10 @@ https://ai.你的域名.com</div>
           <h4>网络类问题</h4>
           <p>代理设置、国际模型访问、VPN 配置、403 / fetch failed</p>
         </a>
-        <a href="#feishu" class="doc-card" style="text-decoration:none;cursor:pointer">
+        <a href="#platforms" class="doc-card" style="text-decoration:none;cursor:pointer">
           <span class="doc-card-icon">🔌</span>
           <h4>平台接入类问题</h4>
-          <p>飞书机器人没回应、QQ 连接失败、Webhook 验证不通过</p>
+          <p>Telegram bot 不回复、Discord 连接失败、原生网关启动失败</p>
         </a>
         <a href="#faq" class="doc-card" style="text-decoration:none;cursor:pointer">
           <span class="doc-card-icon">💾</span>
@@ -2167,14 +2009,19 @@ https://ai.你的域名.com</div>
         <div class="faq-item">
           <div class="faq-q">虾盘 U 盘拔掉之后还能用吗？</div>
           <div class="faq-a">
-            <strong>虾盘版（便携版）：</strong>程序运行在 U 盘上，需要插着才能运行。但好处是拔下来插到另一台电脑上，所有配置和聊天记录完整保留（数据存在 U 盘的 U-Hermes/data/ 目录）。<br><br>
-            <strong>想在不插 U 盘时也能用：</strong>U 盘 tools/ 目录里有 QClaw 或 WorkBuddy 的安装包，可以安装到电脑本地，不依赖 U 盘运行。本地安装版需要自己配置 API Key。
+            <strong>不能。</strong>程序运行依赖 U 盘上的 .NET 运行时和数据目录，激活码也绑定 U 盘硬件指纹（Model + Serial + PNPDeviceID 算 SHA256），所以必须插着 U 盘才能用。<br><br>
+            <strong>但好处是：</strong>拔下来插到另一台 Windows 电脑上，所有配置、聊天记录、激活状态完整保留（数据全在 U 盘的 <code style="font-family:monospace;font-size:.85em">U-Hermes\data\</code> 目录）。<br><br>
+            <strong>不想插 U 盘的解决方案：</strong>用开源版 <a href="https://github.com/dongsheng123132/u-hermes" target="_blank" style="color:var(--accent)">hermes-agent</a> 装到电脑本地（pip / Linux），自己配 API Key，但是激活、Skills 浏览等图形功能没有。
           </div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-q">Mac M1/M2/M3 芯片支持吗？</div>
-          <div class="faq-a">完全支持。虾盘内含 Apple Silicon 原生版本的 Node.js 运行时（arm64），安装脚本会自动检测芯片类型并使用对应版本，不需要 Rosetta 转译。</div>
+          <div class="faq-q">支持 Mac 或 Linux 吗？</div>
+          <div class="faq-a">
+            <strong>U-Hermes 桌面版（U 盘里的 .exe）：仅支持 Windows 10 1809+ / Windows 11（x64）。</strong>不支持 Mac、Linux、ARM 架构。<br><br>
+            <strong>Mac / Linux 用户的方案：</strong>装开源版 <code>pip install hermes-agent</code>，所有 Agent / 工具 / Telegram-Discord-Slack-Matrix-WhatsApp 网关功能都可用，只是没有桌面图形界面（用浏览器访问 <code>http://127.0.0.1:8642</code> 操作）。<br><br>
+            或者：U 盘上的 <strong>U-Claw</strong> 同盘姊妹应用（Electron 跨平台 GUI）支持 Mac，可以用它先顶一下。
+          </div>
         </div>
 
         <div class="faq-item">
