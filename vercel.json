@@ -11,14 +11,9 @@
   ],
   "rewrites": [
     {
-      "source": "/",
+      "source": "/((?!study|imgs|_next|api|favicon).*)",
       "has": [{ "type": "host", "value": "study.u-hermes.org" }],
-      "destination": "/study"
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "study.u-hermes.org" }],
-      "destination": "/study/:path*"
+      "destination": "/study/$1"
     }
   ]
 }
