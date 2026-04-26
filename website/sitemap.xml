@@ -13,6 +13,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://study.u-hermes.org/</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.u-hermes.org/privacy</loc>
     <lastmod>2026-04-25</lastmod>
     <changefreq>yearly</changefreq>
