@@ -11,6 +11,11 @@
   ],
   "rewrites": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "study.u-hermes.org" }],
+      "destination": "/study"
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "study.u-hermes.org" }],
       "destination": "/study/:path*"
