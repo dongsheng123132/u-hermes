@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>龙虾学堂 — U-Hermes 中文教程中心</title>
+<meta name="description" content="U-Hermes 官方中文教程中心。从零基础入门到高级技能，视频图文全覆盖。">
+<style>
+/* ─── Light Theme ─── */
+:root, [data-theme="light"] {
+  --bg:  #f5f6fa;
+  --bg2: #ffffff;
+  --bg3: #f0f1f5;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --border-hover: #d1d5db;
+  --text: #1f2937;
+  --text-dim: #6b7280;
+  --text-muted: #9ca3af;
+  --accent: #e8501a;
+  --accent-light: #f06030;
+  --accent-glow: rgba(232,80,26,0.10);
+  --nav-bg: rgba(255,255,255,0.90);
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  --card-shadow-hover: 0 4px 12px rgba(0,0,0,0.10);
+  --green: #10b981;
+  --gold: #f59e0b;
+  --sidebar-bg: #f8f9fc;
+  --code-bg: #f3f4f6;
+  --code-text: #b45309;
+}
+/* ─── Dark Theme ─── */
+[data-theme="dark"] {
+  --bg:  #0f1117;
+  --bg2: #1a1d28;
+  --bg3: #232735;
+  --surface: #1a1d28;
+  --border: #2e3345;
+  --border-hover: #3d4358;
+  --text: #e8e9ed;
+  --text-dim: #8b8fa3;
+  --text-muted: #5c6078;
+  --accent: #f06030;
+  --accent-light: #ff8040;
+  --accent-glow: rgba(240,96,48,0.12);
+  --nav-bg: rgba(15,17,23,0.92);
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --card-shadow-hover: 0 4px 16px rgba(0,0,0,0.4);
+  --green: #10b981;
+  --gold: #f59e0b;
+  --sidebar-bg: #14161f;
+  --code-bg: #0a0c14;
+  --code-text: #fb923c;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1117;--bg2:#1a1d28;--bg3:#232735;--surface:#1a1d28;--border:#2e3345;--border-hover:#3d4358;--text:#e8e9ed;--text-dim:#8b8fa3;--text-muted:#5c6078;--accent:#f06030;--accent-light:#ff8040;--accent-glow:rgba(240,96,48,0.12);--nav-bg:rgba(15,17,23,0.92);--card-shadow:0 1px 3px rgba(0,0,0,0.3);--card-shadow-hover:0 4px 16px rgba(0,0,0,0.4);--sidebar-bg:#14161f;--code-bg:#0a0c14;--code-text:#fb923c; }
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
+
+/* ─── Theme Toggle Button ─── */
+.theme-toggle {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  transition: border-color .2s, color .2s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ─── Layout ─── */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+
+/* ─── Nav ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 60px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: background .3s;
+}
+nav .wrap {
+  height: 100%;
+  display: flex; align-items: center;
+}
+.nav-logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.logo-tag {
+  font-size: .58rem;
+  font-weight: 600;
+  background: var(--accent);
+  -webkit-text-fill-color: white;
+  color: white;
+  padding: 2px 6px; border-radius: 3px;
+  letter-spacing: .08em;
+}
+.nav-links { display: flex; gap: 4px; align-items: center; }
+.nav-links a {
+  font-size: .84rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: color .2s, background .2s;
+}
+.nav-links a:hover { color: var(--text); background: var(--bg3); }
+.nav-cta {
+  background: var(--accent) !important;
+  -webkit-text-fill-color: white !important;
+  color: white !important;
+  padding: 7px 14px !important;
+  border-radius: 6px;
+  font-size: .82rem !important;
+  font-weight: 500;
+  transition: opacity .2s !important;
+}
+.nav-cta:hover { opacity: .85; background: var(--accent) !important; }
+
+/* ─── Hero ─── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 0 60px;
+  position: relative;
+}
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  
+  font-size: .72rem;
+  color: var(--cyan);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-cyan);
+  padding: 6px 14px; border-radius: 20px;
+  margin-bottom: 28px;
+  background: rgba(6,182,212,.06);
+}
+.hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: blink 1.8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
+.hero-title {
+  
+  font-size: clamp(3rem,5.5vw,5rem);
+  line-height: 1.08;
+  margin-bottom: 20px;
+  letter-spacing: .02em;
+}
+.hero-title .g1 { background: linear-gradient(135deg, var(--purple-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-title .g2 { color: var(--gold); }
+.hero-desc {
+  font-size: 1rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 40px;
+  max-width: 440px;
+}
+.hero-desc strong { color: var(--text); }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-main {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent);
+  color: white; padding: 11px 26px;
+  font-size: .88rem;
+  text-decoration: none; border-radius: 6px;
+  transition: opacity .2s, transform .2s, box-shadow .3s;
+}
+.btn-main:hover { opacity: .88; transform: translateY(-1px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--text);
+  padding: 11px 26px;
+  font-size: .88rem;
+  text-decoration: none; border-radius: 6px;
+  border: 1px solid var(--border);
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ─── Hero Visual: Menu Card ─── */
+.hero-visual { display: flex; justify-content: center; align-items: center; }
+.menu-card {
+  width: 320px;
+  background: linear-gradient(160deg, var(--bg3), var(--bg2));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,.6), 0 0 50px var(--glow-purple);
+  animation: float 5s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.menu-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px;
+  background: linear-gradient(90deg, var(--purple), #5b21b6);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.menu-header-icon { font-size: 1.2rem; }
+.menu-header-text {
+  
+  font-size: 1.1rem;
+  color: white;
+  letter-spacing: .06em;
+}
+.menu-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 18px;
+  border-bottom: 1px solid rgba(124,58,237,.12);
+  cursor: pointer;
+  transition: background .2s;
+  position: relative;
+}
+.menu-item:last-child { border-bottom: none; }
+.menu-item:hover { background: rgba(124,58,237,.12); }
+.menu-item.active { background: rgba(6,182,212,.1); border-left: 3px solid var(--cyan); }
+.menu-item-icon { font-size: 1rem; width: 22px; text-align: center; }
+.menu-item-text {
+  font-size: .9rem;
+  color: var(--text);
+  letter-spacing: .03em;
+}
+.menu-item-arrow {
+  margin-left: auto;
+  color: var(--text-dim);
+  font-size: .75rem;
+}
+
+/* ─── Stats ─── */
+.stats { padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); position: relative; z-index: 2; }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+.stat { text-align: center; padding: 24px; border-right: 1px solid var(--border); }
+.stat:last-child { border-right: none; }
+.stat-n {  font-size: 2.4rem; font-weight: 700; line-height: 1; display: block; margin-bottom: 8px; }
+.stat-n.purple { color: var(--purple-light); }
+.stat-n.cyan { color: var(--cyan); }
+.stat-n.gold { color: var(--gold); }
+.stat-n.green { color: var(--green); }
+.stat-l { font-size: .8rem; color: var(--text-dim); letter-spacing: .06em; }
+
+/* ─── Section ─── */
+.section { padding: 90px 0; position: relative; z-index: 2; }
+.section.dark { background: var(--bg2); }
+.sec-label {  font-size: .7rem; color: var(--cyan); letter-spacing: .18em; text-transform: uppercase; margin-bottom: 12px; display: block; }
+.sec-title {  font-size: clamp(1.8rem,3.5vw,2.8rem); line-height: 1.2; margin-bottom: 16px; letter-spacing: .02em; }
+.sec-desc { color: var(--text-dim); font-size: .95rem; line-height: 1.8; max-width: 500px; }
+
+/* ─── Course Categories ─── */
+.cats { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 56px; }
+.cat {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px 28px;
+  position: relative; overflow: hidden;
+  transition: border-color .3s, transform .25s, box-shadow .3s;
+  cursor: pointer; text-decoration: none; display: block;
+}
+.cat::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--cat-color, var(--purple));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .35s;
+}
+.cat:hover { border-color: var(--cat-color, var(--purple)); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+.cat:hover::before { transform: scaleX(1); }
+.cat-badge {
+  display: inline-block;
+  
+  font-size: .62rem; letter-spacing: .1em;
+  color: var(--cat-color, var(--purple));
+  border: 1px solid var(--cat-color, var(--purple));
+  padding: 2px 8px; border-radius: 2px;
+  margin-bottom: 20px;
+  background: rgba(124,58,237,.06);
+  opacity: .8;
+}
+.cat-icon { font-size: 2.2rem; margin-bottom: 18px; display: block; }
+.cat h3 {  font-size: 1.35rem; margin-bottom: 10px; letter-spacing: .04em; color: var(--text); }
+.cat p { font-size: .83rem; color: var(--text-dim); line-height: 1.8; }
+.cat-count { margin-top: 18px;  font-size: .72rem; color: var(--text-dim); }
+.cat-count span { color: var(--cat-color, var(--purple)); font-weight: 700; }
+
+/* ─── Featured Courses ─── */
+.courses { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 56px; }
+.course {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color .3s, transform .25s;
+  cursor: pointer;
+}
+.course:hover { border-color: var(--purple-light); transform: translateY(-3px); }
+.course-thumb {
+  height: 130px;
+  background: var(--thumb-bg, linear-gradient(135deg, #3b1d8a, #1e3a8a));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+  position: relative; overflow: hidden;
+}
+.course-thumb::after {
+  content: 'NEW'; position: absolute; top: 10px; right: 10px;
+   font-size: .58rem;
+  background: var(--green); color: white;
+  padding: 2px 6px; border-radius: 2px;
+  letter-spacing: .08em;
+  display: var(--new, none);
+}
+.course-body { padding: 18px; }
+.course-meta { display: flex; gap: 8px; margin-bottom: 10px; }
+.course-tag {
+  
+  font-size: .6rem; letter-spacing: .08em;
+  padding: 2px 8px; border-radius: 2px;
+  background: rgba(124,58,237,.15); color: var(--purple-light);
+  border: 1px solid rgba(124,58,237,.2);
+}
+.course-tag.cyan { background: rgba(6,182,212,.1); color: var(--cyan); border-color: rgba(6,182,212,.2); }
+.course h4 { font-size: .95rem; font-weight: 700; margin-bottom: 8px; line-height: 1.4; color: var(--text); }
+.course p { font-size: .8rem; color: var(--text-dim); line-height: 1.7; }
+.course-foot { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-top: 1px solid var(--border); }
+.course-level {  font-size: .68rem; color: var(--text-dim); }
+.course-arrow { color: var(--cyan); font-size: .9rem; }
+
+/* ─── Steps ─── */
+.steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: 56px; position: relative; }
+.steps::before {
+  content: ''; position: absolute;
+  top: 36px; left: 12.5%; right: 12.5%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--purple), var(--cyan), var(--purple));
+  opacity: .35;
+}
+.step { padding: 0 24px; text-align: center; }
+.step-dot {
+  width: 56px; height: 56px;
+  border: 2px solid var(--purple-light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+  background: var(--bg);
+  box-shadow: 0 0 0 8px var(--bg), 0 0 24px var(--glow-purple);
+  
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--purple-light);
+}
+.step h3 {  font-size: 1.2rem; margin-bottom: 10px; }
+.step p { font-size: .8rem; color: var(--text-dim); line-height: 1.8; }
+
+/* ─── CTA ─── */
+.cta-wrap {
+  background: linear-gradient(135deg, rgba(124,58,237,.15), rgba(6,182,212,.1));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 70px 60px;
+  text-align: center;
+  margin-top: 0;
+  position: relative; overflow: hidden;
+}
+.cta-wrap::before {
+  content: '🦞';
+  position: absolute; font-size: 18rem;
+  opacity: .03; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  pointer-events: none; user-select: none;
+}
+.cta-wrap .sec-title { font-size: clamp(2rem,4vw,3.2rem); }
+.cta-wrap .sec-desc { margin: 0 auto 40px; text-align: center; max-width: 460px; }
+.cta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.contact-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.contact-chip {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  padding: 12px 20px; border-radius: 6px;
+  
+  font-size: .78rem; color: var(--text-dim);
+  transition: border-color .2s;
+}
+.contact-chip:hover { border-color: var(--cyan); }
+.contact-chip strong { color: var(--text); display: block; margin-bottom: 2px; }
+
+/* ─── Footer ─── */
+footer { padding: 36px 0; border-top: 1px solid var(--border); position: relative; z-index: 2; }
+footer .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-logo {  color: var(--text-dim); font-size: 1rem; }
+.footer-logo span { background: linear-gradient(135deg,var(--accent),var(--accent-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: .8rem; color: var(--text-dim); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-copy { font-size: .72rem; color: var(--text-muted); }
+
+/* ─── Reveal ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 2px; }
+
+/* ─── Docs Layout ─── */
+.docs-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 0;
+  min-height: 100vh;
+  padding-top: 65px;
+  position: relative; z-index: 2;
+}
+.sidebar {
+  position: sticky; top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  padding: 20px 0 40px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+  transition: background .3s;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; opacity: .4; }
+.sidebar-group { margin-bottom: 6px; }
+.sidebar-group-label {
+  font-size: .67rem;
+  color: var(--text-muted);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 18px 16px 5px;
+  display: block;
+  font-weight: 700;
+}
+.sidebar-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 16px 7px 28px;
+  font-size: .83rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color .15s, background .15s;
+  border-left: 2px solid transparent;
+  margin-left: 0;
+}
+.sidebar-link:hover { color: var(--text); background: var(--accent-glow); }
+.sidebar-link.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-glow); font-weight: 600; }
+.sidebar-link-icon { font-size: .88rem; width: 18px; flex-shrink: 0; }
+.sidebar-link-new {
+  margin-left: auto;
+  font-size: .6rem;
+  background: var(--green);
+  color: white;
+  padding: 1px 6px;
+  border-radius: 3px;
+  letter-spacing: .04em;
+}
+
+/* ─── Doc Content ─── */
+.doc-content {
+  padding: 48px 60px;
+  max-width: 900px;
+}
+.doc-section { margin-bottom: 80px; }
+.doc-section:last-child { margin-bottom: 40px; }
+.doc-h1 {
+  
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: .02em;
+}
+.doc-h1 .accent { background: linear-gradient(135deg,var(--accent),var(--accent-light)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.doc-lead {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 36px;
+  max-width: 620px;
+}
+.doc-h2 {
+  
+  font-size: 1.6rem;
+  margin: 48px 0 20px;
+  letter-spacing: .02em;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.doc-h3 {
+  
+  font-size: 1.15rem;
+  margin: 28px 0 12px;
+  color: var(--accent);
+}
+.doc-p {
+  font-size: .93rem;
+  color: var(--text-dim);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+.doc-p strong { color: var(--text); }
+.doc-p a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(232,80,26,.3); }
+.doc-p a:hover { border-bottom-color: var(--accent); }
+
+/* ─── Card Grid ─── */
+.card-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 24px 0; }
+.card-grid.two { grid-template-columns: repeat(2,1fr); }
+.doc-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px 20px;
+  text-decoration: none;
+  display: block;
+  transition: border-color .2s, transform .2s;
+}
+.doc-card:hover { border-color: var(--purple-light); transform: translateY(-2px); }
+.doc-card-icon { font-size: 1.6rem; margin-bottom: 12px; display: block; }
+.doc-card h4 { font-size: .92rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+.doc-card p { font-size: .78rem; color: var(--text-dim); line-height: 1.7; }
+.doc-card-tag {
+  display: inline-block; margin-top: 10px;
+   font-size: .6rem;
+  color: var(--purple-light); border: 1px solid var(--border);
+  padding: 2px 7px; border-radius: 2px;
+}
+
+/* ─── Step List ─── */
+.step-list { list-style: none; margin: 20px 0; }
+.step-list li {
+  display: flex; gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.step-list li:last-child { border-bottom: none; }
+.step-num-badge {
+  width: 28px; height: 28px; flex-shrink: 0;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  
+  font-size: .72rem; font-weight: 700; color: white;
+}
+.step-list li > div > strong { font-size: .92rem; color: var(--text); display: block; margin-bottom: 4px; }
+.step-list li > div > span { font-size: .82rem; color: var(--text-dim); line-height: 1.7; }
+
+/* ─── Table ─── */
+.doc-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .84rem; }
+.doc-table th { text-align: left; padding: 10px 14px; background: var(--bg3); color: var(--text-muted); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.doc-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text-dim); vertical-align: top; }
+.doc-table td:first-child { color: var(--text); font-weight: 500; }
+.doc-table tr:last-child td { border-bottom: none; }
+.doc-table tr:hover td { background: var(--accent-glow); }
+
+/* ─── Code Block ─── */
+.code-block {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  overflow-x: auto;
+  
+  font-size: .8rem;
+  color: var(--code-text);
+  line-height: 1.7;
+}
+.code-block .comment { color: var(--text-muted); }
+.code-block .string { color: var(--green); }
+.code-block .key { color: var(--accent); }
+
+/* ─── Tag List ─── */
+.tag-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.tag {
+   font-size: .72rem;
+  padding: 5px 12px; border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  transition: border-color .2s, color .2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+.tag.purple { border-color: rgba(232,80,26,.25); color: var(--accent); background: var(--accent-glow); }
+.tag.cyan { border-color: rgba(232,80,26,.15); color: var(--accent-light); }
+.tag.gold { border-color: rgba(245,158,11,.3); color: var(--gold); }
+.tag.green { border-color: rgba(16,185,129,.3); color: var(--green); }
+
+/* ─── Alert ─── */
+.alert {
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin: 20px 0;
+  font-size: .85rem;
+  line-height: 1.7;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.alert.tip { background: var(--accent-glow); border: 1px solid rgba(232,80,26,.2); color: var(--text-dim); }
+.alert.warn { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.2); color: var(--text-dim); }
+.alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+/* ─── Model Grid ─── */
+.model-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 20px 0; }
+.model-chip {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 12px;
+  text-align: center;
+  transition: border-color .2s, transform .2s;
+}
+.model-chip:hover { border-color: var(--accent); transform: translateY(-2px); }
+.model-chip-ico { font-size: 1.5rem; display: block; margin-bottom: 6px; }
+.model-chip-name { font-size: .72rem; color: var(--text-dim); display: block; }
+.model-chip-name strong { color: var(--text); font-size: .8rem; display: block; margin-bottom: 2px; }
+
+/* ─── Platform Grid ─── */
+.platform-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 20px 0; }
+.platform-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color .2s;
+}
+.platform-card:hover { border-color: var(--accent); }
+.platform-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.platform-card-ico { font-size: 1.4rem; }
+.platform-card h4 { font-size: .9rem; font-weight: 700; color: var(--text); }
+.platform-card p { font-size: .78rem; color: var(--text-dim); line-height: 1.7; }
+.platform-diff {
+  margin-top: 8px;
+   font-size: .62rem;
+  color: var(--gold); border: 1px solid rgba(245,158,11,.2);
+  padding: 2px 8px; border-radius: 2px; display: inline-block;
+}
+
+/* ─── FAQ ─── */
+.faq-list { margin: 20px 0; }
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-size: .9rem; font-weight: 700; color: var(--text);
+  transition: background .2s;
+  user-select: none;
+}
+.faq-q:hover { background: rgba(124,58,237,.06); }
+.faq-q::after { content: '+'; color: var(--accent); font-size: 1.2rem; flex-shrink: 0; transition: transform .2s; }
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  padding: 0 20px;
+  max-height: 0; overflow: hidden;
+  font-size: .85rem; color: var(--text-dim); line-height: 1.8;
+  transition: max-height .3s, padding .3s;
+}
+.faq-item.open .faq-a { max-height: 200px; padding: 12px 20px 16px; }
+
+/* ─── Tutorial Screenshots ─── */
+.doc-screenshot {
+  width: 100%; max-width: 640px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0,0,0,.12);
+  margin: 16px 0 24px;
+  display: block;
+}
+.doc-screenshot-caption {
+  font-size: .75rem; color: var(--text-muted);
+  margin: -16px 0 24px;
+  padding-left: 4px;
+}
+.screenshot-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px;
+}
+.screenshot-row figure { margin: 0; }
+.screenshot-row img {
+  width: 100%; border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgba(0,0,0,.10);
+}
+.screenshot-row figcaption {
+  font-size: .73rem; color: var(--text-muted);
+  margin-top: 6px; padding-left: 2px;
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 860px) {
+  .hero-inner, .cats, .courses { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .steps { grid-template-columns: repeat(2,1fr); }
+  .steps::before { display: none; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .nav-links { display: none; }
+  .cta-wrap { padding: 40px 24px; }
+  .docs-layout { grid-template-columns: 1fr; }
+  .sidebar { position: relative; top: 0; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+  .doc-content { padding: 28px 20px; }
+  .card-grid, .card-grid.two { grid-template-columns: 1fr; }
+  .model-grid { grid-template-columns: repeat(2,1fr); }
+  .platform-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+
+<!-- Nav -->
+<nav>
+  <div class="wrap">
+    <a href="/" class="nav-logo">🦞 龙虾学堂 <span class="logo-tag">DOCS</span></a>
+    <div class="nav-links">
+      <a href="#quickstart">快速开始</a>
+      <a href="#model-guide">模型配置</a>
+      <a href="#platforms">平台接入</a>
+      <a href="#faq">常见问题</a>
+      <a href="https://u-hermes.org">官网主页</a>
+      <a href="#contact" class="nav-cta">联系我们</a>
+      <button class="theme-toggle" id="themeBtn" title="切换主题">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Docs Layout -->
+<div class="docs-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-group">
+      <span class="sidebar-group-label">入门</span>
+      <a href="#quickstart" class="sidebar-link active"><span class="sidebar-link-icon">⚡</span>快速开始</a>
+      <a href="#first-chat" class="sidebar-link"><span class="sidebar-link-icon">💬</span>第一次对话</a>
+      <a href="#overview" class="sidebar-link"><span class="sidebar-link-icon">🗺️</span>界面总览</a>
+    </div>
+    <div class="sidebar-group">
+      <span class="sidebar-group-label">模型配置</span>
+      <a href="#model-guide" class="sidebar-link"><span class="sidebar-link-icon">🧭</span>模型选择指南</a>
+      <a href="#xiapan-cloud" class="sidebar-link"><span class="sidebar-link-icon">☁️</span>虾盘云（内置）<span class="sidebar-link-new">推荐</span></a>
+      <a href="#deepseek" class="sidebar-link"><span class="sidebar-link-icon">🔵</span>DeepSeek</a>
+      <a href="#kimi" class="sidebar-link"><span class="sidebar-link-icon">🌙</span>Kimi</a>
+      <a href="#qwen" class="sidebar-link"><span class="sidebar-link-icon">☁️</span>通义千问</a>
+      <a href="#siliconflow" class="sidebar-link"><span class="sidebar-link-icon">💎</span>硅基流动</a>
+      <a href="#intl-models" class="sidebar-link"><span class="sidebar-link-icon">🌍</span>国际模型</a>
+      <a href="#local-models" class="sidebar-link"><span class="sidebar-link-icon">💻</span>本地模型</a>
+    </div>
+    <div class="sidebar-group">
+      <span class="sidebar-group-label">功能</span>
+      <a href="#skills" class="sidebar-link"><span class="sidebar-link-icon">🧰</span>52 个技能一览</a>
+      <a href="#skill-install" class="sidebar-link"><span class="sidebar-link-icon">📦</span>技能安装</a>
+      <a href="#cron" class="sidebar-link"><span class="sidebar-link-icon">⏰</span>定时任务</a>
+    </div>
+    <div class="sidebar-group">
+      <span class="sidebar-group-label">平台接入</span>
+      <a href="#platforms" class="sidebar-link"><span class="sidebar-link-icon">🤖</span>平台总览</a>
+      <a href="#feishu" class="sidebar-link"><span class="sidebar-link-icon">🪶</span>飞书机器人</a>
+      <a href="#qq-detail" class="sidebar-link"><span class="sidebar-link-icon">🐧</span>QQ 机器人</a>
+      <a href="#telegram-detail" class="sidebar-link"><span class="sidebar-link-icon">✈️</span>Telegram</a>
+      <a href="#wechat-detail" class="sidebar-link"><span class="sidebar-link-icon">💚</span>微信机器人</a>
+      <a href="#discord" class="sidebar-link"><span class="sidebar-link-icon">🎮</span>Discord</a>
+    </div>
+    <div class="sidebar-group">
+      <span class="sidebar-group-label">提示词库</span>
+      <a href="#prompts-work" class="sidebar-link"><span class="sidebar-link-icon">💼</span>办公场景</a>
+      <a href="#prompts-code" class="sidebar-link"><span class="sidebar-link-icon">💻</span>编程场景</a>
+      <a href="#prompts-content" class="sidebar-link"><span class="sidebar-link-icon">✍️</span>内容创作</a>
+      <a href="#prompts-life" class="sidebar-link"><span class="sidebar-link-icon">🌱</span>日常生活</a>
+      <a href="#prompts-advanced" class="sidebar-link"><span class="sidebar-link-icon">🚀</span>高级提问技巧</a>
+    </div>
+    <div class="sidebar-group">
+      <span class="sidebar-group-label">进阶玩法</span>
+      <a href="#multi-model" class="sidebar-link"><span class="sidebar-link-icon">🔀</span>多模型策略</a>
+      <a href="#vps" class="sidebar-link"><span class="sidebar-link-icon">🖥️</span>VPS 部署</a>
+      <a href="#troubleshoot" class="sidebar-link"><span class="sidebar-link-icon">🛠️</span>故障排查</a>
+      <a href="#faq" class="sidebar-link"><span class="sidebar-link-icon">❓</span>常见问题</a>
+      <a href="#contact" class="sidebar-link"><span class="sidebar-link-icon">📞</span>联系与支持</a>
+    </div>
+    <div class="sidebar-group">
+      <span class="sidebar-group-label">技能市场</span>
+      <a href="https://cn.clawhub-mirror.com/" target="_blank" class="sidebar-link"><span class="sidebar-link-icon">🦀</span>ClawHub 国内镜像 ↗</a>
+      <a href="https://skillhub.cn/" target="_blank" class="sidebar-link"><span class="sidebar-link-icon">🔧</span>SkillHub 中文社区 ↗</a>
+      <a href="https://clawhub.ai/" target="_blank" class="sidebar-link"><span class="sidebar-link-icon">🌐</span>ClawHub 官网 ↗</a>
+    </div>
+    <div class="sidebar-group">
+      <span class="sidebar-group-label">资源导航</span>
+      <a href="https://u-hermes.org" target="_blank" class="sidebar-link"><span class="sidebar-link-icon">🐎</span>官网 u-hermes.org ↗</a>
+      <a href="https://u-claw.org" target="_blank" class="sidebar-link"><span class="sidebar-link-icon">🦞</span>U-Claw 虾盘 ↗</a>
+      <a href="https://api.u-claw.org" target="_blank" class="sidebar-link"><span class="sidebar-link-icon">☁️</span>虾盘云 ↗</a>
+      <a href="https://github.com/dongsheng123132/u-hermes" target="_blank" class="sidebar-link"><span class="sidebar-link-icon">⭐</span>GitHub 开源仓库 ↗</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="doc-content">
+
+    <!-- 快速开始 -->
+    <div class="doc-section" id="quickstart">
+      <h1 class="doc-h1">欢迎来到 <span class="accent">龙虾学堂</span></h1>
+      <p class="doc-lead">U-Hermes 马盘的官方中文教程中心。这里记录了从安装到高级玩法的所有内容，按顺序看，或直接跳到你需要的章节。</p>
+
+      <h2 class="doc-h2">⚡ 5 分钟快速上手</h2>
+      <p class="doc-p">如果你刚拿到虾盘，按下面的步骤操作，5 分钟内就能和 AI 说上话。</p>
+
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">01</div>
+          <div>
+            <strong>插入虾盘 U 盘</strong>
+            <span>把虾盘插到电脑的 USB 口（双口设计，USB-A 和 USB-C 各一个，选合适的插）。Windows 会在「此电脑」里出现新盘符，打开 U 盘，可以看到如下文件结构：</span>
+            <img src="imgs/start-01-udisk-files.png" alt="U盘文件列表，箭头指向U-Hermes启动程序" class="doc-screenshot">
+          </div>
+        </li>
+        <li>
+          <div class="step-num-badge">02</div>
+          <div>
+            <strong>双击启动程序</strong>
+            <span>
+              双击 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">U-Hermes.exe</code>。<br><br>
+              <strong>双击没反应怎么办：</strong>右键 → 「以管理员身份运行」（如下图）
+            </span>
+            <img src="imgs/start-02-run-as-admin.png" alt="右键菜单选择以管理员身份运行" class="doc-screenshot">
+            <span style="display:block;margin-top:-12px">
+              <strong>弹出「Windows 已保护你的电脑」：</strong>点「更多信息」→「仍要运行」即可。<br>
+              如果被杀毒软件拦截，在杀毒软件里把 U 盘目录添加到白名单后重试。
+            </span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num-badge">03</div>
+          <div>
+            <strong>等待 U-Hermes 窗口弹出（首次可能需要激活）</strong>
+            <span>首次启动需要几秒初始化（Mac 会显示加载画面）。</span>
+            <img src="imgs/start-05-mac-loading.png" alt="Mac上U-Hermes启动加载画面" class="doc-screenshot" style="max-width:360px">
+            <span style="display:block;margin-top:8px"><strong>如果弹出「软件激活」界面：</strong>这是换了新电脑首次运行时会出现的授权绑定步骤。</span>
+            <div class="screenshot-row" style="margin-top:12px">
+              <figure>
+                <img src="imgs/start-03-activate-input.png" alt="软件激活：复制授权码发给商家">
+                <figcaption>① 复制授权码（64位），发送给商家（微信 hecare888）</figcaption>
+              </figure>
+              <figure>
+                <img src="imgs/start-04-activate-done.png" alt="软件激活：粘贴激活码后重启">
+                <figcaption>② 收到激活码后粘贴进去，点「激活授权」→「重启应用」</figcaption>
+              </figure>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-num-badge">04</div>
+          <div>
+            <strong>查看余额 / 充值虾盘云</strong>
+            <span>左侧点「<strong>虾粮</strong>」，可以看到当前 Token 余额和「去充值」按钮。新用户有赠送的体验额度，用完再充值。详细步骤见 <a href="#xiapan-cloud" style="color:var(--accent)">虾盘云章节</a>。</span>
+            <img src="imgs/start-07-xiapan-panel.png" alt="虾粮面板显示余额和去充值按钮" class="doc-screenshot">
+          </div>
+        </li>
+        <li>
+          <div class="step-num-badge">05</div>
+          <div>
+            <strong>发送第一条消息</strong>
+            <span>点击左侧「新对话」，在底部输入框打字，按回车发送。看到 AI 回复就成功了！</span>
+            <img src="imgs/start-06-main-ui.png" alt="U-Hermes主界面，输入框准备发消息" class="doc-screenshot">
+          </div>
+        </li>
+      </ul>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>U 盘插着才能运行。所有配置和对话记录都保存在 U 盘的 <code style="font-family:monospace;font-size:.85em">U-Hermes/data/</code> 目录里——换台电脑插上，数据完整保留，<strong>不要删除这个文件夹</strong>。</span>
+      </div>
+
+      <h3 class="doc-h3">遇到问题？U 盘里有应急工具</h3>
+      <p class="doc-p">U 盘的 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">tools/</code> 目录下有预备好的工具：</p>
+      <table class="doc-table">
+        <thead><tr><th>工具</th><th>什么时候用</th></tr></thead>
+        <tbody>
+          <tr><td><code style="font-family:monospace;font-size:.82em">检测系统环境.bat</code></td><td>双击没反应、启动失败，先运行这个检测原因</td></tr>
+          <tr><td><code style="font-family:monospace;font-size:.82em">防火墙放行(管理员).bat</code></td><td>AI 能启动但无法联网、提示网络错误时运行</td></tr>
+          <tr><td><code style="font-family:monospace;font-size:.82em">VC_redist.x64.exe</code></td><td>提示「缺少 DLL」或「运行库错误」时安装</td></tr>
+          <tr><td><code style="font-family:monospace;font-size:.82em">远程协助-AnyDesk.exe</code></td><td>自己搞不定，让客服远程帮你——运行后把9位数字告诉微信 hecare888</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="doc-h3">U 盘里还有哪些东西？</h3>
+      <p class="doc-p">除了主程序，U 盘 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">tools/</code> 目录下还预备了很多有用的东西：</p>
+      <div class="card-grid">
+        <div class="doc-card">
+          <span class="doc-card-icon">🤖</span>
+          <h4>AI 金箍棒</h4>
+          <p>一个独立的 AI 电脑医生工具，可以诊断和修复电脑问题。双击 <code style="font-family:monospace;font-size:.82em">AI金箍棒/启动.bat</code> 运行，不依赖主程序。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🧊</span>
+          <h4>本地大模型</h4>
+          <p>内含 Gemma 4 和 Qwen 3.5 的离线模型文件，完全不需要联网，数据不出本机。打开 <code style="font-family:monospace;font-size:.82em">本地大模型/使用教程.html</code> 查看用法。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">💻</span>
+          <h4>QClaw 安装包</h4>
+          <p>QClaw 是 U-Hermes 的桌面客户端，可以安装到电脑本地，不依赖 U 盘运行。在 <code style="font-family:monospace;font-size:.82em">tools/</code> 里找 QClaw-Setup.exe 安装。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🔧</span>
+          <h4>系统修复工具</h4>
+          <p>启动失败时用：<code style="font-family:monospace;font-size:.82em">检测系统环境.bat</code>、<code style="font-family:monospace;font-size:.82em">VC_redist.x64.exe</code>、<code style="font-family:monospace;font-size:.82em">防火墙放行.bat</code>。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第一次对话 -->
+    <div class="doc-section" id="first-chat">
+      <h2 class="doc-h2">💬 第一次对话</h2>
+      <p class="doc-p">控制台打开后，左侧点「新建对话」，底部输入框打字，回车发送。如果 AI 有回复，配置就成功了。</p>
+
+      <h3 class="doc-h3">推荐从这些问题开始</h3>
+      <p class="doc-p">这几个问题能快速验证 AI 是否正常工作，也能让你感受一下它能做什么：</p>
+      <div class="card-grid">
+        <div class="doc-card">
+          <span class="doc-card-icon">👋</span>
+          <h4>验证能否回话</h4>
+          <p style="font-family:monospace;font-size:.82rem;color:var(--accent);background:var(--code-bg);padding:8px 10px;border-radius:4px;margin-top:8px">你好，你是谁？你能做什么？</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">✍️</span>
+          <h4>测试写作能力</h4>
+          <p style="font-family:monospace;font-size:.82rem;color:var(--accent);background:var(--code-bg);padding:8px 10px;border-radius:4px;margin-top:8px">帮我写一封请假邮件，因为要去医院，请假一天，发给我的领导</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🌐</span>
+          <h4>测试联网搜索</h4>
+          <p style="font-family:monospace;font-size:.82rem;color:var(--accent);background:var(--code-bg);padding:8px 10px;border-radius:4px;margin-top:8px">今天有什么重要的科技新闻？</p>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:6px">需要安装联网搜索技能才能获取实时信息</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🧮</span>
+          <h4>测试推理能力</h4>
+          <p style="font-family:monospace;font-size:.82rem;color:var(--accent);background:var(--code-bg);padding:8px 10px;border-radius:4px;margin-top:8px">如果一件商品打了七折之后再打八折，相当于打了几折？</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🌏</span>
+          <h4>测试翻译能力</h4>
+          <p style="font-family:monospace;font-size:.82rem;color:var(--accent);background:var(--code-bg);padding:8px 10px;border-radius:4px;margin-top:8px">把这句话翻译成英文，语气要正式：「感谢您的耐心等待，我们将尽快处理您的请求。」</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">💻</span>
+          <h4>测试编程能力</h4>
+          <p style="font-family:monospace;font-size:.82rem;color:var(--accent);background:var(--code-bg);padding:8px 10px;border-radius:4px;margin-top:8px">用 Python 写一个函数，输入一个列表，返回其中出现次数最多的元素</p>
+        </div>
+      </div>
+
+      <h3 class="doc-h3">对话中的常用操作</h3>
+      <table class="doc-table">
+        <thead><tr><th>操作</th><th>怎么做</th></tr></thead>
+        <tbody>
+          <tr><td>发送消息</td><td>输入框打字后按 <kbd style="background:var(--bg3);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-size:.8rem">Enter</kbd>，换行用 <kbd style="background:var(--bg3);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-size:.8rem">Shift+Enter</kbd></td></tr>
+          <tr><td>停止回复</td><td>点击输入框右侧的停止按钮（方形图标），AI 会立即停止生成</td></tr>
+          <tr><td>重新生成</td><td>把鼠标移到 AI 回复上，点击「重新生成」按钮，AI 会给出新的回答</td></tr>
+          <tr><td>复制回复</td><td>把鼠标移到 AI 回复上，点击「复制」图标，复制纯文本内容</td></tr>
+          <tr><td>新建对话</td><td>点击左侧顶部的「新建对话」，开始一个全新的、不带历史记录的对话</td></tr>
+          <tr><td>切换模型</td><td>对话框上方有模型选择下拉菜单，可以随时切换到不同的 AI 模型</td></tr>
+          <tr><td>上传文件</td><td>点击输入框左侧的回形针图标，选择文件（PDF、图片、代码等）上传给 AI 分析</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert warn">
+        <span class="alert-icon">⚠️</span>
+        <span>发消息后 AI 没有任何回应？先确认左上角「gateway 已连接」是绿色状态。如果是红色或灰色，说明后台服务没有运行，需要重新启动 U-Hermes。</span>
+      </div>
+    </div>
+
+    <!-- 界面总览 -->
+    <div class="doc-section" id="overview">
+      <h2 class="doc-h2">🗺️ 界面总览</h2>
+      <p class="doc-p">U-Hermes 控制台的界面分为三个主要区域，认识它们之后操作会顺手很多。</p>
+
+      <h3 class="doc-h3">左侧导航栏</h3>
+      <table class="doc-table">
+        <thead><tr><th>图标/名称</th><th>功能说明</th></tr></thead>
+        <tbody>
+          <tr><td>➕ <strong>新对话</strong></td><td>开始一个全新对话，不携带之前的历史记录</td></tr>
+          <tr><td>🦐 <strong>虾粮</strong></td><td>查看账户余额、用量统计，充值入口（如使用虾盘云）</td></tr>
+          <tr><td>🤖 <strong>Agents</strong></td><td>管理和配置 AI 代理，设置不同用途的专属 AI 助手</td></tr>
+          <tr><td>📡 <strong>频道</strong></td><td>配置平台接入——飞书、QQ、Telegram 等机器人在这里设置</td></tr>
+          <tr><td>🧰 <strong>技能</strong></td><td>管理已安装的技能，浏览技能市场，开启/关闭各个技能</td></tr>
+          <tr><td>⏰ <strong>定时任务</strong></td><td>创建和管理定时自动执行的 AI 任务</td></tr>
+          <tr><td>🔗 <strong>U-Hermes 页面</strong></td><td>跳转到 U-Hermes 的 Web 界面（旧版界面，功能更完整）</td></tr>
+          <tr><td>🎓 <strong>龙虾学堂</strong></td><td>跳转到本教程网站（就是你现在看的这个页面）</td></tr>
+          <tr><td>⚙️ <strong>设置</strong></td><td>模型配置、系统设置、关于信息</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="doc-h3">顶部状态栏</h3>
+      <p class="doc-p">控制台顶部会显示两条关键信息：</p>
+      <div class="card-grid two">
+        <div class="doc-card">
+          <span class="doc-card-icon">🟢</span>
+          <h4>Gateway 状态</h4>
+          <p>显示「gateway 已连接 | port: 18789」说明后台服务正常运行。如果是红色或没有这行信息，AI 无法响应，需要重启服务。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🤖</span>
+          <h4>当前对话对象</h4>
+          <p>显示正在和哪个 Agent 对话（默认是 Main Agent）。不同 Agent 可以有不同的系统提示词和性格设定。</p>
+        </div>
+      </div>
+
+      <h3 class="doc-h3">主对话区</h3>
+      <p class="doc-p">中间最大的区域是对话区，你的消息显示在右侧蓝色气泡，AI 的回复显示在左侧。</p>
+      <div class="card-grid">
+        <div class="doc-card">
+          <span class="doc-card-icon">📝</span>
+          <h4>Markdown 渲染</h4>
+          <p>AI 的回复支持 Markdown 格式，标题、加粗、代码块、表格都会正确渲染显示。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">💾</span>
+          <h4>历史记录</h4>
+          <p>所有对话自动保存在本地，左侧列表按时间分组显示「今天」「昨天」等，点击可以继续之前的对话。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🔍</span>
+          <h4>搜索历史</h4>
+          <p>顶部有搜索框，可以按关键词搜索历史对话内容，快速找到之前讨论过的话题。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 模型选择指南 -->
+    <div class="doc-section" id="model-guide">
+      <h2 class="doc-h2">🧭 模型选择指南</h2>
+      <p class="doc-p">不同模型各有擅长，用对了事半功倍。以下是根据实际使用场景整理的选择建议。</p>
+
+      <h3 class="doc-h3">场景速查表</h3>
+      <table class="doc-table">
+        <thead><tr><th>使用场景</th><th>推荐模型</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td>日常聊天、写文章、改邮件</td><td>DeepSeek V3</td><td>速度快、质量高、价格低</td></tr>
+          <tr><td>数学题、逻辑推理、代码分析</td><td>DeepSeek R1</td><td>专门为推理优化，会展示思考过程</td></tr>
+          <tr><td>分析长篇 PDF、大量代码</td><td>Kimi 128K</td><td>支持超长上下文，不截断内容</td></tr>
+          <tr><td>图片识别、多模态任务</td><td>通义千问 Plus</td><td>阿里多模态支持最好</td></tr>
+          <tr><td>快速问答、高并发场景</td><td>通义千问 Turbo</td><td>响应极快，适合频繁调用</td></tr>
+          <tr><td>白嫖党 / 测试用</td><td>硅基流动免费模型</td><td>有多个完全免费的开源模型</td></tr>
+          <tr><td>隐私敏感、完全离线</td><td>本地 Ollama</td><td>数据不出本机</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="doc-h3">一句话记住每个模型</h3>
+      <div class="card-grid">
+        <div class="doc-card"><span class="doc-card-icon">🔵</span><h4>DeepSeek V3</h4><p>全能选手，日常首选，中文写作一流，价格良心。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🧠</span><h4>DeepSeek R1</h4><p>思考型模型，会把推理过程展示出来，适合需要解释过程的场景。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🌙</span><h4>Kimi</h4><p>长文档专家，把整本书丢给它都没问题。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">☁️</span><h4>通义千问</h4><p>阿里出品，多模态能力强，国内访问最稳定。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">💎</span><h4>硅基流动</h4><p>聚合平台，一个 Key 用多个模型，有免费额度。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">💻</span><h4>本地 Ollama</h4><p>完全离线，适合处理敏感数据，但需要一定硬件配置。</p></div>
+      </div>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>不确定选哪个？直接用<strong>虾盘云</strong>，里面已包含 DeepSeek 和通义千问，充值一次，两个模型都能用，随时切换。</span>
+      </div>
+    </div>
+
+    <!-- 虾盘云 -->
+    <div class="doc-section" id="xiapan-cloud">
+      <h2 class="doc-h2">☁️ 虾盘云（内置推荐）</h2>
+      <p class="doc-lead" style="font-size:.97rem">虾盘云是 U-Hermes 官方的 AI API 服务，支持 DeepSeek、通义千问等国内主流模型，<strong>无需自己到各家官网申请 API Key</strong>，充值后直接用，最省事。</p>
+
+      <h3 class="doc-h3">为什么推荐虾盘云？</h3>
+      <div class="card-grid">
+        <div class="doc-card"><span class="doc-card-icon">⚡</span><h4>零配置开箱</h4><p>买到虾盘 U 盘即自带初始额度，插上就能聊，不用注册任何第三方账号。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🔗</span><h4>一个 Key 多模型</h4><p>一个 API Key 即可访问 DeepSeek V3、DeepSeek R1、通义千问 Turbo/Plus 等多个模型，随时切换。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">💴</span><h4>人民币充值</h4><p>支付宝付款，无需绑定外币信用卡，工作时间 10 分钟到账。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">♾️</span><h4>余额永不过期</h4><p>充值余额长期有效，用多少扣多少，不用担心到期作废。</p></div>
+      </div>
+
+      <h3 class="doc-h3">支持的模型与价格</h3>
+      <table class="doc-table">
+        <thead><tr><th>模型</th><th>特点</th><th>输入价格</th></tr></thead>
+        <tbody>
+          <tr><td><strong>DeepSeek V3</strong></td><td>综合能力强，日常首选</td><td>¥3 / 百万 token</td></tr>
+          <tr><td><strong>DeepSeek R1</strong></td><td>深度推理，解数学/逻辑题</td><td>¥12 / 百万 token</td></tr>
+          <tr><td><strong>Qwen Turbo</strong></td><td>响应极快，中文优化</td><td>¥1.8 / 百万 token</td></tr>
+          <tr><td><strong>Qwen Plus</strong></td><td>长文档理解强</td><td>¥4 / 百万 token</td></tr>
+        </tbody>
+      </table>
+      <p class="doc-p" style="margin-top:8px;font-size:.82rem;color:var(--text-muted)">参考：1 百万 token ≈ 75 万中文字，普通用户每天聊 1-2 小时约消耗 2-5 万 token。</p>
+
+      <h3 class="doc-h3">充值步骤</h3>
+      <p class="doc-p">新用户自动赠送体验额度，开箱即用。额度用完后按以下步骤充值：</p>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">01</div>
+          <div><strong>打开虾粮面板</strong><span>U-Hermes 左侧点「<strong>虾粮</strong>」，可以看到当前 Token 余额，以及「去充值」蓝色按钮。</span>
+            <img src="imgs/start-07-xiapan-panel.png" alt="虾粮面板" class="doc-screenshot">
+          </div>
+        </li>
+        <li>
+          <div class="step-num-badge">02</div>
+          <div><strong>点击「去充值」</strong><span>点击蓝色按钮，会跳转（或在浏览器打开）虾盘云充值中心网页，API Key 已自动填入。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">03</div>
+          <div><strong>选择充值金额，支付宝付款</strong><span>在充值页面选择金额（10 / 20 / 50 / 100 / 200 元或自定义），点「支付宝充值」，扫码完成付款。</span>
+            <img src="imgs/start-08-recharge-page.png" alt="虾盘云充值中心页面" class="doc-screenshot" style="max-width:400px">
+          </div>
+        </li>
+        <li>
+          <div class="step-num-badge">04</div>
+          <div><strong>到账确认</strong><span>付款成功后，回到 U-Hermes 点「刷新」查看余额更新。到账通常很快，如超过 30 分钟未到账，加微信 <strong>hecare888</strong> 并发付款截图。</span></div>
+        </li>
+      </ul>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>充值页面会自动读取你的 API Key，无需手动填写，直接选金额付款即可。余额永不过期，用多少扣多少。</span>
+      </div>
+
+      <h3 class="doc-h3">如果你习惯直接用 API Key（开发者方式）</h3>
+      <p class="doc-p">也可以在任何支持 OpenAI 格式的客户端里直接配置虾盘云：</p>
+      <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://api.u-hermes.org/v1</span>
+<span class="key">API Key：</span>  <span class="string">sk-xp-xxxxxxxx</span>  <span class="comment">← 从面板里复制</span>
+<span class="key">模型名：</span>   <span class="string">deepseek-chat</span>    <span class="comment">（或 deepseek-reasoner / qwen-turbo）</span></div>
+    </div>
+
+    <!-- DeepSeek -->
+    <div class="doc-section" id="deepseek">
+      <h2 class="doc-h2">🔵 接入 DeepSeek</h2>
+      <p class="doc-p">深度求索出品，目前综合能力最强的国产大模型之一。API 价格极低（V3 约每百万 token 仅 ¥1），新用户注册有免费额度，非常适合自己申请 Key 直接用。</p>
+
+      <h3 class="doc-h3">申请步骤</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>注册账号</strong><span>访问 <strong>platform.deepseek.com</strong>，用国内手机号注册，无需实名认证，1 分钟完成。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>领取免费额度</strong><span>新用户注册后系统会自动发放免费额度（具体金额以官网为准，通常够用一段时间）。在「账户余额」页面可以查看。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>创建 API Key</strong><span>进入「API Keys」→「创建 API Key」，给 Key 起个名字（方便区分用途），复制生成的 Key 保存好——它只显示一次。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">4</div>
+          <div><strong>填入 U-Hermes</strong><span>U-Hermes → 设置 → 模型 → 添加供应商，填入以下信息，保存。</span></div>
+        </li>
+      </ul>
+
+      <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://api.deepseek.com/v1</span>
+<span class="key">API Key：</span>  <span class="string">sk-xxxxxxxxxxxxxxxx</span>
+<span class="key">模型（日常）：</span> <span class="string">deepseek-chat</span>      <span class="comment">← DeepSeek V3，通用首选</span>
+<span class="key">模型（推理）：</span> <span class="string">deepseek-reasoner</span>  <span class="comment">← DeepSeek R1，复杂逻辑推理</span></div>
+
+      <h3 class="doc-h3">两个模型怎么选？</h3>
+      <table class="doc-table">
+        <thead><tr><th>模型</th><th>适合场景</th><th>特点</th></tr></thead>
+        <tbody>
+          <tr><td><strong>deepseek-chat</strong>（V3）</td><td>写作、翻译、问答、代码生成</td><td>速度快，综合能力强，日常首选</td></tr>
+          <tr><td><strong>deepseek-reasoner</strong>（R1）</td><td>数学、逻辑、分析报告、复杂推理</td><td>会展示思维链，回答更可靠但较慢</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>DeepSeek 有时会因流量高峰出现响应慢或报错（错误码 503）。如果遇到这种情况，可以暂时切换到虾盘云的 DeepSeek 通道，稳定性更好。</span>
+      </div>
+    </div>
+
+    <!-- Kimi -->
+    <div class="doc-section" id="kimi">
+      <h2 class="doc-h2">🌙 接入 Kimi</h2>
+      <p class="doc-p">月之暗面出品，最大支持 128K tokens 的超长上下文，是处理长文档的最佳选择。把一整本书、一个完整代码仓库丢给它，都能完整分析，不会截断。</p>
+
+      <h3 class="doc-h3">申请步骤</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>注册账号</strong><span>访问 <strong>platform.moonshot.cn</strong>，手机号注册，新用户有免费额度赠送。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>创建 API Key</strong><span>进入「API Key 管理」→「新建 API Key」，复制保存。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>填入 U-Hermes</strong><span>添加供应商，填入以下配置：</span></div>
+        </li>
+      </ul>
+
+      <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://api.moonshot.cn/v1</span>
+<span class="key">API Key：</span>  <span class="string">sk-xxxxxxxxxxxxxxxx</span>
+<span class="key">模型：</span>     <span class="string">moonshot-v1-8k</span>    <span class="comment">← 短文本，速度最快</span>
+          <span class="string">moonshot-v1-32k</span>   <span class="comment">← 中等长度文档</span>
+          <span class="string">moonshot-v1-128k</span>  <span class="comment">← 超长文档，整本书</span></div>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>上下文越长，费用越高。日常聊天用 8k 就够，只有真正需要分析长文档时才用 128k。</span>
+      </div>
+    </div>
+
+    <!-- 通义千问 -->
+    <div class="doc-section" id="qwen">
+      <h2 class="doc-h2">☁️ 接入通义千问</h2>
+      <p class="doc-p">阿里云出品，国内访问速度最稳定，免费额度较多，支持图片识别（多模态）。如果你已经在用阿里云生态（钉钉、阿里云盘等），通义千问是最自然的选择。</p>
+
+      <h3 class="doc-h3">申请步骤</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>开通阿里云账号</strong><span>访问 <strong>dashscope.aliyuncs.com</strong>（灵积模型服务），用支付宝或手机号登录/注册阿里云账号。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>开通 DashScope 服务</strong><span>首次登录会引导你开通服务，免费，新用户有赠送额度。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>创建 API Key</strong><span>在右上角个人头像 →「API-KEY 管理」→「创建新的 API-KEY」，复制保存。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">4</div>
+          <div><strong>填入 U-Hermes</strong><span>添加供应商，注意 Base URL 格式与其他不同：</span></div>
+        </li>
+      </ul>
+
+      <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://dashscope.aliyuncs.com/compatible-mode/v1</span>
+<span class="key">API Key：</span>  <span class="string">sk-xxxxxxxxxxxxxxxx</span>
+<span class="key">模型（快速）：</span> <span class="string">qwen-turbo</span>  <span class="comment">← 极速响应，价格最低</span>
+<span class="key">模型（均衡）：</span> <span class="string">qwen-plus</span>   <span class="comment">← 综合能力强，性价比好</span>
+<span class="key">模型（旗舰）：</span> <span class="string">qwen-max</span>    <span class="comment">← 最强效果，价格较高</span></div>
+    </div>
+
+    <!-- 硅基流动 -->
+    <div class="doc-section" id="siliconflow">
+      <h2 class="doc-h2">💎 接入硅基流动</h2>
+      <p class="doc-p">聚合型 API 平台，一个 Key 可以访问数十个主流开源模型（Qwen、GLM、Llama 等），有多个完全免费的模型，适合预算有限或想测试不同模型的用户。</p>
+
+      <h3 class="doc-h3">申请步骤</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>注册账号</strong><span>访问 <strong>siliconflow.cn</strong>，手机号注册，新用户赠送 ¥14 免费额度。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>获取 API Key</strong><span>登录后进入「API 密钥」→「新建 API 密钥」，复制保存。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>填入 U-Hermes</strong><span>添加供应商，填入配置后，在模型名处填写你想用的具体模型。</span></div>
+        </li>
+      </ul>
+
+      <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://api.siliconflow.cn/v1</span>
+<span class="key">API Key：</span>  <span class="string">sk-xxxxxxxxxxxxxxxx</span></div>
+
+      <h3 class="doc-h3">推荐模型</h3>
+      <table class="doc-table">
+        <thead><tr><th>模型名</th><th>费用</th><th>适合场景</th></tr></thead>
+        <tbody>
+          <tr><td><code style="font-family:monospace;font-size:.82em">Qwen/Qwen2.5-7B-Instruct</code></td><td>免费</td><td>日常问答、文字处理</td></tr>
+          <tr><td><code style="font-family:monospace;font-size:.82em">THUDM/glm-4-9b-chat</code></td><td>免费</td><td>中文对话，清华出品</td></tr>
+          <tr><td><code style="font-family:monospace;font-size:.82em">Qwen/Qwen2.5-72B-Instruct</code></td><td>付费</td><td>高质量输出，旗舰级别</td></tr>
+          <tr><td><code style="font-family:monospace;font-size:.82em">deepseek-ai/DeepSeek-V3</code></td><td>付费</td><td>通过硅基访问 DeepSeek</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 国际模型 -->
+    <div class="doc-section" id="intl-models">
+      <h2 class="doc-h2">🌍 国际模型</h2>
+      <p class="doc-p">ChatGPT（GPT-4o）、Claude、Gemini 等国际模型能力很强，但 API 在国内访问受限，需要代理或中转才能用。</p>
+
+      <h3 class="doc-h3">国际模型概览</h3>
+      <table class="doc-table">
+        <thead><tr><th>模型</th><th>出品方</th><th>特点</th><th>国内访问</th></tr></thead>
+        <tbody>
+          <tr><td><strong>GPT-4o</strong></td><td>OpenAI</td><td>综合能力强，多模态，应用最广</td><td>❌ 需代理或中转</td></tr>
+          <tr><td><strong>Claude 3.5 Sonnet</strong></td><td>Anthropic</td><td>写作和代码能力顶级，指令遵循准确</td><td>❌ 需代理或中转</td></tr>
+          <tr><td><strong>Gemini Pro</strong></td><td>Google</td><td>多模态能力强，有免费额度</td><td>❌ 需代理或中转</td></tr>
+          <tr><td><strong>Llama 3</strong></td><td>Meta</td><td>开源，可本地运行，无审查</td><td>✅ 可通过硅基流动访问</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="doc-h3">方式一：通过虾盘云中转（推荐）</h3>
+      <p class="doc-p">虾盘云支持部分国际模型的中转服务，不需要你自己配代理，直接填入虾盘云的 Base URL 和 Key 就能用。具体支持哪些国际模型，以 <a href="https://api.u-hermes.org" target="_blank" style="color:var(--accent)">api.u-hermes.org</a> 实际显示的模型列表为准。</p>
+
+      <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://api.u-hermes.org/v1</span>
+<span class="key">API Key：</span>  <span class="string">sk-xp-xxxxxxxx</span>  <span class="comment">← 你的虾盘云 Key</span>
+<span class="key">模型名：</span>   <span class="string">gpt-4o</span>  <span class="comment">（如虾盘云支持，具体以列表为准）</span></div>
+
+      <h3 class="doc-h3">方式二：自己申请 + 配代理直连</h3>
+      <p class="doc-p">如果你已有代理环境，也可以直接申请官方 API Key 使用，费率更透明，但需要国际支付方式（信用卡）。</p>
+      <table class="doc-table">
+        <thead><tr><th>模型</th><th>申请地址</th><th>Base URL</th><th>支付方式</th></tr></thead>
+        <tbody>
+          <tr><td>GPT-4o</td><td>platform.openai.com</td><td>https://api.openai.com/v1</td><td>国际信用卡</td></tr>
+          <tr><td>Claude</td><td>console.anthropic.com</td><td>https://api.anthropic.com/v1</td><td>国际信用卡</td></tr>
+          <tr><td>Gemini</td><td>aistudio.google.com</td><td>https://generativelanguage.googleapis.com/v1beta/openai</td><td>有免费额度</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert warn">
+        <span class="alert-icon">⚠️</span>
+        <span>国际模型 API 费率以美元计价，国内使用需要代理且网络延迟较高。如果没有特别需求，国内的 DeepSeek / 通义千问已经能满足大多数场景，且更稳定、更便宜。</span>
+      </div>
+    </div>
+
+    <!-- 本地模型 -->
+    <div class="doc-section" id="local-models">
+      <h2 class="doc-h2">💻 本地模型（Ollama）</h2>
+      <p class="doc-p">使用 Ollama 在本机运行 AI 模型，数据完全不上网，适合处理公司内部文件、个人隐私内容等敏感场景。缺点是需要一定的显卡或内存配置，速度比云端模型慢。</p>
+
+      <h3 class="doc-h3">硬件要求参考</h3>
+      <table class="doc-table">
+        <thead><tr><th>模型规模</th><th>最低配置</th><th>推荐配置</th></tr></thead>
+        <tbody>
+          <tr><td>7B 模型（如 qwen2.5:7b）</td><td>8GB 内存 / 集成显卡</td><td>16GB 内存 / 独立显卡</td></tr>
+          <tr><td>14B 模型</td><td>16GB 内存 + 独显</td><td>32GB 内存 + 8GB 显存</td></tr>
+          <tr><td>70B 模型</td><td>需要高端 GPU</td><td>A100/4090 级别</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="doc-h3">安装步骤</h3>
+      <div class="code-block"><span class="comment"># Windows / Mac 直接下载安装包</span>
+<span class="comment"># 访问 ollama.com 下载对应平台的安装包，安装后自动运行</span>
+
+<span class="comment"># Linux 一键安装</span>
+curl -fsSL https://ollama.com/install.sh | sh
+
+<span class="comment"># 下载中文模型（推荐先用 7B，速度和效果平衡）</span>
+ollama pull qwen2.5:7b
+
+<span class="comment"># 验证是否正常运行</span>
+ollama list   <span class="comment"># 查看已下载的模型</span></div>
+
+      <h3 class="doc-h3">填入 U-Hermes</h3>
+      <div class="code-block"><span class="key">Base URL：</span> <span class="string">http://127.0.0.1:11434/v1</span>
+<span class="key">API Key：</span>  <span class="string">ollama</span>  <span class="comment">← 随便填，本地不验证</span>
+<span class="key">模型名：</span>   <span class="string">qwen2.5:7b</span>  <span class="comment">← 和你下载的模型名一致</span></div>
+
+      <h3 class="doc-h3">推荐中文模型</h3>
+      <table class="doc-table">
+        <thead><tr><th>模型</th><th>下载命令</th><th>适合配置</th></tr></thead>
+        <tbody>
+          <tr><td>Qwen2.5 7B（推荐入门）</td><td><code style="font-family:monospace;font-size:.82em">ollama pull qwen2.5:7b</code></td><td>8GB+ 内存</td></tr>
+          <tr><td>Qwen2.5 14B</td><td><code style="font-family:monospace;font-size:.82em">ollama pull qwen2.5:14b</code></td><td>16GB+ 内存</td></tr>
+          <tr><td>GLM4 9B</td><td><code style="font-family:monospace;font-size:.82em">ollama pull glm4:9b</code></td><td>16GB+ 内存</td></tr>
+          <tr><td>DeepSeek R1 8B</td><td><code style="font-family:monospace;font-size:.82em">ollama pull deepseek-r1:8b</code></td><td>16GB+ 内存</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert warn">
+        <span class="alert-icon">⚠️</span>
+        <span>本地模型首次下载体积较大（7B 模型约 4-5GB），需要在网络良好的环境下载。下载完成后完全离线使用。</span>
+      </div>
+    </div>
+
+    <!-- 技能库 -->
+    <div class="doc-section" id="skills">
+      <h2 class="doc-h2">🧰 技能库说明</h2>
+      <p class="doc-lead" style="font-size:.97rem">技能（Skill）是给 U-Hermes 安装的"插件"，让 AI 从只会聊天，变成能真正执行任务——查天气、发邮件、操作文件、接收平台消息……每个技能是独立的功能模块，按需开启。</p>
+
+      <h3 class="doc-h3">技能从哪里来？</h3>
+      <div class="card-grid">
+        <div class="doc-card">
+          <span class="doc-card-icon">🦀</span>
+          <h4>ClawHub 技能市场</h4>
+          <p>全球最大的 U-Hermes 技能市场，18,000+ 个技能，分 MCP 工具、工作流、开发工具、数据&API 等类别。</p>
+          <span class="doc-card-tag" style="color:var(--accent)">cn.clawhub-mirror.com（国内镜像）</span>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🔧</span>
+          <h4>SkillHub 中文社区</h4>
+          <p>国内技能共享社区，收录中文用户开发的本土化技能，更适合国内使用场景。</p>
+          <span class="doc-card-tag" style="color:var(--accent)">skillhub.cn</span>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">📦</span>
+          <h4>虾盘预装技能</h4>
+          <p>U-Hermes 虾盘 Hermes出厂预装了精选技能集，涵盖最常用的功能，买到即有，无需手动安装。</p>
+          <span class="doc-card-tag">开箱即用</span>
+        </div>
+      </div>
+
+      <h3 class="doc-h3">技能按类别分类</h3>
+
+      <h4 style="font-size:.88rem;font-weight:600;color:var(--text);margin:20px 0 10px">🌐 信息获取类</h4>
+      <table class="doc-table">
+        <thead><tr><th>技能</th><th>能做什么</th><th>是否需要额外配置</th></tr></thead>
+        <tbody>
+          <tr><td><strong>网页搜索</strong></td><td>让 AI 联网搜索实时信息，不再只靠训练数据回答</td><td>需要搜索 API（Tavily 或 SerpAPI）</td></tr>
+          <tr><td><strong>天气查询</strong></td><td>查询任意城市的实时天气和未来预报</td><td>需要天气 API Key</td></tr>
+          <tr><td><strong>RSS 订阅</strong></td><td>监控 RSS 源，有新内容时自动推送摘要</td><td>仅需填写 RSS 链接</td></tr>
+          <tr><td><strong>网站监控</strong></td><td>定期检查指定网站是否可访问，宕机时告警</td><td>无需配置</td></tr>
+          <tr><td><strong>视频摘要</strong></td><td>输入 B 站/YouTube 视频链接，AI 生成内容摘要</td><td>无需配置</td></tr>
+        </tbody>
+      </table>
+
+      <h4 style="font-size:.88rem;font-weight:600;color:var(--text);margin:20px 0 10px">📁 文件与数据类</h4>
+      <table class="doc-table">
+        <thead><tr><th>技能</th><th>能做什么</th><th>是否需要额外配置</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PDF 解析</strong></td><td>上传 PDF 文件，AI 读取内容并回答问题</td><td>无需配置</td></tr>
+          <tr><td><strong>文件读写</strong></td><td>读取本地文件内容，或将 AI 输出保存为文件</td><td>无需配置</td></tr>
+          <tr><td><strong>代码执行</strong></td><td>AI 写出代码后在沙箱里直接运行，返回结果</td><td>无需配置</td></tr>
+          <tr><td><strong>数据分析</strong></td><td>上传 CSV/Excel，AI 分析数据、画图表、给结论</td><td>无需配置</td></tr>
+          <tr><td><strong>图片生成</strong></td><td>根据描述生成图片（需接入图像模型 API）</td><td>需要 Stable Diffusion 或 DALL·E API</td></tr>
+        </tbody>
+      </table>
+
+      <h4 style="font-size:.88rem;font-weight:600;color:var(--text);margin:20px 0 10px">📬 通讯与协作类</h4>
+      <table class="doc-table">
+        <thead><tr><th>技能</th><th>能做什么</th><th>是否需要额外配置</th></tr></thead>
+        <tbody>
+          <tr><td><strong>邮件收发</strong></td><td>AI 代读收件箱、起草回复、发送邮件</td><td>需要邮箱 SMTP/IMAP 配置</td></tr>
+          <tr><td><strong>日历管理</strong></td><td>查看日程、新建事件、设置提醒</td><td>需要 Google Calendar 授权</td></tr>
+          <tr><td><strong>GitHub 操作</strong></td><td>查看 Issue、创建 PR、读取代码、写注释</td><td>需要 GitHub Token</td></tr>
+          <tr><td><strong>飞书集成</strong></td><td>在飞书发消息、创建文档、读取多维表格</td><td>需要飞书应用 Token</td></tr>
+          <tr><td><strong>笔记整理</strong></td><td>将对话内容整理保存到笔记（Notion/Obsidian）</td><td>需要对应平台 API</td></tr>
+        </tbody>
+      </table>
+
+      <h4 style="font-size:.88rem;font-weight:600;color:var(--text);margin:20px 0 10px">🔌 平台频道类</h4>
+      <table class="doc-table">
+        <thead><tr><th>技能/频道</th><th>能做什么</th><th>备注</th></tr></thead>
+        <tbody>
+          <tr><td><strong>QQ 机器人</strong></td><td>在 QQ 群/私聊里和 AI 对话</td><td>需申请腾讯开放平台资质</td></tr>
+          <tr><td><strong>飞书机器人</strong></td><td>在飞书群/私聊里和 AI 对话</td><td>需创建飞书自建应用</td></tr>
+          <tr><td><strong>Telegram Bot</strong></td><td>在 Telegram 群/私聊里和 AI 对话</td><td>需代理访问，申请简单</td></tr>
+          <tr><td><strong>Discord Bot</strong></td><td>在 Discord 服务器频道里和 AI 对话</td><td>需代理访问</td></tr>
+          <tr><td><strong>微信机器人</strong></td><td>在微信里自动回复</td><td>非官方方案，存在封号风险</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>技能市场国内访问地址：<strong>cn.clawhub-mirror.com</strong>（官方中国镜像）或 <strong>skillhub.cn</strong>（国内社区）。搜索技能名称即可找到安装包。</span>
+      </div>
+    </div>
+
+    <!-- 技能安装 -->
+    <div class="doc-section" id="skill-install">
+      <h2 class="doc-h2">📦 安装新技能</h2>
+      <p class="doc-p">虾盘预装的技能已够日常使用。如果需要安装社区里的新技能，按以下步骤操作：</p>
+
+      <h3 class="doc-h3">方式一：在控制台直接搜索安装（推荐）</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>打开技能面板</strong><span>在 U-Hermes 控制台左侧点击「技能」，进入技能管理页面。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>搜索技能</strong><span>点击「技能市场」或「搜索」，输入技能名称（英文或中文都可以），找到目标技能。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>点击安装</strong><span>点击技能卡片上的「安装」按钮，等待下载完成。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">4</div>
+          <div><strong>配置并启用</strong><span>部分技能需要填写 API Key 或其他配置项（技能页面有说明），填完后点击「启用」即可使用。</span></div>
+        </li>
+      </ul>
+
+      <h3 class="doc-h3">方式二：从文件安装</h3>
+      <p class="doc-p">在 ClawHub 或 SkillHub 下载到 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">.zip</code> 格式的技能包后：</p>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>进入技能管理</strong><span>控制台 → 技能 → 右上角「从文件安装」。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>选择技能文件</strong><span>选择下载的 .zip 文件，点击确认。U-Hermes 会自动解析并安装。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>按说明配置</strong><span>阅读技能的 README，根据说明填写所需的 API Key 或配置项。</span></div>
+        </li>
+      </ul>
+
+      <div class="alert warn">
+        <span class="alert-icon">⚠️</span>
+        <span>安装第三方技能前，建议在 ClawHub 上查看该技能的安全扫描状态（VirusTotal 和 U-Hermes 官方扫描结果）。评分高、下载量大的技能更可靠。</span>
+      </div>
+    </div>
+
+    <!-- 定时任务 -->
+    <div class="doc-section" id="cron">
+      <h2 class="doc-h2">⏰ 定时任务</h2>
+      <p class="doc-p">定时任务让 AI 按照你设定的时间表自动执行任务，不需要你手动触发。比如：每天早上 8 点总结今日新闻、每周五下午生成工作周报、每小时检查服务器状态……</p>
+
+      <h3 class="doc-h3">配置步骤</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>进入定时任务</strong><span>U-Hermes 控制台左侧 → 「定时任务」→「新建任务」。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>设置触发时间</strong><span>选择执行频率：每天（填写具体时间）、每周（选择星期几+时间）、或填写 Cron 表达式实现精确控制。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>填写任务内容</strong><span>在「任务提示词」里填写你希望 AI 执行的指令，就像平时发消息给 AI 一样。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">4</div>
+          <div><strong>选择输出方式</strong><span>结果可以发送到：QQ 群、飞书、Telegram、邮件，或保存到笔记。</span></div>
+        </li>
+      </ul>
+
+      <h3 class="doc-h3">实用任务示例</h3>
+      <table class="doc-table">
+        <thead><tr><th>任务名称</th><th>触发时间</th><th>提示词示例</th></tr></thead>
+        <tbody>
+          <tr><td>每日新闻摘要</td><td>每天 8:00</td><td>搜索今天的科技新闻，总结5条最重要的，每条不超过50字</td></tr>
+          <tr><td>工作周报提醒</td><td>每周五 17:00</td><td>提醒我填写本周工作周报，并给出周报模板</td></tr>
+          <tr><td>天气播报</td><td>每天 7:30</td><td>查询【你的城市】今天和明天的天气，给出穿衣建议</td></tr>
+          <tr><td>GitHub Issue 巡查</td><td>每天 9:00</td><td>查看我的 GitHub 仓库今天有哪些新 Issue 和 PR，列出摘要</td></tr>
+          <tr><td>学英语打卡</td><td>每天 21:00</td><td>给我出一道英语写作练习题，难度中等，给出参考答案</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>定时任务需要 U-Hermes 保持运行才会执行。如果你的电脑关机了，任务不会触发。想要 24 小时稳定执行，参考 <a href="#vps">VPS 部署</a>章节，把 U-Hermes 部署到服务器上。</span>
+      </div>
+    </div>
+
+    <!-- 平台接入 -->
+    <div class="doc-section" id="platforms">
+      <h2 class="doc-h2">🤖 平台接入总览</h2>
+      <p class="doc-p">U-Hermes 支持多个聊天平台，配置后可以直接在对应平台里和 AI 对话，不需要打开浏览器控制台。</p>
+      <div class="platform-grid">
+        <div class="platform-card" id="qq">
+          <div class="platform-card-head"><span class="platform-card-ico">🐧</span><h4>QQ 机器人</h4></div>
+          <p>接入腾讯 QQ 官方开放平台，支持群聊和私聊，@机器人即可对话。</p>
+          <span class="platform-diff">官方接口</span>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-head"><span class="platform-card-ico">🪶</span><h4>飞书机器人</h4></div>
+          <p>接入企业飞书，支持消息卡片、群机器人，适合团队内部 AI 助手。</p>
+          <span class="platform-diff">企业级</span>
+        </div>
+        <div class="platform-card" id="telegram">
+          <div class="platform-card-head"><span class="platform-card-ico">✈️</span><h4>Telegram</h4></div>
+          <p>通过 BotFather 创建 Bot，接入 Telegram 群组或私聊，全球可用。</p>
+          <span class="platform-diff">需代理</span>
+        </div>
+        <div class="platform-card" id="wechat">
+          <div class="platform-card-head"><span class="platform-card-ico">💚</span><h4>微信机器人</h4></div>
+          <p>通过企业微信或个人号 Hook 接入，适合日常私人使用或小团队。</p>
+          <span class="platform-diff">非官方</span>
+        </div>
+        <div class="platform-card" id="discord">
+          <div class="platform-card-head"><span class="platform-card-ico">🎮</span><h4>Discord</h4></div>
+          <p>创建 Discord Bot，接入服务器频道，适合游戏社区和开发者群体。</p>
+          <span class="platform-diff">需代理</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 飞书机器人 -->
+    <div class="doc-section" id="feishu">
+      <h2 class="doc-h2">🪶 飞书机器人接入教程</h2>
+      <p class="doc-lead" style="font-size:.97rem">把 U-Hermes 接入飞书后，在飞书群里 @机器人或直接私聊，即可和 AI 对话。适合公司团队共用一个 AI 助手。</p>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>飞书机器人使用<strong>官方开放平台接口</strong>，稳定可靠，不违反飞书使用条款。整个配置过程约 15 分钟。</span>
+      </div>
+
+      <h3 class="doc-h3">第一步：创建飞书应用</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>登录飞书开放平台</strong><span>在浏览器打开 <strong>open.feishu.cn</strong>，用你的飞书账号（需要是企业版管理员或开发者权限）登录。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>创建企业自建应用</strong><span>点击「开发者后台」→「创建应用」→「企业自建应用」。填写应用名称（比如「AI 助手」）和描述，上传图标，点击「确认创建」。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>记录凭证</strong><span>进入应用页面，在「凭证与基础信息」里找到 <strong>App ID</strong> 和 <strong>App Secret</strong>，复制保存备用。</span></div>
+        </li>
+      </ul>
+
+      <h3 class="doc-h3">第二步：开启机器人能力</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>添加机器人能力</strong><span>在左侧菜单点「添加应用能力」→「机器人」，点击「添加」。这一步让应用具备在飞书里发消息的权限。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>配置权限</strong><span>进入「权限管理」，搜索并开启以下权限：<code style="font-family:monospace;font-size:.82em;color:var(--accent)">im:message</code>（接收消息）、<code style="font-family:monospace;font-size:.82em;color:var(--accent)">im:message:send_as_bot</code>（发送消息）、<code style="font-family:monospace;font-size:.82em;color:var(--accent)">im:chat</code>（读取群信息）。</span></div>
+        </li>
+      </ul>
+
+      <h3 class="doc-h3">第三步：配置事件订阅（接收消息）</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>先获取 U-Hermes 的 Webhook 地址</strong><span>在 U-Hermes 控制台 → 频道 → 飞书 → 新增，系统会生成一个 Webhook 地址，格式类似：<code style="font-family:monospace;font-size:.82em;color:var(--accent)">http://你的IP:18789/channel/feishu/xxx</code>。复制这个地址。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>填入请求地址</strong><span>回到飞书开放平台，进入「事件订阅」，将请求 URL 设置为刚才复制的 Webhook 地址。点击「验证」，飞书会向该地址发一个验证请求，U-Hermes 会自动响应通过。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>添加事件</strong><span>在事件列表里搜索并添加：<strong>接收消息</strong>（im.message.receive_v1）。这样每当用户发消息给机器人，飞书就会通知 U-Hermes。</span></div>
+        </li>
+      </ul>
+
+      <h3 class="doc-h3">第四步：在 U-Hermes 里完成配对</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>填入 App ID 和 App Secret</strong><span>在 U-Hermes → 频道 → 飞书配置页面，把第一步记录的 App ID 和 App Secret 填进去，保存。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>发布应用</strong><span>回到飞书开放平台，点击「版本管理与发布」→「创建版本」→「申请发布」。企业内测版本通常 1 小时内审核通过（免审）。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>测试对话</strong><span>在飞书里搜索你的机器人名称，发起私聊，发送「你好」，如果收到 AI 回复，配置成功。</span></div>
+        </li>
+      </ul>
+
+      <div class="alert warn">
+        <span class="alert-icon">⚠️</span>
+        <span>如果 U-Hermes 运行在本机（不是公网服务器），飞书无法访问你的 Webhook 地址。解决方案：① 用 <strong>frp 内网穿透</strong>把本机端口映射到公网；② 或者把 U-Hermes 部署到 VPS 上（参考 <a href="#vps">VPS 部署</a>章节）。</span>
+      </div>
+    </div>
+
+    <!-- QQ 机器人详细 -->
+    <div class="doc-section" id="qq-detail">
+      <h2 class="doc-h2">🐧 QQ 机器人接入教程</h2>
+      <p class="doc-p">腾讯 QQ 官方开放平台提供了正规的机器人接入方式，支持 QQ 群聊和私聊，@机器人即可触发 AI 回复。</p>
+
+      <div class="alert warn">
+        <span class="alert-icon">⚠️</span>
+        <span>QQ 机器人需要在腾讯 QQ 开放平台申请资质，目前对个人开发者开放，但需实名认证。申请地址：<strong>q.qq.com</strong></span>
+      </div>
+
+      <h3 class="doc-h3">基本流程</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>申请机器人</strong><span>访问 <strong>q.qq.com</strong>，登录 QQ 账号，进入「机器人管理」→「创建机器人」，填写基本信息，提交审核（通常 1-3 个工作日）。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>获取凭证</strong><span>审核通过后，在机器人详情页找到 <strong>AppID</strong> 和 <strong>AppSecret</strong>，复制保存。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>配置 U-Hermes</strong><span>在 U-Hermes → 频道 → QQ，填入 AppID 和 AppSecret，填入 Webhook 回调地址（同飞书步骤），保存启用。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">4</div>
+          <div><strong>邀请机器人进群</strong><span>在 QQ 群里点「邀请」，搜索你的机器人名称，邀请进群。之后在群里 @机器人发消息即可触发回复。</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Telegram 机器人 -->
+    <div class="doc-section" id="telegram-detail">
+      <h2 class="doc-h2">✈️ Telegram 机器人接入教程</h2>
+      <p class="doc-p">Telegram 的机器人 API 是最容易配置的平台之一——申请简单，功能完整，支持群组和私聊。唯一要求：需要能访问 Telegram（大陆需要代理）。</p>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>如果你已有代理，Telegram Bot 是最推荐的平台接入方式：配置最简单，5 分钟能搞定，API 稳定，免费无限制。</span>
+      </div>
+
+      <h3 class="doc-h3">第一步：创建 Bot，获取 Token</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>找 BotFather</strong><span>打开 Telegram，搜索 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">@BotFather</code>（官方机器人管家，认准蓝色认证标），发送 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">/newbot</code> 命令。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>填写名称和用户名</strong><span>按提示填写机器人显示名（任意，如「我的 AI 助手」）和用户名（必须以 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">bot</code> 结尾，如 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">my_ai_helper_bot</code>）。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>保存 Token</strong><span>创建成功后，BotFather 会发给你一串 Token，格式类似 <code style="font-family:monospace;font-size:.82em;color:var(--accent)">123456789:AAExxxxxxx</code>，复制保存好，接下来需要用。</span></div>
+        </li>
+      </ul>
+
+      <h3 class="doc-h3">第二步：在 U-Hermes 里配置</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>进入频道配置</strong><span>U-Hermes 控制台 → 左侧「频道」→「Telegram」→「新增」。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>填入 Bot Token</strong><span>把刚才从 BotFather 获得的 Token 粘贴进去，保存启用。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>测试对话</strong><span>在 Telegram 里搜索你的机器人用户名，发起私聊，发送「/start」或任意消息。几秒内收到 AI 回复即配置成功。</span></div>
+        </li>
+      </ul>
+
+      <div class="alert warn">
+        <span class="alert-icon">⚠️</span>
+        <span>Telegram Bot 使用的是「轮询」方式获取消息，U-Hermes 需要保持运行才能响应。若要 24 小时在线，需要把 U-Hermes 部署到 VPS 上，并确保服务器网络能访问 Telegram API（<code style="font-family:monospace;font-size:.82em">api.telegram.org</code>）。</span>
+      </div>
+
+      <h3 class="doc-h3">在群组里使用</h3>
+      <p class="doc-p">把机器人添加到 Telegram 群组后，默认不会响应所有消息（防止刷屏）。可以选择两种模式：</p>
+      <table class="doc-table">
+        <thead><tr><th>模式</th><th>触发方式</th><th>适合场景</th></tr></thead>
+        <tbody>
+          <tr><td>@触发模式（推荐）</td><td>发消息时 @你的机器人用户名</td><td>群聊，避免 AI 回复所有聊天</td></tr>
+          <tr><td>全量响应模式</td><td>群里每条消息都触发 AI</td><td>专门的 AI 助手群，人不多</td></tr>
+          <tr><td>私聊模式</td><td>任意消息</td><td>个人使用，不影响群聊</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 微信机器人 -->
+    <div class="doc-section" id="wechat-detail">
+      <h2 class="doc-h2">💬 微信机器人说明</h2>
+      <p class="doc-p">很多用户会问：能不能在微信里直接和 AI 对话？这里给出客观说明。</p>
+
+      <div class="alert warn">
+        <span class="alert-icon">⚠️</span>
+        <span><strong>重要说明：</strong>微信官方没有开放个人账号的机器人 API。目前所有「微信 AI 机器人」方案都是通过模拟登录（hook 微信客户端）实现的，<strong>存在封号风险</strong>，腾讯会定期封禁使用此类工具的账号。请谨慎使用，不要用主力微信号操作。</span>
+      </div>
+
+      <h3 class="doc-h3">可替代的方案</h3>
+      <div class="card-grid">
+        <div class="doc-card">
+          <span class="doc-card-icon">🏢</span>
+          <h4>企业微信（相对安全）</h4>
+          <p>企业微信有官方开放的机器人 API，通过企业微信群机器人 Webhook 接入，官方支持，不存在封号风险。适合有企业微信账号的团队。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🪶</span>
+          <h4>飞书机器人（推荐代替）</h4>
+          <p>飞书是目前企业 IM 里 AI 机器人支持最好的平台，官方 API 完整，配置也不复杂。如果团队能接受，迁移成本很低。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">✈️</span>
+          <h4>Telegram（个人使用）</h4>
+          <p>个人用户想随时随地用 AI 聊天，Telegram 是最合适的替代方案，配置简单，响应稳定，支持全平台。</p>
+        </div>
+      </div>
+
+      <h3 class="doc-h3">企业微信群机器人（最简单的官方方案）</h3>
+      <p class="doc-p">如果你的团队用企业微信，可以用「群机器人 Webhook」快速实现 AI 消息推送（注意：这是单向推送，不是双向对话）：</p>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>创建群机器人</strong><span>在企业微信群里，点「…」→「添加机器人」→「新建机器人」，填写名称，创建后会给你一个 Webhook URL。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>在 U-Hermes 配置</strong><span>U-Hermes → 频道 → 企业微信，填入 Webhook URL，保存。之后 AI 的回复可以推送到这个群里。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>配合定时任务使用</strong><span>企业微信 Webhook 最适合和定时任务配合：每天自动推送日报、周报摘要、提醒事项到群里。参考<a href="#cron" style="color:var(--accent)">定时任务章节</a>。</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 提示词库 -->
+    <div class="doc-section" id="prompts-work">
+      <h2 class="doc-h2">💼 提示词库 · 办公场景</h2>
+      <p class="doc-p">以下提示词可以直接复制使用，把【】里的内容替换成你的实际情况。</p>
+
+      <h3 class="doc-h3">📧 邮件撰写</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">你是一位商务写作专家。请帮我写一封【道歉/感谢/跟进/邀请】邮件。
+
+背景：【简述情况，例如：上周交付的报告有数据错误，已更正，需要向客户致歉】
+收件人：【对方的身份，例如：重要客户，关系维护了两年】
+语气要求：【正式/半正式/友好】
+字数：控制在 200 字以内
+
+邮件格式：主题行 + 正文 + 结尾敬语</div>
+
+      <h3 class="doc-h3">📝 会议纪要整理</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">请把以下会议记录整理成结构化的会议纪要：
+
+【粘贴你的会议录音转文字，或手写的碎片化记录】
+
+输出格式：
+1. 会议基本信息（时间、参会人、主题）
+2. 讨论要点（分条列出）
+3. 达成的决议
+4. 待办事项（责任人 + 截止日期）
+5. 下次会议安排（如有）</div>
+
+      <h3 class="doc-h3">📊 工作周报生成</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">帮我根据以下工作记录生成本周工作汇报：
+
+本周完成的工作：
+【逐条列出你这周做了什么，不用写得好，流水账即可】
+
+遇到的问题：
+【有哪些卡点或未解决的事情】
+
+下周计划：
+【下周打算做什么】
+
+要求：语言简洁专业，突出成果而非过程，适合发给上级查看。</div>
+
+      <h3 class="doc-h3">🎯 方案策划框架</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">请帮我制定一份【产品推广/活动策划/项目启动】方案。
+
+项目背景：【一句话描述是什么项目】
+目标受众：【目标用户是谁】
+预算范围：【大概多少预算，或"暂未确定"】
+时间节点：【什么时候需要完成】
+
+请输出：执行目标、核心策略（3条）、执行步骤（含时间节点）、预期效果、风险提示。</div>
+    </div>
+
+    <div class="doc-section" id="prompts-code">
+      <h2 class="doc-h2">💻 提示词库 · 编程场景</h2>
+      <p class="doc-p">用 AI 辅助编程时，给的上下文越具体，回答越准确。以下是经过验证的高效提问方式。</p>
+
+      <h3 class="doc-h3">🔍 解释代码</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">请解释以下代码的作用，用简单的语言说明：
+1. 整体功能是什么
+2. 每个关键部分在做什么
+3. 有没有潜在的问题或可以改进的地方
+
+```【语言，如 Python / JavaScript / Go】
+【粘贴你的代码】
+```</div>
+
+      <h3 class="doc-h3">🐛 Debug 排查</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">我的代码报错了，请帮我找出问题并给出修复方案。
+
+报错信息：
+【粘贴完整报错内容】
+
+相关代码：
+```【语言】
+【粘贴出问题的代码段】
+```
+
+我期望的行为是：【描述正确情况下应该发生什么】</div>
+
+      <h3 class="doc-h3">✍️ 写单元测试</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">请为以下函数写单元测试。
+
+测试框架：【Jest / pytest / Go testing / 其他】
+要求覆盖：正常情况、边界值、异常情况
+
+```【语言】
+【粘贴要测试的函数】
+```</div>
+    </div>
+
+    <div class="doc-section" id="prompts-content">
+      <h2 class="doc-h2">✍️ 提示词库 · 内容创作</h2>
+      <p class="doc-p">适合写公众号、小红书、短视频文案等内容场景。</p>
+
+      <h3 class="doc-h3">📱 小红书爆款笔记</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">请帮我写一篇小红书笔记。
+
+主题：【例如：分享我用 AI 写周报的方法，省了 1 小时】
+目标读者：【例如：职场打工人，25-35岁】
+风格要求：口语化、接地气，有共鸣感，适当加 emoji
+
+格式：
+- 开头钩子（第一句要能抓住人）
+- 正文（分 3-5 个要点，每点一行）
+- 结尾互动引导（鼓励点赞/评论/收藏）
+- 标签（给我推荐 5 个相关话题标签）</div>
+
+      <h3 class="doc-h3">📢 公众号文章</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">请帮我写一篇公众号文章。
+
+主题：【一句话说明文章核心观点】
+目标读者：【读者群体描述】
+文章基调：【实用干货 / 故事叙述 / 观点评论】
+字数：【800-1200 字 / 1500-2000 字】
+
+要求：
+- 标题要有吸引力（给我 3 个备选标题）
+- 开头用问题或场景引入，不要直接摆观点
+- 正文逻辑清晰，有小标题分段
+- 结尾有行动号召</div>
+    </div>
+
+    <div class="doc-section" id="prompts-life">
+      <h2 class="doc-h2">🌱 提示词库 · 日常生活</h2>
+
+      <h3 class="doc-h3">✈️ 旅行攻略</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">请帮我规划一份旅行行程。
+
+目的地：【城市/地区】
+出发时间：【日期】
+天数：【几天几夜】
+人员：【几个人，有没有老人小孩】
+预算：【大概总预算，或人均预算】
+偏好：【文化历史 / 自然风景 / 美食购物 / 休闲放松】
+
+请输出：每天行程安排（上午/下午/晚上）、必吃餐厅推荐、交通建议、注意事项。</div>
+
+      <h3 class="doc-h3">💊 健康咨询（预筛查用）</h3>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">我出现了以下症状，请帮我分析可能的原因和建议：
+
+症状描述：【详细描述症状，包括持续时间、严重程度】
+基本信息：【年龄、性别、有无慢性病】
+
+请告诉我：可能的原因（从常见到少见排列）、需要去医院的紧急信号、日常可以先做的缓解措施。
+
+注意：这不是医疗诊断，仅供参考，如症状严重请直接就医。</div>
+    </div>
+
+    <div class="doc-section" id="prompts-advanced">
+      <h2 class="doc-h2">🚀 高级提问技巧</h2>
+      <p class="doc-p">掌握这几个技巧，AI 的回答质量会显著提升。</p>
+
+      <h3 class="doc-h3">① 给 AI 设定角色</h3>
+      <p class="doc-p">在提问开头加上角色设定，AI 会以该角色的视角和专业度回答。</p>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">你是一位有 10 年经验的产品经理，擅长 B2B SaaS 产品设计。
+请从这个角度帮我分析：【你的问题】</div>
+
+      <h3 class="doc-h3">② 要求结构化输出</h3>
+      <p class="doc-p">明确告诉 AI 你想要什么格式，避免一大段文字难以阅读。</p>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">请分析【某个话题】，用以下格式输出：
+- 结论（一句话）
+- 原因（3条，每条不超过30字）
+- 建议行动（2条，具体可执行）
+- 需要注意的风险（1条）</div>
+
+      <h3 class="doc-h3">③ 迭代修改，不要重新开始</h3>
+      <p class="doc-p">AI 的第一次回答往往不是最好的，用这些指令持续优化：</p>
+      <div class="card-grid">
+        <div class="doc-card"><span class="doc-card-icon">✏️</span><h4>「修改第2点」</h4><p>只改某一部分，其余保持不变。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">📏</span><h4>「缩短到100字」</h4><p>让 AI 精简，去掉废话。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🔄</span><h4>「换一个角度」</h4><p>如果不满意，让 AI 重新想。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">➕</span><h4>「展开第3条」</h4><p>对某个点深入讲解。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🎯</span><h4>「更口语化一些」</h4><p>调整语气，更符合你的风格。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">📋</span><h4>「给我3个版本」</h4><p>让 AI 提供多个选项对比。</p></div>
+      </div>
+
+      <h3 class="doc-h3">④ 追问而不是重问</h3>
+      <p class="doc-p">同一个对话里，AI 会记住上下文。不需要把问题重复一遍，直接追问更高效：</p>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">❌ 低效做法：每次都重新描述背景，开新对话
+
+✅ 高效做法：在同一对话里继续追问
+→「刚才你说的第2点，能举个具体例子吗？」
+→「如果换成小公司场景，结论会不一样吗？」
+→「把这个总结成一份可以发给团队的简报」</div>
+    </div>
+
+    <!-- 多模型策略 -->
+    <div class="doc-section" id="multi-model">
+      <h2 class="doc-h2">🔀 多模型策略</h2>
+      <p class="doc-p">U-Hermes 支持同时配置多个模型，对话时随时切换。用好这一点，可以大幅提升效果、降低成本。</p>
+
+      <h3 class="doc-h3">按任务类型分配模型</h3>
+      <table class="doc-table">
+        <thead><tr><th>任务类型</th><th>推荐模型</th><th>原因</th></tr></thead>
+        <tbody>
+          <tr><td>日常聊天、随手提问</td><td>DeepSeek V3 / 通义千问 Turbo</td><td>响应快，费用低，够用</td></tr>
+          <tr><td>写长文章、做深度分析</td><td>DeepSeek V3 / 通义千问 Plus</td><td>输出质量更稳定</td></tr>
+          <tr><td>数学题、逻辑推理、代码分析</td><td>DeepSeek R1</td><td>专门的推理模型，会展示思考过程</td></tr>
+          <tr><td>分析 PDF、分析大量代码</td><td>Kimi 128K</td><td>超长上下文，内容不截断</td></tr>
+          <tr><td>识别图片内容</td><td>通义千问 Plus（多模态）</td><td>阿里多模态支持最好</td></tr>
+          <tr><td>敏感/隐私内容处理</td><td>本地 Ollama 模型</td><td>数据不出本机</td></tr>
+          <tr><td>高频调用、测试用途</td><td>硅基流动免费模型</td><td>有完全免费的模型，省钱</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="doc-h3">实用技巧：两个模型交叉验证</h3>
+      <p class="doc-p">对于重要的判断或分析（比如合同条款、投资决策、技术方案），可以把同一个问题发给两个不同模型，对比它们的答案。两个模型都同意的结论更可靠，有分歧的地方值得重点关注。</p>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">使用方法：
+1. 用 DeepSeek V3 回答问题，得到答案 A
+2. 切换到 Kimi 或通义千问，发同样的问题，得到答案 B
+3. 对比 A 和 B，重点看有哪些不同
+4. 对于有分歧的地方追问：「你为什么这样认为？有没有反例？」</div>
+
+      <h3 class="doc-h3">成本控制：按用量选模型</h3>
+      <div class="card-grid">
+        <div class="doc-card"><span class="doc-card-icon">💰</span><h4>极低成本</h4><p>通义千问 Turbo：¥1.8/百万 token<br>适合高频简单问答</p></div>
+        <div class="doc-card"><span class="doc-card-icon">⚖️</span><h4>均衡选择</h4><p>DeepSeek V3：约 ¥1/百万 token<br>质量和成本的最佳平衡</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🎯</span><h4>高质量输出</h4><p>DeepSeek R1 / Kimi Plus<br>重要任务才用，贵但值</p></div>
+      </div>
+    </div>
+
+    <!-- VPS 部署 -->
+    <div class="doc-section" id="vps">
+      <h2 class="doc-h2">🖥️ VPS 部署</h2>
+      <p class="doc-p">默认情况下 U-Hermes 运行在你的本机，关机后服务停止。如果想让 AI 助手 24 小时在线（比如接入飞书/QQ 机器人全天响应、定时任务不中断），需要把 U-Hermes 部署到云服务器（VPS）上。</p>
+
+      <h3 class="doc-h3">服务器选择建议</h3>
+      <table class="doc-table">
+        <thead><tr><th>云服务商</th><th>推荐配置</th><th>参考价格</th><th>优点</th></tr></thead>
+        <tbody>
+          <tr><td><strong>阿里云 ECS</strong></td><td>2核 2GB 内存，40GB 硬盘</td><td>约 ¥40-60/月</td><td>国内延迟低，稳定</td></tr>
+          <tr><td><strong>腾讯云 CVM</strong></td><td>2核 2GB 内存</td><td>约 ¥40-60/月</td><td>新用户优惠力度大</td></tr>
+          <tr><td><strong>新加坡 VPS</strong></td><td>1核 1GB，按需即可</td><td>约 ¥30-50/月</td><td>能访问国际 API，无需代理</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="doc-h3">部署步骤（以 Linux 服务器为例）</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num-badge">1</div>
+          <div><strong>购买服务器并登录</strong><span>在阿里云/腾讯云购买 ECS，选择 Ubuntu 22.04 系统。拿到服务器 IP 后，用 SSH 登录：<code style="font-family:monospace;font-size:.82em;color:var(--accent)">ssh root@你的IP</code></span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">2</div>
+          <div><strong>安装 Node.js</strong><span>U-Hermes 基于 Node.js 运行，需要 Node.js 18 或以上版本。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">3</div>
+          <div><strong>安装 U-Hermes</strong><span>按官方文档用 npm 安装 openclaw 包，配置 API Key 和端口。</span></div>
+        </li>
+        <li>
+          <div class="step-num-badge">4</div>
+          <div><strong>用 PM2 保持后台运行</strong><span>PM2 是 Node.js 进程管理工具，让 U-Hermes 开机自启、崩溃后自动重启。</span></div>
+        </li>
+      </ul>
+
+      <div class="code-block"><span class="comment"># 安装 Node.js 18（Ubuntu）</span>
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+apt-get install -y nodejs
+
+<span class="comment"># 安装 PM2 进程管理</span>
+npm install -g pm2
+
+<span class="comment"># 安装并启动 U-Hermes</span>
+npm install -g openclaw
+pm2 start "openclaw gateway run --port 18789" --name openclaw
+
+<span class="comment"># 设置开机自启</span>
+pm2 startup
+pm2 save</div>
+
+      <div class="alert tip">
+        <span class="alert-icon">💡</span>
+        <span>部署到服务器后，记得在服务器防火墙（安全组）里开放 18789 端口，否则外部无法访问控制台，飞书/QQ 的 Webhook 也无法回调。</span>
+      </div>
+
+      <h3 class="doc-h3">部署后的访问方式</h3>
+      <div class="code-block"><span class="comment"># 浏览器访问控制台（把 IP 换成你服务器的 IP）</span>
+http://你的服务器IP:18789
+
+<span class="comment"># 或者绑定域名后用域名访问（更安全）</span>
+https://ai.你的域名.com</div>
+    </div>
+
+    <!-- FAQ -->
+    <!-- 故障排查 -->
+    <div class="doc-section" id="troubleshoot">
+      <h2 class="doc-h2">🛠️ 故障排查</h2>
+      <p class="doc-p">按问题类型快速定位，点击卡片跳转到对应解答。</p>
+      <div class="card-grid two">
+        <a href="#faq" class="doc-card" style="text-decoration:none;cursor:pointer">
+          <span class="doc-card-icon">🚫</span>
+          <h4>启动类问题</h4>
+          <p>程序打不开、弹出安全警告、被杀毒软件拦截、Gateway 连接失败一直转圈</p>
+        </a>
+        <a href="#faq" class="doc-card" style="text-decoration:none;cursor:pointer">
+          <span class="doc-card-icon">🤖</span>
+          <h4>模型类问题</h4>
+          <p>AI 不回复、API key 错误、403 / fetch failed、No API key found</p>
+        </a>
+        <a href="#faq" class="doc-card" style="text-decoration:none;cursor:pointer">
+          <span class="doc-card-icon">💳</span>
+          <h4>充值类问题</h4>
+          <p>充值没到账、余额查询、支付宝扣款但未入账</p>
+        </a>
+        <a href="#faq" class="doc-card" style="text-decoration:none;cursor:pointer">
+          <span class="doc-card-icon">🌐</span>
+          <h4>网络类问题</h4>
+          <p>代理设置、国际模型访问、VPN 配置、403 / fetch failed</p>
+        </a>
+        <a href="#feishu" class="doc-card" style="text-decoration:none;cursor:pointer">
+          <span class="doc-card-icon">🔌</span>
+          <h4>平台接入类问题</h4>
+          <p>飞书机器人没回应、QQ 连接失败、Webhook 验证不通过</p>
+        </a>
+        <a href="#faq" class="doc-card" style="text-decoration:none;cursor:pointer">
+          <span class="doc-card-icon">💾</span>
+          <h4>数据类问题</h4>
+          <p>升级后配置丢失、换电脑数据迁移、U 盘拔掉后数据在哪</p>
+        </a>
+      </div>
+      <div style="margin-top:16px;padding:14px 18px;background:var(--accent-glow);border:1px solid rgba(232,80,26,.2);border-radius:6px;font-size:.85rem;line-height:1.7;color:var(--text-dim)">
+        📖 问题没找到？查看完整 FAQ 文档（飞书，持续更新）→
+        <a href="https://my.feishu.cn/wiki/COzYwHR7Ii2qlBkPIrBciFkOnng" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none">打开飞书文档 ↗</a>
+      </div>
+    </div>
+
+    <div class="doc-section" id="faq">
+      <h2 class="doc-h2">❓ 常见问题</h2>
+      <p class="doc-p">遇到问题先看这里，90% 的问题有现成答案。</p>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-q">双击 U-Hermes.exe 没反应，或弹出安全警告怎么办？</div>
+          <div class="faq-a">
+            <strong>弹出「Windows 已保护你的电脑」：</strong>点「更多信息」→「仍要运行」，这是 Windows SmartScreen 对未知来源程序的默认提示，不代表有病毒。<br><br>
+            <strong>双击完全没反应：</strong>右键 → 「以管理员身份运行」。<br><br>
+            <strong>被杀毒软件拦截：</strong>在 360/火绒/Windows Defender 里把 U-Hermes 目录加入信任/白名单，再重新运行。<br><br>
+            <strong>提示缺少运行库：</strong>运行 U 盘 tools/ 目录下的 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">VC_redist.x64.exe</code> 安装运行库，再重试。<br><br>
+            <strong>还是不行：</strong>运行 tools/ 里的 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">检测系统环境.bat</code>，把输出结果发给微信 hecare888，我们帮你诊断。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">控制台能打开，但发消息 AI 没有回复？</div>
+          <div class="faq-a">
+            按顺序检查以下几点：<br>
+            1. <strong>模型是否配置</strong>：设置 → 模型，确认有至少一个模型处于启用状态（开关是绿色）。<br>
+            2. <strong>API Key 是否填写</strong>：点击模型名称，查看 API Key 是否为空或格式错误（Key 不能有多余空格）。<br>
+            3. <strong>API Key 是否有余额</strong>：去对应平台（如 platform.deepseek.com）登录查看账户余额。<br>
+            4. <strong>网络是否正常</strong>：如果用的是国际模型（OpenAI、Claude），需要开启代理。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">虾盘 U 盘拔掉之后还能用吗？</div>
+          <div class="faq-a">
+            <strong>虾盘版（便携版）：</strong>程序运行在 U 盘上，需要插着才能运行。但好处是拔下来插到另一台电脑上，所有配置和聊天记录完整保留（数据存在 U 盘的 U-Hermes/data/ 目录）。<br><br>
+            <strong>想在不插 U 盘时也能用：</strong>U 盘 tools/ 目录里有 QClaw 或 WorkBuddy 的安装包，可以安装到电脑本地，不依赖 U 盘运行。本地安装版需要自己配置 API Key。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Mac M1/M2/M3 芯片支持吗？</div>
+          <div class="faq-a">完全支持。虾盘内含 Apple Silicon 原生版本的 Node.js 运行时（arm64），安装脚本会自动检测芯片类型并使用对应版本，不需要 Rosetta 转译。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">虾盘云充值后没到账怎么办？</div>
+          <div class="faq-a">
+            先确认以下几点：<br>
+            1. 是否用「去充值」按钮跳转到充值页面后付款（直接转账到个人账号不会自动到账）。<br>
+            2. 支付宝付款是否成功（查看支付宝账单确认扣款）。<br>
+            如果确认付款成功但超过 30 分钟未到账，联系微信 <strong>hecare888</strong>，提供付款截图。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">DeepSeek 总是报错 503，怎么办？</div>
+          <div class="faq-a">503 是 DeepSeek 服务端流量过载导致的，在高峰期（尤其是白天工作时段）较常见。临时解决方案：切换到虾盘云的 DeepSeek 通道，通常更稳定。或者换用通义千问 Turbo 作为备用模型。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">可以在公司电脑上安装吗？数据安全吗？</div>
+          <div class="faq-a">
+            可以安装，不会影响系统稳定性。关于数据安全：<br>
+            · U-Hermes 本身运行在本地，不向任何第三方服务器发送你的对话记录。<br>
+            · 对话内容会发给你选择的 AI 模型 API（如 DeepSeek、通义千问），受对应平台的隐私政策约束。<br>
+            · 如果需要完全不上网，使用本地 Ollama 模型，数据完全不出本机。<br>
+            · 公司网络有限制的情况，请先咨询 IT 部门。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">U-Hermes 和 ChatGPT 有什么区别？</div>
+          <div class="faq-a">
+            核心区别：U-Hermes 是一个运行在你本地的 AI 框架，可以接入任意模型；ChatGPT 是 OpenAI 的产品，只能用 GPT 模型。<br><br>
+            U-Hermes 的优势：① 可以同时用 DeepSeek、Kimi、通义千问等多个模型；② 可以安装技能插件，让 AI 执行实际任务；③ 可以接入飞书/QQ/Telegram 等平台；④ 数据存在本地，更私密；⑤ 国内访问无需代理（使用国内模型时）。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">飞书机器人配置好了，但发消息没有回应？</div>
+          <div class="faq-a">
+            按顺序排查：<br>
+            1. <strong>U-Hermes 是否在运行</strong>：打开浏览器访问 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">http://127.0.0.1:18789</code>，如果打不开说明服务没启动。<br>
+            2. <strong>Webhook 地址是否可访问</strong>：飞书需要从外网访问你的 U-Hermes，本机运行时需要内网穿透（frp/ngrok）。<br>
+            3. <strong>事件订阅是否验证通过</strong>：回到飞书开放平台，检查事件订阅的状态是否显示「验证成功」。<br>
+            4. <strong>权限是否全部开通</strong>：确认 im:message、im:message:send_as_bot 权限都已开启。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">如何升级到最新版本？</div>
+          <div class="faq-a">
+            <strong>虾盘 U 盘用户：</strong>关注虾盘官方公告（微信 hecare888 或龙虾学习交流群），收到更新通知后按说明操作即可。U 盘版更新通常由厂家统一推送，不需要自己手动操作。<br><br>
+            <strong>普通安装用户：</strong>在终端执行 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">npm update -g openclaw</code>，然后重启服务。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Gateway 连接失败 / 程序启动后一直转圈怎么办？</div>
+          <div class="faq-a">
+            按以下顺序排查：<br>
+            1. <strong>检查杀毒软件是否拦截</strong>：360、火绒、Windows Defender 可能静默拦截 Gateway 进程。进入杀毒软件的"信任区"或"白名单"，把 U-Hermes 目录整个加入信任，再重新启动。<br><br>
+            2. <strong>重新拷贝 U 盘文件</strong>：如果 U 盘曾强制拔出或传输中断，程序文件可能已损坏。重新完整拷贝 U 盘数据覆盖原文件后再试。<br><br>
+            3. <strong>临时关闭杀毒再试</strong>：如无法确认是哪个软件拦截，可暂时完全关闭杀毒软件，启动成功后再加白名单。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">配置模型时提示 403 或 fetch failed 怎么办？</div>
+          <div class="faq-a">
+            通常和网络代理有关：<br>
+            1. <strong>检查代理 / Tun 模式</strong>：若本机开着 VPN 或代理（尤其 Tun 全局模式），国产 API 请求可能被错误走代理，导致 403。先暂时关闭代理再试。<br><br>
+            2. <strong>国产模型无需代理</strong>：DeepSeek、通义千问、Kimi、硅基流动等直连即可，建议优先使用预装的国产模型。<br><br>
+            3. <strong>国际模型需要代理</strong>：OpenAI、Claude 等在国内需开启代理，且代理须能访问对应域名。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">提示 "No API key found for provider" 怎么办？</div>
+          <div class="faq-a">
+            1. <strong>进入模型页面添加提供商</strong>：设置 → 模型 → 点击「添加提供商」，选择对应服务商，填入 API Key 并保存。<br><br>
+            2. <strong>卸载重装后报此错</strong>：旧配置文件可能残留冲突数据。删除 <code style="font-family:monospace;font-size:.85em;color:var(--accent)">data/.openclaw/openclaw.json</code>，重启后重新配置 API Key。<br><br>
+            3. <strong>Key 格式是否正确</strong>：复制 Key 时不要带多余空格或换行；也可直接使用虾盘云，无需配置任何 Key。
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 联系支持 -->
+    <div class="doc-section" id="contact">
+      <h2 class="doc-h2">📞 联系与支持</h2>
+      <p class="doc-p">安装遇到问题、教程看不懂、想定制技能、需要批量授权？随时找我们，通常 24 小时内回复。</p>
+
+      <h3 class="doc-h3">联系方式</h3>
+
+      <div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;margin-top:16px;margin-bottom:24px">
+        <div style="flex-shrink:0;text-align:center">
+          <img src="imgs/wechat-qrcode.jpg" alt="微信二维码 hecare888" style="width:180px;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.10);display:block">
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:8px">微信扫码添加</p>
+        </div>
+        <div style="flex:1;min-width:200px;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start">
+          <div class="contact-chip">
+            <span style="font-size:1.4rem">💬</span>
+            <div><strong style="color:var(--text);display:block;margin-bottom:2px">微信</strong><span style="font-family:monospace;color:var(--accent)">hecare888</span></div>
+          </div>
+          <div class="contact-chip">
+            <span style="font-size:1.4rem">✈️</span>
+            <div><strong style="color:var(--text);display:block;margin-bottom:2px">Telegram</strong><span style="font-family:monospace;color:var(--accent)">@dsds8848</span></div>
+          </div>
+          <div class="contact-chip">
+            <span style="font-size:1.4rem">📧</span>
+            <div><strong style="color:var(--text);display:block;margin-bottom:2px">邮箱</strong><span style="font-family:monospace;color:var(--accent)">hefangsheng@gmail.com</span></div>
+          </div>
+          <div class="contact-chip">
+            <span style="font-size:1.4rem">🛍️</span>
+            <div><strong style="color:var(--text);display:block;margin-bottom:2px">购买虾盘</strong><span style="color:var(--text-dim)">淘宝口令 <strong>HU293</strong></span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="doc-h3">常见支持场景</h3>
+      <div class="card-grid">
+        <div class="doc-card">
+          <span class="doc-card-icon">🔧</span>
+          <h4>安装问题</h4>
+          <p>安装脚本报错、控制台打不开、AI 没有回复——截个图发给我，通常能快速定位原因。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">💡</span>
+          <h4>使用咨询</h4>
+          <p>不知道怎么配置模型、平台接入不会弄、想实现某个自动化场景——可以直接问，描述你的需求。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🏢</span>
+          <h4>企业/团队采购</h4>
+          <p>团队多人使用、需要统一部署、批量采购虾盘——联系微信 hecare888 咨询团队方案和价格。</p>
+        </div>
+        <div class="doc-card">
+          <span class="doc-card-icon">🎨</span>
+          <h4>定制开发</h4>
+          <p>需要定制技能、特定平台接入、二次开发——说明需求，我们评估可行性和报价。</p>
+        </div>
+      </div>
+
+      <h3 class="doc-h3">反馈问题前，先备好这些信息</h3>
+      <p class="doc-p">能帮我们更快定位问题：</p>
+      <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">1. 操作系统：Windows 几 / Mac 几（M 系芯片还是 Intel）
+2. 问题描述：做了什么操作，出现了什么现象
+3. 报错截图：命令行窗口或浏览器控制台的报错信息
+4. 使用的模型：虾盘云 / DeepSeek / 其他
+5. 是否刚安装 / 之前能用突然不行了</div>
+
+      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+        <a href="https://u-hermes.org" class="btn-main">🦐 回到官网</a>
+        <a href="https://u-hermes.org#pricing" class="btn-ghost">🛒 购买虾盘</a>
+      </div>
+      <div style="margin-top:20px;padding:14px 18px;background:var(--accent-glow);border:1px solid rgba(232,80,26,.2);border-radius:6px;font-size:.85rem;line-height:1.7;color:var(--text-dim)">
+        📖 遇到复杂问题？查看完整 FAQ 文档（飞书，持续更新）→
+        <a href="https://my.feishu.cn/wiki/COzYwHR7Ii2qlBkPIrBciFkOnng" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none">打开飞书文档 ↗</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer style="position:relative;z-index:2">
+  <div class="wrap">
+    <div class="footer-logo">🦞 <span>龙虾学堂</span> · study.u-hermes.org</div>
+    <div class="footer-links">
+      <a href="https://u-hermes.org">U-Hermes 官网</a>
+      <a href="#quickstart">快速开始</a>
+      <a href="#model-guide">模型配置</a>
+      <a href="#faq">常见问题</a>
+    </div>
+    <div class="footer-copy">U-Hermes 中文教程中心 · MIT License</div>
+  </div>
+</footer>
+
+<script>
+// ─── Theme Toggle ───
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+const saved = localStorage.getItem('theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+let isDark = saved ? saved === 'dark' : prefersDark;
+function applyTheme() {
+  html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  themeBtn.textContent = isDark ? '☀️' : '🌙';
+}
+applyTheme();
+themeBtn.addEventListener('click', () => { isDark = !isDark; localStorage.setItem('theme', isDark ? 'dark' : 'light'); applyTheme(); });
+
+// Reveal
+const els=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*55);obs.unobserve(e.target);}});},{threshold:.1});
+els.forEach(e=>obs.observe(e));
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!open) item.classList.add('open');
+  });
+});
+
+// Sidebar active link on scroll
+const sections=document.querySelectorAll('.doc-section[id]');
+const sideLinks=document.querySelectorAll('.sidebar-link');
+const ioOpts={rootMargin:'-20% 0px -70% 0px'};
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      sideLinks.forEach(l=>l.classList.remove('active'));
+      const active=document.querySelector('.sidebar-link[href="#'+e.target.id+'"]');
+      if(active){active.classList.add('active');active.scrollIntoView({block:'nearest'});}
+    }
+  });
+},ioOpts).observe && sections.forEach(s=>new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){sideLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector('.sidebar-link[href="#'+e.target.id+'"]');if(a)a.classList.add('active');}});
+},ioOpts).observe(s));
+
+// Nav scroll
+const nav=document.querySelector('nav');
+let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.style.boxShadow=scrollY>60?'0 4px 30px rgba(0,0,0,.5)':'';ticking=false;});ticking=true;}},{passive:true});
+</script>
+</body>
+</html>
