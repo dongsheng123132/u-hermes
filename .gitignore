@@ -6,3 +6,12 @@ dist/
 .env
 .env.local
 downloads/*.iso
+
+.vercel
+.env*.local
+
+# 内部运营文档（不公开）
+__SITE_ARCHITECTURE_*.md
+__STUDY_SITE_HANDOFF*.md
+__USER_TUTORIAL_*.md
+.tmp-*

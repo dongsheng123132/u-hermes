@@ -57,6 +57,7 @@ cd u-hermes\linux
 
 ## 相关
 
+- 📖 **[hermes-agent-zh](https://github.com/dongsheng123132/hermes-agent-zh)** — 配套中文教程（含安装/Provider/案例/工程进阶）
 - [u-hermes.org](https://u-hermes.org) — U-Hermes 马盘官网
 - [u-claw.org](https://u-claw.org) — U-Claw 项目
 - [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) — 上游项目

@@ -1023,12 +1023,18 @@ footer .wrap { display: flex; align-items: center; justify-content: space-betwee
       <h2 class="doc-h2">🧭 模型选择指南</h2>
       <p class="doc-p">不同模型各有擅长，用对了事半功倍。以下是根据实际使用场景整理的选择建议。</p>
 
+      <div class="alert tip" style="margin:8px 0 16px">
+        <span class="alert-icon">🆕</span>
+        <span><strong>2026-04-24 DeepSeek V4 已发布。</strong>V4-Pro / V4-Flash 双模型 + 1M 上下文 + Agent 能力大幅升级。本指南已全面更新到 V4。<br>⚠ 旧名 <code>deepseek-chat</code> / <code>deepseek-reasoner</code> 仍可用，2026-07-24 起退役，过渡期自动映射到 V4-Flash。</span>
+      </div>
+
       <h3 class="doc-h3">场景速查表</h3>
       <table class="doc-table">
         <thead><tr><th>使用场景</th><th>推荐模型</th><th>理由</th></tr></thead>
         <tbody>
-          <tr><td>日常聊天、写文章、改邮件</td><td>DeepSeek V3</td><td>速度快、质量高、价格低</td></tr>
-          <tr><td>数学题、逻辑推理、代码分析</td><td>DeepSeek R1</td><td>专门为推理优化，会展示思考过程</td></tr>
+          <tr><td>日常聊天、写文章、改邮件</td><td>DeepSeek V4-Flash</td><td>速度快、价格低、1M 上下文</td></tr>
+          <tr><td>数学题、逻辑推理、代码分析</td><td>DeepSeek V4-Flash（思考模式）</td><td>开思考模式 = 替代旧 R1，免切换</td></tr>
+          <tr><td>编程 Agent、复杂任务、企业级</td><td>DeepSeek V4-Pro</td><td>1.6T 参数旗舰，Agent 能力开源最强</td></tr>
           <tr><td>分析长篇 PDF、大量代码</td><td>Kimi 128K</td><td>支持超长上下文，不截断内容</td></tr>
           <tr><td>图片识别、多模态任务</td><td>通义千问 Plus</td><td>阿里多模态支持最好</td></tr>
           <tr><td>快速问答、高并发场景</td><td>通义千问 Turbo</td><td>响应极快，适合频繁调用</td></tr>
@@ -1039,8 +1045,8 @@ footer .wrap { display: flex; align-items: center; justify-content: space-betwee
 
       <h3 class="doc-h3">一句话记住每个模型</h3>
       <div class="card-grid">
-        <div class="doc-card"><span class="doc-card-icon">🔵</span><h4>DeepSeek V3</h4><p>全能选手，日常首选，中文写作一流，价格良心。</p></div>
-        <div class="doc-card"><span class="doc-card-icon">🧠</span><h4>DeepSeek R1</h4><p>思考型模型，会把推理过程展示出来，适合需要解释过程的场景。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🚀</span><h4>DeepSeek V4-Flash</h4><p>日常首选，284B MoE / 1M 上下文 / 价格良心，可开思考模式（替代旧 R1）。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🧠</span><h4>DeepSeek V4-Pro</h4><p>旗舰模型，1.6T 参数 / Agent 能力开源第一，复杂编程任务首选，价格略高。</p></div>
         <div class="doc-card"><span class="doc-card-icon">🌙</span><h4>Kimi</h4><p>长文档专家，把整本书丢给它都没问题。</p></div>
         <div class="doc-card"><span class="doc-card-icon">☁️</span><h4>通义千问</h4><p>阿里出品，多模态能力强，国内访问最稳定。</p></div>
         <div class="doc-card"><span class="doc-card-icon">💎</span><h4>硅基流动</h4><p>聚合平台，一个 Key 用多个模型，有免费额度。</p></div>
@@ -1061,22 +1067,22 @@ footer .wrap { display: flex; align-items: center; justify-content: space-betwee
       <h3 class="doc-h3">为什么推荐虾盘云？</h3>
       <div class="card-grid">
         <div class="doc-card"><span class="doc-card-icon">⚡</span><h4>零配置开箱</h4><p>买到虾盘 U 盘即自带初始额度，插上就能聊，不用注册任何第三方账号。</p></div>
-        <div class="doc-card"><span class="doc-card-icon">🔗</span><h4>一个 Key 多模型</h4><p>一个 API Key 即可访问 DeepSeek V3、DeepSeek R1、通义千问 Turbo/Plus 等多个模型，随时切换。</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🔗</span><h4>一个 Key 多模型</h4><p>一个 API Key 即可访问 DeepSeek V4-Flash / V4-Pro、通义千问 Turbo/Plus 等多个模型，随时切换。</p></div>
         <div class="doc-card"><span class="doc-card-icon">💴</span><h4>人民币充值</h4><p>支付宝付款，无需绑定外币信用卡，工作时间 10 分钟到账。</p></div>
         <div class="doc-card"><span class="doc-card-icon">♾️</span><h4>余额永不过期</h4><p>充值余额长期有效，用多少扣多少，不用担心到期作废。</p></div>
       </div>
 
       <h3 class="doc-h3">支持的模型与价格</h3>
       <table class="doc-table">
-        <thead><tr><th>模型</th><th>特点</th><th>输入价格</th></tr></thead>
+        <thead><tr><th>模型</th><th>特点</th><th>输入</th><th>输出</th></tr></thead>
         <tbody>
-          <tr><td><strong>DeepSeek V3</strong></td><td>综合能力强，日常首选</td><td>¥3 / 百万 token</td></tr>
-          <tr><td><strong>DeepSeek R1</strong></td><td>深度推理，解数学/逻辑题</td><td>¥12 / 百万 token</td></tr>
-          <tr><td><strong>Qwen Turbo</strong></td><td>响应极快，中文优化</td><td>¥1.8 / 百万 token</td></tr>
-          <tr><td><strong>Qwen Plus</strong></td><td>长文档理解强</td><td>¥4 / 百万 token</td></tr>
+          <tr><td><strong>DeepSeek V4-Flash</strong></td><td>日常首选，284B MoE，1M 上下文，可开思考模式</td><td>¥1 / 百万</td><td>¥2 / 百万</td></tr>
+          <tr><td><strong>DeepSeek V4-Pro</strong></td><td>旗舰，1.6T 参数，Agent 开源最强</td><td>¥12 / 百万</td><td>¥24 / 百万</td></tr>
+          <tr><td><strong>Qwen Turbo</strong></td><td>响应极快，中文优化</td><td>¥1.8 / 百万</td><td>—</td></tr>
+          <tr><td><strong>Qwen Plus</strong></td><td>长文档理解强</td><td>¥4 / 百万</td><td>—</td></tr>
         </tbody>
       </table>
-      <p class="doc-p" style="margin-top:8px;font-size:.82rem;color:var(--text-muted)">参考：1 百万 token ≈ 75 万中文字，普通用户每天聊 1-2 小时约消耗 2-5 万 token。</p>
+      <p class="doc-p" style="margin-top:8px;font-size:.82rem;color:var(--text-muted)">参考：1 百万 token ≈ 75 万中文字，普通用户每天聊 1-2 小时约消耗 2-5 万 token。<br>缓存命中时 V4-Flash 输入仅 ¥0.2 / V4-Pro 输入仅 ¥1，重复对话场景成本极低。</p>
 
       <h3 class="doc-h3">充值步骤</h3>
       <p class="doc-p">U-Hermes 首次启动会自动写入虾盘云模型配置，并尝试激活初始额度（赠送 token）。额度用完后按以下步骤充值：</p>
@@ -1110,13 +1116,14 @@ footer .wrap { display: flex; align-items: center; justify-content: space-betwee
       <p class="doc-p">虾盘云兼容 OpenAI API 格式，可以在 ChatBox / Cherry Studio / 任何 OpenAI 客户端里直接接入：</p>
       <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://api.u-claw.org/v1</span>
 <span class="key">API Key：</span>  <span class="string">sk-{你的 USB 指纹}</span>  <span class="comment">← 从 U-Hermes "↔ 模型" 页复制</span>
-<span class="key">模型名：</span>   <span class="string">deepseek-chat</span>    <span class="comment">（或 deepseek-reasoner / qwen-turbo / qwen-plus）</span></div>
+<span class="key">模型名：</span>   <span class="string">deepseek-v4-flash</span>    <span class="comment">（或 deepseek-v4-pro / qwen-turbo / qwen-plus）</span>
+<span class="comment">                         旧名 deepseek-chat / deepseek-reasoner 仍可用，2026-07-24 退役。</span></div>
     </div>
 
     <!-- DeepSeek -->
     <div class="doc-section" id="deepseek">
       <h2 class="doc-h2">🔵 接入 DeepSeek</h2>
-      <p class="doc-p">深度求索出品，目前综合能力最强的国产大模型之一。API 价格极低（V3 约每百万 token 仅 ¥1），新用户注册有免费额度，非常适合自己申请 Key 直接用。</p>
+      <p class="doc-p">深度求索出品，目前综合能力最强的国产大模型之一。<strong>2026-04-24 发布的 V4 系列</strong>引入 1.6T 参数旗舰 + 1M 上下文 + 全新稀疏注意力机制，Agent 能力开源第一。API 价格极低（V4-Flash 输入约 ¥1 / 百万 token，缓存命中仅 ¥0.2），新用户注册有免费额度。</p>
 
       <h3 class="doc-h3">申请步骤</h3>
       <ul class="step-list">
@@ -1140,17 +1147,25 @@ footer .wrap { display: flex; align-items: center; justify-content: space-betwee
 
       <div class="code-block"><span class="key">Base URL：</span> <span class="string">https://api.deepseek.com/v1</span>
 <span class="key">API Key：</span>  <span class="string">sk-xxxxxxxxxxxxxxxx</span>
-<span class="key">模型（日常）：</span> <span class="string">deepseek-chat</span>      <span class="comment">← DeepSeek V3，通用首选</span>
-<span class="key">模型（推理）：</span> <span class="string">deepseek-reasoner</span>  <span class="comment">← DeepSeek R1，复杂逻辑推理</span></div>
+<span class="key">模型（日常）：</span> <span class="string">deepseek-v4-flash</span>  <span class="comment">← V4-Flash，284B MoE，通用首选</span>
+<span class="key">模型（旗舰）：</span> <span class="string">deepseek-v4-pro</span>    <span class="comment">← V4-Pro，1.6T 参数，复杂 Agent / 编程任务</span>
 
-      <h3 class="doc-h3">两个模型怎么选？</h3>
+<span class="comment">  兼容名（2026-07-24 退役，过渡期映射到 V4-Flash）：</span>
+<span class="comment">    deepseek-chat       → V4-Flash 非思考模式</span>
+<span class="comment">    deepseek-reasoner   → V4-Flash 思考模式</span></div>
+
+      <h3 class="doc-h3">V4 两个模型怎么选？</h3>
       <table class="doc-table">
         <thead><tr><th>模型</th><th>适合场景</th><th>特点</th></tr></thead>
         <tbody>
-          <tr><td><strong>deepseek-chat</strong>（V3）</td><td>写作、翻译、问答、代码生成</td><td>速度快，综合能力强，日常首选</td></tr>
-          <tr><td><strong>deepseek-reasoner</strong>（R1）</td><td>数学、逻辑、分析报告、复杂推理</td><td>会展示思维链，回答更可靠但较慢</td></tr>
+          <tr><td><strong>deepseek-v4-flash</strong></td><td>日常聊天、写作、翻译、问答、轻代码任务</td><td>284B MoE，1M 上下文，单 token FLOPs 仅 V3.2 的 27%，价格便宜，可开思考模式</td></tr>
+          <tr><td><strong>deepseek-v4-pro</strong></td><td>编程 Agent、复杂推理、企业级任务</td><td>1.6T 参数旗舰，Agent 能力开源第一，员工内部反馈体验超 Claude Sonnet 4.5</td></tr>
         </tbody>
       </table>
+      <div class="alert tip" style="margin-top:12px">
+        <span class="alert-icon">💡</span>
+        <span>V4-Flash 已经能覆盖 90% 日常需求。只在做复杂编程 Agent / 多步推理时才需要切到 V4-Pro。<strong>"思考模式"是 V4-Flash 内置开关</strong>，不用换模型，开了就相当于旧 R1。</span>
+      </div>
 
       <div class="alert tip">
         <span class="alert-icon">💡</span>
@@ -1339,7 +1354,7 @@ ollama list   <span class="comment"># 查看已下载的模型</span></div>
           <tr><td>Qwen2.5 7B（推荐入门）</td><td><code style="font-family:monospace;font-size:.82em">ollama pull qwen2.5:7b</code></td><td>8GB+ 内存</td></tr>
           <tr><td>Qwen2.5 14B</td><td><code style="font-family:monospace;font-size:.82em">ollama pull qwen2.5:14b</code></td><td>16GB+ 内存</td></tr>
           <tr><td>GLM4 9B</td><td><code style="font-family:monospace;font-size:.82em">ollama pull glm4:9b</code></td><td>16GB+ 内存</td></tr>
-          <tr><td>DeepSeek R1 8B</td><td><code style="font-family:monospace;font-size:.82em">ollama pull deepseek-r1:8b</code></td><td>16GB+ 内存</td></tr>
+          <tr><td>DeepSeek R1 8B（蒸馏版）</td><td><code style="font-family:monospace;font-size:.82em">ollama pull deepseek-r1:8b</code></td><td>16GB+ 内存（注：本地版仍是 R1 蒸馏，云端 R1 已升级为 V4-Flash 思考模式）</td></tr>
         </tbody>
       </table>
 
@@ -1830,9 +1845,9 @@ inputs:
       <table class="doc-table">
         <thead><tr><th>任务类型</th><th>推荐模型</th><th>原因</th></tr></thead>
         <tbody>
-          <tr><td>日常聊天、随手提问</td><td>DeepSeek V3 / 通义千问 Turbo</td><td>响应快，费用低，够用</td></tr>
-          <tr><td>写长文章、做深度分析</td><td>DeepSeek V3 / 通义千问 Plus</td><td>输出质量更稳定</td></tr>
-          <tr><td>数学题、逻辑推理、代码分析</td><td>DeepSeek R1</td><td>专门的推理模型，会展示思考过程</td></tr>
+          <tr><td>日常聊天、随手提问</td><td>DeepSeek V4-Flash / 通义千问 Turbo</td><td>响应快，费用低，够用</td></tr>
+          <tr><td>写长文章、做深度分析</td><td>DeepSeek V4-Flash / 通义千问 Plus</td><td>1M 上下文，输出质量稳定</td></tr>
+          <tr><td>数学题、逻辑推理、代码分析</td><td>DeepSeek V4-Flash（开思考模式）/ V4-Pro</td><td>开思考模式即替代旧 R1，复杂任务用 Pro</td></tr>
           <tr><td>分析 PDF、分析大量代码</td><td>Kimi 128K</td><td>超长上下文，内容不截断</td></tr>
           <tr><td>识别图片内容</td><td>通义千问 Plus（多模态）</td><td>阿里多模态支持最好</td></tr>
           <tr><td>敏感/隐私内容处理</td><td>本地 Ollama 模型</td><td>数据不出本机</td></tr>
@@ -1843,7 +1858,7 @@ inputs:
       <h3 class="doc-h3">实用技巧：两个模型交叉验证</h3>
       <p class="doc-p">对于重要的判断或分析（比如合同条款、投资决策、技术方案），可以把同一个问题发给两个不同模型，对比它们的答案。两个模型都同意的结论更可靠，有分歧的地方值得重点关注。</p>
       <div class="code-block" style="color:var(--text-dim);white-space:pre-wrap;font-family:inherit;font-size:.85rem">使用方法：
-1. 用 DeepSeek V3 回答问题，得到答案 A
+1. 用 DeepSeek V4-Flash 回答问题，得到答案 A
 2. 切换到 Kimi 或通义千问，发同样的问题，得到答案 B
 3. 对比 A 和 B，重点看有哪些不同
 4. 对于有分歧的地方追问：「你为什么这样认为？有没有反例？」</div>
@@ -1851,8 +1866,8 @@ inputs:
       <h3 class="doc-h3">成本控制：按用量选模型</h3>
       <div class="card-grid">
         <div class="doc-card"><span class="doc-card-icon">💰</span><h4>极低成本</h4><p>通义千问 Turbo：¥1.8/百万 token<br>适合高频简单问答</p></div>
-        <div class="doc-card"><span class="doc-card-icon">⚖️</span><h4>均衡选择</h4><p>DeepSeek V3：约 ¥1/百万 token<br>质量和成本的最佳平衡</p></div>
-        <div class="doc-card"><span class="doc-card-icon">🎯</span><h4>高质量输出</h4><p>DeepSeek R1 / Kimi Plus<br>重要任务才用，贵但值</p></div>
+        <div class="doc-card"><span class="doc-card-icon">⚖️</span><h4>均衡选择</h4><p>DeepSeek V4-Flash：¥1/百万 token<br>1M 上下文，质量和成本的最佳平衡</p></div>
+        <div class="doc-card"><span class="doc-card-icon">🎯</span><h4>高质量输出</h4><p>DeepSeek V4-Pro / Kimi Plus<br>编程 Agent / 重要任务才用，贵但值</p></div>
       </div>
     </div>
 
@@ -1896,7 +1911,7 @@ model:
   provider: deepseek
   base_url: https://api.deepseek.com/v1
   api_key: sk-xxxxxxx
-  default: deepseek-chat
+  default: deepseek-v4-flash
 EOF
 
 <span class="comment"># 用 systemd / pm2 守护</span>
