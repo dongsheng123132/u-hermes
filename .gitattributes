@@ -6,6 +6,7 @@
 *.bat       text eol=crlf
 *.ps1       text eol=crlf
 
-# PowerShell 脚本需要 UTF-8 BOM（PS 5.1 否则按 GBK 读崩中文）——
-# 不让 git 当文本规范化破坏 BOM。
-portable/build-portable-win.ps1 -text
+# 含中文的 PowerShell 脚本需要 UTF-8 BOM（PS 5.1 否则按 GBK 读崩中文）——
+# 标 -text 当二进制，不让 git 规范化破坏 BOM。
+portable/build-portable-win.ps1     -text
+portable/templates/report-bug.ps1   -text

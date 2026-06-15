@@ -228,6 +228,8 @@ Step "4/6" "拷入启动脚本与配置模板"
 Copy-Item (Join-Path $TemplateDir "Windows-Start.bat") (Join-Path $Root "Windows-Start.bat") -Force
 Copy-Item (Join-Path $TemplateDir "README.txt")        (Join-Path $Root "README.txt")        -Force
 Copy-Item (Join-Path $TemplateDir ".env.example")      (Join-Path $DataDir ".env.example")   -Force
+# 问题反馈收集器 → runtime\win\tools\（Windows-Start.bat 的 [7] 报告问题 会调它）
+Copy-Item (Join-Path $TemplateDir "report-bug.ps1")    (Join-Path $ToolsDir "report-bug.ps1") -Force
 # data 子目录预建，运行时直接可写
 foreach ($d in @("sessions","logs")) { New-Item -ItemType Directory -Force -Path (Join-Path $DataDir $d) | Out-Null }
 Ok "模板已拷入"

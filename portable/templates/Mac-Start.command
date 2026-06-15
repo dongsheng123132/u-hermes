@@ -72,8 +72,45 @@ fi
 
 run_hermes() { ( cd "${APP}" && "${UV}" run --project "${APP}" hermes "$@" ); }
 
+# 共享 API key：若同一 U 盘上的 U-Claw 已写了 key 文件，复用它（共享余额）。
+# 真实的 key 派生逻辑在商业版；这里只读已存在的文件。路径可用 HERMES_KEY_FILE 覆盖。
+: "${HERMES_KEY_FILE:=${USB}/../shared-apikey.txt}"
+
+# 问题反馈收集：打包日志+系统信息+doctor 到桌面，HERMES_REPORT_URL 有则上传
+report_problem() {
+    local stamp work desk zip
+    stamp="$(date +%Y%m%d-%H%M%S)"
+    work="$(mktemp -d -t u-hermes-report)"
+    echo "{\"product\":\"u-hermes-portable\",\"time\":\"$(date -u +%FT%TZ)\",\"os\":\"$(uname -a)\",\"deviceId\":\"${HERMES_DEVICE_ID:-anonymous}\"}" > "${work}/system.json"
+    run_hermes --version > "${work}/hermes-version.txt" 2>&1 || true
+    run_hermes doctor   > "${work}/hermes-doctor.txt"  2>&1 || true
+    if [ -d "${USB}/data/logs" ]; then
+        mkdir -p "${work}/logs"
+        ls -t "${USB}/data/logs"/*.log 2>/dev/null | head -5 | while read -r f; do
+            tail -c 262144 "$f" > "${work}/logs/$(basename "$f")" 2>/dev/null || true
+        done
+    fi
+    read -r -p "  一句话描述问题（可直接回车跳过）: " d
+    [ -n "$d" ] && echo "$d" > "${work}/description.txt"
+    desk="${HOME}/Desktop"; [ -d "$desk" ] || desk="${HOME}"
+    zip="${desk}/u-hermes-report-${stamp}.zip"
+    ( cd "${work}" && zip -qr "${zip}" . )
+    echo "  已生成: ${zip}"
+    if [ -n "${HERMES_REPORT_URL:-}" ]; then
+        echo "  上传到 ${HERMES_REPORT_URL} ..."
+        if curl -fsS -X POST -H "Content-Type: application/zip" --data-binary "@${zip}" "${HERMES_REPORT_URL}" >/dev/null 2>&1; then
+            echo "  上传成功，感谢反馈！"
+        else
+            echo "  上传失败，请把桌面的 zip 手动发给客服。"
+        fi
+    else
+        echo "  未配置上传地址，请把桌面上的 zip 发给客服。"
+    fi
+    rm -rf "${work}"
+}
+
 # ============================================================
-#  主菜单
+#  主菜单（默认 TUI：直接回车进对话）
 # ============================================================
 while true; do
     clear
@@ -82,14 +119,17 @@ while true; do
     echo "    U-Hermes 便携版    完全离线 · 插上即用"
     echo "  =========================================="
     echo ""
-    echo "    [1]  开始对话 (命令行 TUI)"
+    echo "    [1]  开始对话 (命令行 TUI)        <- 默认，直接回车"
     echo "    [2]  启动 Web 网关 (浏览器界面)"
     echo "    [3]  编辑配置 (API Key / 模型)"
-    echo "    [4]  检查更新 (需联网)"
-    echo "    [5]  诊断 (hermes doctor)"
+    echo "    [4]  充值 / 续费额度"
+    echo "    [5]  检查更新 (需联网)"
+    echo "    [6]  诊断 (hermes doctor)"
+    echo "    [7]  报告问题 (收集日志)"
     echo "    [0]  退出"
     echo ""
-    read -r -p "  请输入数字后回车: " CHOICE
+    read -r -p "  请输入数字后回车 [1]: " CHOICE
+    [ -z "${CHOICE}" ] && CHOICE=1
 
     case "${CHOICE}" in
         1)
@@ -110,10 +150,19 @@ while true; do
         4)
             clear
             echo "  =========================================="
+            echo "    充值 / 续费额度"
+            echo "  =========================================="; echo ""
+            # 充值地址走环境变量；开源仓无真实地址，没设就指向官网
+            RU="${HERMES_RECHARGE_URL:-https://u-hermes.org/#buy}"
+            echo "  在浏览器打开充值页：${RU}"; echo ""
+            open "${RU}" 2>/dev/null || true
+            read -r -p "按回车返回菜单..." _ ;;
+        5)
+            clear
+            echo "  =========================================="
             echo "    检查更新（需要联网）"
             echo "  =========================================="; echo ""
             echo "  正在联网更新 hermes（更新会写回这个 U 盘，下次离线仍是新版）…"; echo ""
-            # 优先用 hermes 自带的 update（v2026.6.5+ 支持 in-app self-update）
             if ! run_hermes update; then
                 echo ""; echo "  [!] hermes update 失败，尝试用 uv 重装依赖…"
                 if ! ( cd "${APP}" && "${UV}" sync --project "${APP}" --extra all ); then
@@ -122,9 +171,16 @@ while true; do
             fi
             echo ""; echo "  更新流程结束。若上面报网络错误，检查联网/代理后重试。"; echo ""
             read -r -p "按回车返回菜单..." _ ;;
-        5)
+        6)
             clear; run_hermes doctor || true
             read -r -p "按回车返回菜单..." _ ;;
+        7)
+            clear
+            echo "  =========================================="
+            echo "    报告问题（收集日志）"
+            echo "  =========================================="; echo ""
+            report_problem
+            echo ""; read -r -p "按回车返回菜单..." _ ;;
         0)
             exit 0 ;;
         *)

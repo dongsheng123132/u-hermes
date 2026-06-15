@@ -106,7 +106,7 @@ Mac 上 `ripgrep` / `ffmpeg` 若系统已有则不强制内置；要做到**绝�
 ## 自更新（造盘锁版 + 盘内更新，两者兼得）
 
 - **造盘时**：`-Tag v2026.6.5` 把一个**确定的版本**烤进 U 盘，保证每次造盘产物一致、可复现、纯离线。
-- **客户用时**：成品启动菜单的 **`[4] 检查更新`** 在**联网**时会:
+- **客户用时**：成品启动菜单的 **`[5] 检查更新`** 在**联网**时会:
   1. 先跑上游自带的 `hermes update`（v2026.6.5+ 支持 in-app self-update），把新代码拉下来；
   2. 失败则回退 `uv sync --extra all` 重装依赖；再失败回退 `uv pip install -e .[all]`。
 - 更新**写回 U 盘的 `app/hermes-agent/`**，所以**下次离线启动仍是更新后的新版**。断网时这个菜单项会报网络错误并提示重试，不影响离线使用旧版。
@@ -117,16 +117,32 @@ Mac 上 `ripgrep` / `ffmpeg` 若系统已有则不强制内置；要做到**绝�
 
 ## 启动菜单（客户双击后看到的）
 
+**主推 TUI**：菜单第一项就是 TUI 对话，**直接回车**即进（上游 v2026.6.5 虽然出了原生桌面 app，但 TUI 是核心、最轻、最稳，便携版主推它）。
+
 ```
-[1] 开始对话 (命令行 TUI)
+[1] 开始对话 (TUI)            <- 默认，直接回车
 [2] 启动 Web 网关 (浏览器界面)   → http://127.0.0.1:8648
 [3] 编辑配置 (API Key / 模型)
-[4] 检查更新 (需联网)
-[5] 诊断 (hermes doctor)
+[4] 充值 / 续费额度            → 打开 HERMES_RECHARGE_URL
+[5] 检查更新 (需联网)
+[6] 诊断 (hermes doctor)
+[7] 报告问题 (收集日志打包，可选上传)
 [0] 退出
 ```
 
 首跑会自动生成 `data/.env` 并打开编辑器引导填 key。`Windows-Start.bat` 和 `Mac-Start.command` 都是这套菜单。
+
+> **`Windows-Start.bat` 为什么是纯英文？** cmd.exe 按系统 ANSI 代码页（中文 Windows = GBK）读 `.bat`，文件里的中文会被错位解码、当成命令执行（满屏“不是内部或外部命令”）。所以 `.bat` 刻意只用 ASCII，中文说明放 `README.txt` 和 hermes TUI 里。`Mac-Start.command`（bash/UTF-8）无此限制，保留中文。
+
+### 充值 / 报告问题 / 共享 key（地址全走环境变量，开源仓不含真实地址）
+
+| 菜单项 | 行为 | 控制变量 |
+|--------|------|---------|
+| `[4] 充值` | 浏览器打开充值页 | `HERMES_RECHARGE_URL`（留空 → `u-hermes.org/#buy`） |
+| `[7] 报告问题` | 收集 日志+系统信息+`hermes doctor` 打包成 zip 放桌面；设了上传地址则 POST 上传 | `HERMES_REPORT_URL`（留空 → 只生成 zip）、`HERMES_DEVICE_ID` |
+| 共享 apikey | 同一 U 盘上若 U-Claw 已写 key 文件则复用（共享余额） | `HERMES_KEY_FILE` |
+
+这些是**借鉴 `../u-claw/v1-开源/u-claw/portable/`** 的 `report-bug.mjs` / `getRechargeUrl` / 指纹绑定思路做的。但 u-claw 那套的真实地址、指纹算法、虾盘云对接是**商业闭源逻辑**——本开源仓只放**机制**，真实地址/key 派生由商业版 `../u-hermes-pro/` 构建时注入。
 
 ---
 
