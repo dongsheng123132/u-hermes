@@ -1,0 +1,11 @@
+# 跨平台脚本换行符：Mac/Linux 脚本必须 LF，Windows 脚本用 CRLF。
+# 防止在 Windows 上 checkout 把 LF 转成 CRLF，导致 .command/.sh 在 Mac 上跑不起来。
+
+*.sh        text eol=lf
+*.command   text eol=lf
+*.bat       text eol=crlf
+*.ps1       text eol=crlf
+
+# PowerShell 脚本需要 UTF-8 BOM（PS 5.1 否则按 GBK 读崩中文）——
+# 不让 git 当文本规范化破坏 BOM。
+portable/build-portable-win.ps1 -text
