@@ -12,7 +12,7 @@ U-Hermes 马盘是即插即用的 AI U 盘成品：同一张 Windows 便携 U �
 |------|------|------|--------|
 | **Win/Mac 便携版** | 开源构建脚本，从上游一键造盘，完全离线、零依赖、插上即用 | 免费 | 想自己造盘 / 二次分发的人 |
 | **Linux Live USB** | 开源脚本自己刻盘 | 免费 | 极客、开发者 |
-| **U-Hermes 马盘 Windows 便携 U 盘** | 成品 U 盘开箱即用，内置 U-Claw + U-Hermes + 图形启动器 + 账户体系 | ¥199 起 / 淘宝 / 拼多多 | 所有 Windows 用户 |
+| **U-Hermes 马盘 Windows 便携 U 盘** | 成品 U 盘开箱即用，内置 U-Claw + U-Hermes + 图形启动器 + 账户体系 | ¥199 起 / 淘宝 | 所有 Windows 用户 |
 
 ## 本仓库是什么
 
@@ -64,9 +64,7 @@ bash portable/build-portable-mac.sh --output /Volumes/MYUSB --tag v2026.6.5
 
 - 官网：[https://www.u-hermes.org/](https://www.u-hermes.org/)
 - 购买页：[https://www.u-hermes.org/#buy](https://www.u-hermes.org/#buy)
-- 淘宝：[购买马盘 U 盘](https://e.tb.cn/h.ij8LYYB0cZPkNHw?tk=FMo05XEJYk0)
-- 拼多多：[购买马盘 U 盘](https://mobile.yangkeduo.com/goods1.html?ps=WaQeS00tDn)
-- 抖音：[购买马盘 U 盘](https://haohuo.jinritemai.com/ecommerce/trade/detail/index.html?id=3814862440735309865&origin_type=604)
+- 淘宝：[购买马盘 U 盘](https://e.tb.cn/h.8G5SzX1vqFQLjTf?tk=zf7ZT92nu4j)
 
 ## 许可
 
