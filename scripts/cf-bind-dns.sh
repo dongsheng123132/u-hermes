@@ -2,8 +2,8 @@
 # Cloudflare DNS 一键绑定脚本
 #
 # 给 u-hermes.org 添加两条 DNS：
-#   - study.u-hermes.org  → CNAME cname.vercel-dns.com  (proxied:false)
-#   - dev.u-hermes.org    → CNAME dongsheng123132.github.io  (proxied:false)
+#   - study.u-hermes.org  → CNAME cname.vercel-dns.com  (proxied:false)  客户售后教程
+#   - zh.u-hermes.org     → CNAME cname.vercel-dns.com  (proxied:false)  中文社区 + 实体书
 #
 # 用法：
 #   export CF_API_TOKEN='cfut_xxx你的token'
@@ -19,7 +19,7 @@ ZONE_NAME="u-hermes.org"
 RECORDS=(
   # name|type|content|proxied
   "study|CNAME|cname.vercel-dns.com|false"
-  "dev|CNAME|dongsheng123132.github.io|false"
+  "zh|CNAME|cname.vercel-dns.com|false"
 )
 
 if [ -z "${CF_API_TOKEN:-}" ]; then
@@ -117,7 +117,7 @@ done
 echo ""
 echo "[4/4] 当前 ${ZONE_NAME} 的相关 DNS 记录："
 curl -sS "${API_BASE}/zones/${zone_id}/dns_records?per_page=100" "${HEADERS[@]}" \
-  | jq -r '.result[] | select(.name | test("^(study|dev)\\.")) | "  \(.name)  \(.type)  → \(.content)  (proxied: \(.proxied))"'
+  | jq -r '.result[] | select(.name | test("^(study|zh)\\.")) | "  \(.name)  \(.type)  → \(.content)  (proxied: \(.proxied))"'
 
 echo ""
 echo "=================================="
@@ -131,10 +131,10 @@ echo "   1. 打开 https://vercel.com/<your-team>/u-hermes-oss/settings/domains"
 echo "   2. Add Domain → study.u-hermes.org"
 echo "   3. 5-30 分钟后访问 https://study.u-hermes.org/ 验证"
 echo ""
-echo " dev.u-hermes.org （GitHub Pages 部署 hermes-agent-zh）："
-echo "   1. 在 hermes-agent-zh/site/static/ 加 CNAME 文件，内容: dev.u-hermes.org"
-echo "   2. 仓库 push 后 → Settings → Pages → Custom domain: dev.u-hermes.org"
-echo "   3. 等待 SSL 证书颁发（最多 24h，通常 5-15 分钟）"
+echo " zh.u-hermes.org （Vercel 部署 hermes-zh-community）："
+echo "   1. 打开 https://vercel.com/<your-team>/hermes-zh-community/settings/domains"
+echo "   2. Add Domain → zh.u-hermes.org"
+echo "   3. 5-30 分钟后访问 https://zh.u-hermes.org/ 验证"
 echo ""
 echo " 验证："
 echo "   dig +short study.u-hermes.org"
