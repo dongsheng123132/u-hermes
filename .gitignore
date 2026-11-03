@@ -6,6 +6,10 @@ dist/
 .env
 .env.local
 downloads/*.iso
+linux/.download-cache/
+.download-cache/
+*.iso
+persistence.dat
 
 .vercel
 .env*.local

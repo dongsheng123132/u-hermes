@@ -1,3 +1,14 @@
+> ⚠️ **本目录已归档，不再维护。**
+>
+> 上游 hermes-agent 自 v0.22 起官方只支持 `install.sh` / `install.ps1` 安装（PyPI 已列入 Unsupported），
+> 本目录里的 `pip install hermes-agent` 路线会被冻结在 2026-07 的 0.19.0；
+> 端口与命令也已过时（Web 面现在是 `hermes dashboard` 9119 / `hermes webapp` 9120）。
+>
+> 需要 Linux 上跑 Hermes Agent，请直接用上游官方安装脚本：
+> `curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash`
+>
+> 保留本目录只是为了不打断已有链接与 fork，内容仅作历史参考。
+
 # U-Hermes Linux 启动盘（开源方案）
 
 > 把任意 x86_64 电脑变成 AI 编程工作站：插上 U 盘，从 USB 启动，进入 Ubuntu 桌面后运行 U-Hermes。
