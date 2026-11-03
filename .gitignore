@@ -19,3 +19,9 @@ __SITE_ARCHITECTURE_*.md
 __STUDY_SITE_HANDOFF*.md
 __USER_TUTORIAL_*.md
 .tmp-*
+
+# 便携壳运行时产物
+/data/
+portable/app/engine.tar.gz
+portable/app/engine.json
+*.lock

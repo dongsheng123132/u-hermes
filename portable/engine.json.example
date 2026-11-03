@@ -1,0 +1,14 @@
+{
+  "version": "0.22.6-portable.1",
+  "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "archive": "engine.tar.gz",
+  "entry": "bin/hermes.exe",
+  "unpackedBytes": 943718400,
+  "_notes": [
+    "version 决定本机缓存目录：%LOCALAPPDATA%\\U-Hermes\\engine\\<version>\\ —— 换版本=换目录，旧版本自动成为回滚点",
+    "sha256 必须与构建期写入的一致；不一致直接拒绝启动（坏 U 盘会真的把文件拷坏）",
+    "archive 相对 app/ 目录；单归档替代上万个散文件（U 盘上文件数比体积更伤）",
+    "unpackedBytes 用于解包前空间预检，留 1.2 倍余量",
+    "entry 相对解包目录，指向内核可执行入口"
+  ]
+}

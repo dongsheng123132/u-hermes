@@ -1,0 +1,8 @@
+# 换行必须由机制保证，不能靠开发机的 core.autocrlf
+*.cmd  text eol=crlf
+*.bat  text eol=crlf
+*.ps1  text eol=crlf
+*.sh   text eol=lf
+*.cjs  text eol=lf
+*.mjs  text eol=lf
+*.command text eol=lf
