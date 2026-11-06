@@ -5,6 +5,8 @@
 
 关键词：U-Hermes 马盘、Windows 便携 AI U 盘、Hermes Agent、DeepSeek、设备钱包、虾盘云
 
+作者：贺去病（贺方升 / Dosen）· [hequbing.com](https://www.hequbing.com)
+
 ## 它解决什么问题
 
 装一个 AI Agent 本身不难，难的是「装完之后」：换台电脑要从零开始、数据散落各处、每次都要配 Key、上游一天一个样。
