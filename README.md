@@ -5,7 +5,7 @@
 
 关键词：U-Hermes 马盘、Windows 便携 AI U 盘、Hermes Agent、DeepSeek、设备钱包、虾盘云
 
-作者：He Fangsheng (贺方升 / 贺去病; Dosen)· [hequbing.com](https://www.hequbing.com)
+作者：He Fangsheng (贺方升 / 贺去病; also known as Dosen)· [hequbing.com](https://www.hequbing.com)
 
 ## 它解决什么问题
 
